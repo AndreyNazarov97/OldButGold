@@ -3,9 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Domain", "OldButGold.Domain\OldButGold.Domain.csproj", "{5FB7689E-F010-4C78-9C21-23DC9846936C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Domain", "OldButGold.Domain\OldButGold.Domain.csproj", "{5FB7689E-F010-4C78-9C21-23DC9846936C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Storage", "OldButGold.Storage\OldButGold.Storage.csproj", "{E5E2D765-0FF1-4C7D-8099-8FECD68B3575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage", "OldButGold.Storage\OldButGold.Storage.csproj", "{E5E2D765-0FF1-4C7D-8099-8FECD68B3575}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{EA38BF32-D2B8-4138-8F1D-459673315BCA}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.API", "OldButGold.API\OldButGold.API.csproj", "{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Domain.Tests", "OldButGold.Domain.Tests\OldButGold.Domain.Tests.csproj", "{27398D8C-84EF-4D47-9915-A34A054B3BA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +30,14 @@ Global
 		{E5E2D765-0FF1-4C7D-8099-8FECD68B3575}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5E2D765-0FF1-4C7D-8099-8FECD68B3575}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5E2D765-0FF1-4C7D-8099-8FECD68B3575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27398D8C-84EF-4D47-9915-A34A054B3BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27398D8C-84EF-4D47-9915-A34A054B3BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27398D8C-84EF-4D47-9915-A34A054B3BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27398D8C-84EF-4D47-9915-A34A054B3BA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

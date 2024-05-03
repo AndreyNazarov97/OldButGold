@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OldButGold.Storage
 {
@@ -9,6 +10,8 @@ namespace OldButGold.Storage
 
         public string Title { get; set; }
 
+        [InverseProperty(nameof(Topic.Forum))]
+        public ICollection<Topic> Topics { get; set; }
 
     }
 }
