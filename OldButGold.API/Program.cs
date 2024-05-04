@@ -1,11 +1,14 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using OldButGold.Domain;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
+using OldButGold.Domain.Models;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Storage;
 using OldButGold.Storage.Storages;
+using Forum = OldButGold.Domain.Models.Forum;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,7 @@ builder.Services.AddScoped<IIntentionResolver, TopicIntentionResolver>();
 builder.Services.AddScoped<IIntentionManager, IntentionManager>();
 builder.Services.AddScoped<IIdentityProvider, IdentityProvider>();
 
+builder.Services.AddValidatorsFromAssemblyContaining<Forum>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -43,6 +47,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//app.Services.GetRequiredService<ForumDbContext>().Database.Migrate();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.Run();

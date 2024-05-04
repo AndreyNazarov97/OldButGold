@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OldButGold.API.Models.Topic;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Exceptions;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using Forum = OldButGold.API.Models.Forum;
@@ -27,8 +25,6 @@ namespace OldButGold.API.Controllers
         {
             var forums = await useCase.Execute(cancellationToken);
 
-
-
             return Ok(forums.Select(f => new Forum()
             {
                 Id = f.Id,
@@ -37,6 +33,7 @@ namespace OldButGold.API.Controllers
         }
 
         [HttpPost("{forumId}/topics")]
+        [ProducesResponseType(400)]
         [ProducesResponseType(403)]
         [ProducesResponseType(410)]
         [ProducesResponseType(201, Type = typeof(Topic))]
@@ -46,25 +43,14 @@ namespace OldButGold.API.Controllers
             [FromServices] ICreateTopicUseCase useCase,
             CancellationToken cancellationToken)
         {
-            try
+            var command = new CreateTopicCommand(forumId, request.Title);
+            var topic = await useCase.Execute(command, cancellationToken);
+            return CreatedAtRoute(nameof(GetForums), new Topic
             {
-                var topic = await useCase.Execute(forumId, request.Title, cancellationToken);
-                return CreatedAtRoute(nameof(GetForums), new Topic
-                {
-                    Title = topic.Title,
-                    Id = topic.Id,
-                    CreatedAt = topic.CreatedAt,
-                });
-            }
-            catch (Exception exception)
-            {
-                return exception switch
-                {
-                    IntentionManagerException => Forbid(),
-                    ForumNotFoundException => StatusCode(StatusCodes.Status410Gone),
-                    _ => StatusCode(StatusCodes.Status500InternalServerError)
-                };
-            }
+                Title = topic.Title,
+                Id = topic.Id,
+                CreatedAt = topic.CreatedAt,
+            });
         }
 
     }

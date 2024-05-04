@@ -1,4 +1,6 @@
 using FluentAssertions;
+using FluentValidation;
+using FluentValidation.Results;
 using Moq;
 using Moq.Language.Flow;
 using OldButGold.Domain.Authentication;
@@ -34,7 +36,12 @@ namespace OldButGold.Domain.Tests
             intentionManager = new Mock<IIntentionManager>();
             intentionIsAllowedSetup = intentionManager.Setup(p => p.IsAllowed(It.IsAny<TopicIntention>()));
 
-            sut = new CreateTopicUseCase(intentionManager.Object, identityProvider.Object, storage.Object);
+            var validator = new Mock<IValidator<CreateTopicCommand>>();
+            validator
+                .Setup(v => v.ValidateAsync(It.IsAny<CreateTopicCommand>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new ValidationResult());
+
+            sut = new CreateTopicUseCase(validator.Object, intentionManager.Object, identityProvider.Object, storage.Object);
         }
 
         [Fact]
@@ -44,7 +51,7 @@ namespace OldButGold.Domain.Tests
 
             intentionIsAllowedSetup.Returns(false);
 
-            await sut.Invoking(s => s.Execute(forumId, "Whatever", CancellationToken.None))
+            await sut.Invoking(s => s.Execute(new CreateTopicCommand(forumId, "Whatever"), CancellationToken.None))
                 .Should().ThrowAsync<IntentionManagerException>();
             intentionManager.Verify(m => m.IsAllowed(TopicIntention.Create));
         }
@@ -58,7 +65,7 @@ namespace OldButGold.Domain.Tests
             forumExistSetup.ReturnsAsync(false);
 
 
-            await sut.Invoking(s => s.Execute(forumId, "Some Title", CancellationToken.None))
+            await sut.Invoking(s => s.Execute(new CreateTopicCommand(forumId, "Some Title"), CancellationToken.None))
                 .Should().ThrowAsync<ForumNotFoundException>();
 
             storage.Verify(s => s.ForumExist(forumId, It.IsAny<CancellationToken>()));
@@ -78,7 +85,7 @@ namespace OldButGold.Domain.Tests
             var expected = new Topic();
             createTopicSetup.ReturnsAsync(expected);
 
-            var actual = await sut.Execute(forumId, title, CancellationToken.None);
+            var actual = await sut.Execute(new CreateTopicCommand(forumId, title), CancellationToken.None);
             actual.Should().Be(expected);
 
             storage.Verify(s => s.CreateTopic(forumId, userId, title, It.IsAny<CancellationToken>()), Times.Once);
