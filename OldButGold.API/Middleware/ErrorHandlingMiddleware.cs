@@ -1,6 +1,7 @@
-﻿using OldButGold.Domain.Authorization;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using OldButGold.Domain.Authorization;
 using OldButGold.Domain.Exceptions;
-using System.ComponentModel.DataAnnotations;
 
 namespace OldButGold.API.Middleware
 {
@@ -15,7 +16,7 @@ namespace OldButGold.API.Middleware
 
         public async Task InvokeAsync(
             HttpContext httpContext, 
-            CancellationToken cancellationToken)
+            ProblemDetailsFactory problemDetailsFactory)
         {
             try
             {
@@ -34,7 +35,19 @@ namespace OldButGold.API.Middleware
                     },
                     _ => StatusCodes.Status500InternalServerError
                 };
-                httpContext.Response.StatusCode = httpStatusCode;
+                var problemDetails = exception switch
+                {
+                    IntentionManagerException intentionManagerException => 
+                        problemDetailsFactory.CreateFrom(httpContext, intentionManagerException),
+                    ValidationException validationException =>
+                        problemDetailsFactory.CreateFrom(httpContext, validationException),
+                    DomainException domainException =>
+                        problemDetailsFactory.CreateFrom(httpContext, domainException),
+                    _ => problemDetailsFactory.CreateProblemDetails(httpContext, StatusCodes.Status500InternalServerError,
+                        "Unhadled error!", detail : exception.Message)
+                };
+                httpContext.Response.StatusCode = problemDetails.Status ?? StatusCodes.Status500InternalServerError;
+                await httpContext.Response.WriteAsJsonAsync(problemDetails);
             }
         }
     }

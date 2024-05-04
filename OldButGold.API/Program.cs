@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using OldButGold.API.Middleware;
 using OldButGold.Domain;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
