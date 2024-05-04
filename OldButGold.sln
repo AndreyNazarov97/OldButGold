@@ -9,12 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage", "OldBu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{EA38BF32-D2B8-4138-8F1D-459673315BCA}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.API", "OldButGold.API\OldButGold.API.csproj", "{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.API", "OldButGold.API\OldButGold.API.csproj", "{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Domain.Tests", "OldButGold.Domain.Tests\OldButGold.Domain.Tests.csproj", "{27398D8C-84EF-4D47-9915-A34A054B3BA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Domain.Tests", "OldButGold.Domain.Tests\OldButGold.Domain.Tests.csproj", "{27398D8C-84EF-4D47-9915-A34A054B3BA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
