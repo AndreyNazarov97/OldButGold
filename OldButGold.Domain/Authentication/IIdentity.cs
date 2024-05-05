@@ -5,7 +5,7 @@
         Guid UserId { get; }
     }
 
-    public static class IIdentityExtensions
+    internal static class IIdentityExtensions
     {
         public static bool isAuthenticated(this IIdentity identity)
         {

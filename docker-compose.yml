@@ -34,12 +34,12 @@ services:
 
 
   opensearch-dashboards:
-    image: 'opensearchproject/opensearch-dashboards:latest'
+    image: 'opensearchproject/opensearch-dashboards:2.9.0'
     container_name: 'obg-osd'
     ports:
       - '5601:5601'
     environment:
-      OPENSEARCH_HOSTS: '["http://obg-opensearch:9200"]'
+      OPENSEARCH_HOSTS: '["http://obg-os:9200"]'
       DISABLE_SECURITY_DASHBOARDS_PLUGIN: 'true'
     depends_on:
       - opensearch

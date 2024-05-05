@@ -17,12 +17,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.8" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.OpenSearch" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OldButGold.Domain.DependencyIncjection\OldButGold.Domain.DependencyInjection.csproj" />
     <ProjectReference Include="..\OldButGold.Domain\OldButGold.Domain.csproj" />
-    <ProjectReference Include="..\OldButGold.Storage\OldButGold.Storage.csproj" />
+    <ProjectReference Include="..\OldButGold.Storage.DependencyIncjection\OldButGold.Storage.DependencyInjection.csproj" />
   </ItemGroup>
 
 

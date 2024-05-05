@@ -3,7 +3,7 @@ using OldButGold.Domain.UseCases.GetForums;
 
 namespace OldButGold.Storage.Storages
 {
-    public class GetForumStorage : IGetForumsStorage
+    internal class GetForumStorage : IGetForumsStorage
     {
         private readonly ForumDbContext dbContext;
 

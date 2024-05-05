@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OldButGold.Domain;
-using OldButGold.Domain.Models;
 using OldButGold.Domain.UseCases.CreateTopic;
 
 namespace OldButGold.Storage.Storages
 {
-    public class CreateTopicStorage : ICreateTopicStorage
+    internal class CreateTopicStorage : ICreateTopicStorage
     {
         private readonly IGuidFactory guidFactory;
         private readonly IMomentProvider momentProvider;
