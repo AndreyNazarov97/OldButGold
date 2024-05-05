@@ -2,6 +2,7 @@
 using OldButGold.API.Models.Topic;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
+using OldButGold.Domain.UseCases.GetTopics;
 using Forum = OldButGold.API.Models.Forum;
 using Topic = OldButGold.API.Models.Topic.Topic;
 
@@ -51,6 +52,20 @@ namespace OldButGold.API.Controllers
                 Id = topic.Id,
                 CreatedAt = topic.CreatedAt,
             });
+        }
+
+
+        [HttpGet("{forumId:guid}/topics")]
+        public async Task<IActionResult> GetTopics(
+            [FromRoute] Guid forumId,
+            [FromQuery] int skip,
+            [FromQuery] int take,
+            [FromServices] IGetTopicsUseCase useCase,
+            CancellationToken cancellationToken)
+        {
+            var query = new GetTopicsQuery(forumId, skip, take);
+            var (resources, totalCount) = await useCase.Execute(query, cancellationToken);
+            return Ok(new { resources, totalCount });
         }
 
     }

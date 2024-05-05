@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
+using OldButGold.Domain.UseCases.GetTopics;
 using OldButGold.Storage.Storages;
 
 namespace OldButGold.Storage.DependencyIncjection
@@ -13,6 +14,7 @@ namespace OldButGold.Storage.DependencyIncjection
             services
                 .AddScoped<IGetForumsStorage, GetForumStorage>()
                 .AddScoped<ICreateTopicStorage, CreateTopicStorage>()
+                .AddScoped<IGetTopicsStorage, GetTopicsStorage>()
                 .AddScoped<IGuidFactory, GuidFactory>()
                 .AddScoped<IMomentProvider, MomentProvider>();
 

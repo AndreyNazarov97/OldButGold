@@ -9,13 +9,13 @@ using OldButGold.Domain.Exceptions;
 using OldButGold.Domain.UseCases.CreateTopic;
 using Topic = OldButGold.Domain.Models.Topic;
 
-namespace OldButGold.Domain.Tests
+namespace OldButGold.Domain.Tests.CreateTopic
 {
     public class CreateTopicUseCaseShould
     {
         private readonly Mock<ICreateTopicStorage> storage;
         private readonly ISetup<ICreateTopicStorage, Task<bool>> forumExistSetup;
-        private readonly ISetup<ICreateTopicStorage, Task<Models.Topic>> createTopicSetup;
+        private readonly ISetup<ICreateTopicStorage, Task<Topic>> createTopicSetup;
         private readonly ISetup<IIdentity, Guid> getCurrentUserIdSetup;
         private readonly Mock<IIntentionManager> intentionManager;
         private readonly ISetup<IIntentionManager, bool> intentionIsAllowedSetup;
@@ -24,7 +24,7 @@ namespace OldButGold.Domain.Tests
         public CreateTopicUseCaseShould()
         {
             storage = new Mock<ICreateTopicStorage>();
-            forumExistSetup =  storage.Setup(s => s.ForumExist(It.IsAny<Guid>(), It.IsAny<CancellationToken>()));
+            forumExistSetup = storage.Setup(s => s.ForumExist(It.IsAny<Guid>(), It.IsAny<CancellationToken>()));
             createTopicSetup = storage.Setup(s =>
                 s.CreateTopic(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<CancellationToken>()));
 

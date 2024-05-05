@@ -2,10 +2,10 @@
 {
     public abstract class DomainException : Exception
     {
-        public ErrorCode ErrorCode { get; }
+        public DomainErrorCode ErrorCode { get; }
 
 
-        protected DomainException(ErrorCode errorCode, string message) : base(message)
+        protected DomainException(DomainErrorCode errorCode, string message) : base(message)
         {
             ErrorCode = errorCode;
         }

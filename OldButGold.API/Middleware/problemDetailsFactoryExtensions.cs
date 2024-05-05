@@ -30,7 +30,7 @@ namespace OldButGold.API.Middleware
                 httpContext,
                 domainException.ErrorCode switch
                 {
-                    ErrorCode.Gone => StatusCodes.Status410Gone,
+                    DomainErrorCode.Gone => StatusCodes.Status410Gone,
                     _ => StatusCodes.Status500InternalServerError,
                 },
                 domainException.Message);
