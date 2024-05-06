@@ -56,6 +56,9 @@ namespace OldButGold.API.Controllers
 
 
         [HttpGet("{forumId:guid}/topics")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(410)]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> GetTopics(
             [FromRoute] Guid forumId,
             [FromQuery] int skip,
@@ -65,7 +68,12 @@ namespace OldButGold.API.Controllers
         {
             var query = new GetTopicsQuery(forumId, skip, take);
             var (resources, totalCount) = await useCase.Execute(query, cancellationToken);
-            return Ok(new { resources, totalCount });
+            return Ok(new { resources = resources.Select(r => new Topic()
+            {
+                Id = r.Id,
+                Title = r.Title,
+                CreatedAt = r.CreatedAt,
+            }), totalCount });
         }
 
     }

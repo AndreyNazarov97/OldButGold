@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using OldButGold.Domain.UseCases.CreateTopic;
 
 namespace OldButGold.Storage.Storages
@@ -12,16 +13,16 @@ namespace OldButGold.Storage.Storages
         public CreateTopicStorage(
             IGuidFactory guidFactory,
             IMomentProvider momentProvider,
+            IMemoryCache memoryCache,
             ForumDbContext dbContext)
         {
             this.guidFactory = guidFactory;
             this.momentProvider = momentProvider;
             this.dbContext = dbContext;
         }
-        public async Task<bool> ForumExist(Guid forumId, CancellationToken cancellationToken)
-        {
-            return await dbContext.Forums.AnyAsync(f => f.ForumId == forumId, cancellationToken);
-        }
+
+       
+
         public async Task<Domain.Models.Topic> CreateTopic(Guid forumId, Guid userId, string title, CancellationToken cancellationToken)
         {
 

@@ -6,7 +6,9 @@ using Moq.Language.Flow;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
 using OldButGold.Domain.Exceptions;
+using OldButGold.Domain.Models;
 using OldButGold.Domain.UseCases.CreateTopic;
+using OldButGold.Domain.UseCases.GetForums;
 using Topic = OldButGold.Domain.Models.Topic;
 
 namespace OldButGold.Domain.Tests.CreateTopic
@@ -14,8 +16,9 @@ namespace OldButGold.Domain.Tests.CreateTopic
     public class CreateTopicUseCaseShould
     {
         private readonly Mock<ICreateTopicStorage> storage;
-        private readonly ISetup<ICreateTopicStorage, Task<bool>> forumExistSetup;
         private readonly ISetup<ICreateTopicStorage, Task<Topic>> createTopicSetup;
+        private readonly Mock<IGetForumsStorage> getForumsStorage;
+        private readonly ISetup<IGetForumsStorage, Task<IEnumerable<Models.Forum>>> getForumsSetup;
         private readonly ISetup<IIdentity, Guid> getCurrentUserIdSetup;
         private readonly Mock<IIntentionManager> intentionManager;
         private readonly ISetup<IIntentionManager, bool> intentionIsAllowedSetup;
@@ -24,9 +27,11 @@ namespace OldButGold.Domain.Tests.CreateTopic
         public CreateTopicUseCaseShould()
         {
             storage = new Mock<ICreateTopicStorage>();
-            forumExistSetup = storage.Setup(s => s.ForumExist(It.IsAny<Guid>(), It.IsAny<CancellationToken>()));
             createTopicSetup = storage.Setup(s =>
                 s.CreateTopic(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<CancellationToken>()));
+
+            getForumsStorage = new Mock<IGetForumsStorage>();
+            getForumsSetup = getForumsStorage.Setup(s => s.GetForums(It.IsAny<CancellationToken>()));
 
             var identity = new Mock<IIdentity>();
             var identityProvider = new Mock<IIdentityProvider>();
@@ -41,7 +46,7 @@ namespace OldButGold.Domain.Tests.CreateTopic
                 .Setup(v => v.ValidateAsync(It.IsAny<CreateTopicCommand>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new ValidationResult());
 
-            sut = new CreateTopicUseCase(validator.Object, intentionManager.Object, identityProvider.Object, storage.Object);
+            sut = new CreateTopicUseCase(validator.Object, intentionManager.Object, identityProvider.Object, getForumsStorage.Object , storage.Object);
         }
 
         [Fact]
@@ -62,13 +67,11 @@ namespace OldButGold.Domain.Tests.CreateTopic
             var forumId = Guid.Parse("4eea5436-e706-464e-b146-8095569443ac");
 
             intentionIsAllowedSetup.Returns(true);
-            forumExistSetup.ReturnsAsync(false);
+            getForumsSetup.ReturnsAsync(Array.Empty<Forum>());
 
 
             await sut.Invoking(s => s.Execute(new CreateTopicCommand(forumId, "Some Title"), CancellationToken.None))
                 .Should().ThrowAsync<ForumNotFoundException>();
-
-            storage.Verify(s => s.ForumExist(forumId, It.IsAny<CancellationToken>()));
         }
 
 
@@ -80,7 +83,7 @@ namespace OldButGold.Domain.Tests.CreateTopic
             var title = "Hello World";
 
             intentionIsAllowedSetup.Returns(true);
-            forumExistSetup.ReturnsAsync(true);
+            getForumsSetup.ReturnsAsync(new Forum[] {new() { Id = forumId,  Title = title} } );
             getCurrentUserIdSetup.Returns(userId);
             var expected = new Topic();
             createTopicSetup.ReturnsAsync(expected);

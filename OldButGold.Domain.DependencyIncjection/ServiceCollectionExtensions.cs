@@ -22,8 +22,10 @@ namespace OldButGold.Domain.DependencyIncjection
             services
                 .AddScoped<IIntentionManager, IntentionManager>()
                 .AddScoped<IIdentityProvider, IdentityProvider>();
-
+            
             services.AddValidatorsFromAssemblyContaining<Forum>(includeInternalTypes: true);
+
+            services.AddMemoryCache();
 
             return services;
         }

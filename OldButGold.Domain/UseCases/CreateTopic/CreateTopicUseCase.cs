@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Exceptions;
+using OldButGold.Domain.UseCases.GetForums;
 using Topic = OldButGold.Domain.Models.Topic;
 
 namespace OldButGold.Domain.UseCases.CreateTopic
@@ -11,17 +11,20 @@ namespace OldButGold.Domain.UseCases.CreateTopic
         private readonly IValidator<CreateTopicCommand> validator;
         private readonly IIntentionManager intentionManager;
         private readonly IIdentityProvider identityProvider;
+        private readonly IGetForumsStorage getForumsStorage;
         private readonly ICreateTopicStorage storage;
 
         public CreateTopicUseCase(
             IValidator<CreateTopicCommand> validator,
             IIntentionManager intentionManager,
             IIdentityProvider identityProvider,
+            IGetForumsStorage getForumsStorage,
             ICreateTopicStorage storage)
         {
             this.validator = validator;
             this.intentionManager = intentionManager;
             this.identityProvider = identityProvider;
+            this.getForumsStorage = getForumsStorage;
             this.storage = storage;
         }
         public async Task<Topic> Execute(CreateTopicCommand command, CancellationToken cancellationToken)
@@ -31,11 +34,8 @@ namespace OldButGold.Domain.UseCases.CreateTopic
             var (forumId, title) = command;
             intentionManager.ThrowIfForbidden(TopicIntention.Create);
 
-            var forumExist = await storage.ForumExist(forumId, cancellationToken);
-            if (!forumExist)
-            {
-                throw new ForumNotFoundException(forumId);
-            }
+            await getForumsStorage.ThrowIfFormNotExist(forumId, cancellationToken);
+           
 
             return await storage.CreateTopic(forumId, identityProvider.Current.UserId, title, cancellationToken);
         }

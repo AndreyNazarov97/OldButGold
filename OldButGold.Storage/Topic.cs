@@ -14,6 +14,8 @@ namespace OldButGold.Storage
         public Guid ForumId { get; set; }
 
         public Guid UserId { get; set; }
+
+        [MaxLength(100)]    
         public string Title { get; set; }
 
         [ForeignKey(nameof(UserId))]
