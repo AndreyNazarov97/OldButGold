@@ -5,6 +5,7 @@ using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Domain.UseCases.GetTopics;
 using OldButGold.Storage.Storages;
+using System.Reflection;
 
 namespace OldButGold.Storage.DependencyIncjection
 {
@@ -24,6 +25,9 @@ namespace OldButGold.Storage.DependencyIncjection
                 options.UseNpgsql(dbConnectionString));
 
             services.AddMemoryCache();
+
+            services.AddAutoMapper(config => config
+                .AddMaps(Assembly.GetAssembly(typeof(ForumDbContext)))); 
 
             return services;
         }

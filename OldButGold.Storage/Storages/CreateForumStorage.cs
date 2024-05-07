@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Storage.Storages;
@@ -10,15 +12,18 @@ namespace OldButGold.Storage.DependencyIncjection
         private readonly IMemoryCache memoryCache;
         private readonly IGuidFactory guidFactory;
         private readonly ForumDbContext dbContext;
+        private readonly IMapper mapper;
 
         public CreateForumStorage(
             IMemoryCache memoryCache,
             IGuidFactory guidFactory, 
-            ForumDbContext dbContext)
+            ForumDbContext dbContext,
+            IMapper mapper)
         {
             this.memoryCache = memoryCache;
             this.guidFactory = guidFactory;
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         public async Task<Domain.Models.Forum> CreateForum(string title, CancellationToken cancellationToken)
@@ -38,11 +43,7 @@ namespace OldButGold.Storage.DependencyIncjection
 
             return await dbContext.Forums
                 .Where(f => f.ForumId == forumId)
-                .Select(f => new Domain.Models.Forum
-                {
-                    Id = f.ForumId,
-                    Title = f.Title,
-                })
+                .ProjectTo<Domain.Models.Forum>(mapper.ConfigurationProvider)
                 .FirstAsync(cancellationToken);
         }
 

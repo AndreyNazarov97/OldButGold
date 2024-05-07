@@ -1,3 +1,4 @@
+using OldButGold.API.Mapping;
 using OldButGold.API.Middleware;
 using OldButGold.Domain.DependencyIncjection;
 using OldButGold.Storage.DependencyIncjection;
@@ -24,6 +25,7 @@ builder.Services.AddLogging(b => b.AddSerilog(new LoggerConfiguration()
 builder.Services
     .AddForumDomain()
     .AddForumStorage(builder.Configuration.GetConnectionString("Postgres"));
+builder.Services.AddAutoMapper(config => config.AddProfile<ApiProfile>());
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -8,6 +8,7 @@ namespace OldButGold.Storage
         [Key]
         public Guid ForumId { get; set; }
 
+        [MaxLength(100)]
         public string Title { get; set; }
 
         [InverseProperty(nameof(Topic.Forum))]
