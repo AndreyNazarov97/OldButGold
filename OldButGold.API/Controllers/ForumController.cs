@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OldButGold.API.Models;
 using OldButGold.API.Models.Topic;
+using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Domain.UseCases.GetTopics;
@@ -13,6 +15,27 @@ namespace OldButGold.API.Controllers
     [Route("forums")]
     public class ForumController : ControllerBase
     {
+        [HttpPost]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(410)]
+        [ProducesResponseType(201, Type = typeof(Forum))]
+        public async Task<IActionResult> CreateForum(
+        [FromBody] CreateForum request,
+        [FromServices] ICreateForumUseCase useCase,
+        CancellationToken cancellationToken)
+        {
+            var command = new CreateForumCommand(request.Title);
+            var forum = await useCase.Execute(command, cancellationToken);
+
+
+            return CreatedAtRoute(nameof(GetForums), new Forum()
+            {
+                Id = forum.Id,
+                Title = forum.Title,
+            });
+        }
+
         /// <summary>
         /// Get list of every forum
         /// </summary>

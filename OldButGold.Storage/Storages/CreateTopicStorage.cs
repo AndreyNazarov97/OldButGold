@@ -13,7 +13,6 @@ namespace OldButGold.Storage.Storages
         public CreateTopicStorage(
             IGuidFactory guidFactory,
             IMomentProvider momentProvider,
-            IMemoryCache memoryCache,
             ForumDbContext dbContext)
         {
             this.guidFactory = guidFactory;
@@ -21,7 +20,6 @@ namespace OldButGold.Storage.Storages
             this.dbContext = dbContext;
         }
 
-       
 
         public async Task<Domain.Models.Topic> CreateTopic(Guid forumId, Guid userId, string title, CancellationToken cancellationToken)
         {

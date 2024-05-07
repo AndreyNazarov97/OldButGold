@@ -23,7 +23,7 @@ namespace OldButGold.Storage.Storages
                 nameof(GetForums),
                 entry =>
                 {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30);
                 return dbContext.Forums
                     .Select(f => new Domain.Models.Forum()
                     {

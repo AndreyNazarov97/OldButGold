@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
 using OldButGold.Domain.Models;
+using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Domain.UseCases.GetTopics;
@@ -14,6 +15,8 @@ namespace OldButGold.Domain.DependencyIncjection
         public static IServiceCollection AddForumDomain(this IServiceCollection services)
         {
             services
+                .AddScoped<ICreateForumUseCase, CreateForumUseCase>()
+                .AddScoped<IIntentionResolver, ForumIntentionResolver>()
                 .AddScoped<IGetForumsUseCase, GetForumsUseCase>()
                 .AddScoped<ICreateTopicUseCase, CreateTopicUseCase>()
                 .AddScoped<IGetTopicsUseCase, GetTopicsUseCase>()
@@ -25,7 +28,7 @@ namespace OldButGold.Domain.DependencyIncjection
             
             services.AddValidatorsFromAssemblyContaining<Forum>(includeInternalTypes: true);
 
-            services.AddMemoryCache();
+            
 
             return services;
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Domain.UseCases.GetTopics;
@@ -12,6 +13,7 @@ namespace OldButGold.Storage.DependencyIncjection
         public static IServiceCollection AddForumStorage(this  IServiceCollection services, string dbConnectionString)
         {
             services
+                .AddScoped<ICreateForumStorage, CreateForumStorage>()
                 .AddScoped<IGetForumsStorage, GetForumStorage>()
                 .AddScoped<ICreateTopicStorage, CreateTopicStorage>()
                 .AddScoped<IGetTopicsStorage, GetTopicsStorage>()
@@ -20,6 +22,8 @@ namespace OldButGold.Storage.DependencyIncjection
 
             services.AddDbContextPool<ForumDbContext>(options =>
                 options.UseNpgsql(dbConnectionString));
+
+            services.AddMemoryCache();
 
             return services;
         }
