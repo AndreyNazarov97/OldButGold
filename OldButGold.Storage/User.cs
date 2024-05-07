@@ -11,6 +11,12 @@ namespace OldButGold.Storage
         [MaxLength(30)]
         public string Login {  get; set; }
 
+        [MaxLength(120)]
+        public string Salt {  get; set; }
+
+        [MaxLength(300)]
+        public string PasswordHash {  get; set; }
+
         [InverseProperty(nameof(Topic.Author))]
         ICollection<Topic> Topics { get; set; }
 
