@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Domain.Authentication
 {
     internal class SecurityManager : ISecurityManager
     {
@@ -16,7 +16,7 @@ namespace OldButGold.Storage.Storages
 
         public (string Salt, string Hash) GeneratePasswordParts(string password)
         {
-            const int saltLength = 100;
+            var saltLength = 100;
 
             var buffer = RandomNumberGenerator.GetBytes(saltLength * 4 / 3);
             var base64String = Convert.ToBase64String(buffer);
