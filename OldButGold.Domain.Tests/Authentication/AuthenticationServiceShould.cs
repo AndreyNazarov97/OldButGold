@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Language.Flow;
 using OldButGold.Domain.Authentication;
+using OldButGold.Domain.UseCases.SignIn;
 
 namespace OldButGold.Domain.Tests.Authentication
 {
@@ -18,7 +19,7 @@ namespace OldButGold.Domain.Tests.Authentication
             storage = new Mock<IAuthenticationStorage>();
             findUserSetup = storage.Setup(s => s.FindUser(It.IsAny<string>(), It.IsAny<CancellationToken>()));
 
-            var securityManager = new Mock<ISecurityManager>();
+            var securityManager = new Mock<IPasswordManager>();
             securityManager
                 .Setup(m => m.ComparePassword(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
@@ -71,7 +72,7 @@ namespace OldButGold.Domain.Tests.Authentication
         public async Task SignInUser_WhenPasswordMatch()
         {
             var password = "qwerty";
-            var securityManager = new SecurityManager();
+            var securityManager = new PasswordManager();
             var (salt, hash) = securityManager.GeneratePasswordParts(password);
 
             findUserSetup.ReturnsAsync(new RecognisedUser

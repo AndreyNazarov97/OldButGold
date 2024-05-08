@@ -1,4 +1,6 @@
-﻿namespace OldButGold.Domain.Authentication
+﻿using OldButGold.Domain.UseCases.SignIn;
+
+namespace OldButGold.Domain.Authentication
 {
     public interface IAuthenticationStorage
     {
