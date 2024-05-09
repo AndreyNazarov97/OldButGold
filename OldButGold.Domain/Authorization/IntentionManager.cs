@@ -20,10 +20,5 @@ namespace OldButGold.Domain.Authorization
             var mathcingResolver = resolvers.OfType<IIntentionResolver<TIntention>>().FirstOrDefault();
             return mathcingResolver?.isAllowed(identityProvider.Current, intention) ?? false;
         }
-
-        public bool IsAllowed<TIntention, TObject>(TIntention intention, TObject target) where TIntention : struct
-        {
-            throw new NotImplementedException();
-        }
     }
 }

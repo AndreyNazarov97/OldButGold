@@ -70,8 +70,9 @@ namespace OldButGold.Domain.Tests.CreateTopic
             getForumsSetup.ReturnsAsync(Array.Empty<Forum>());
 
 
-            await sut.Invoking(s => s.Execute(new CreateTopicCommand(forumId, "Some Title"), CancellationToken.None))
-                .Should().ThrowAsync<ForumNotFoundException>();
+            (await sut.Invoking(s => s.Execute(new CreateTopicCommand(forumId, "Some Title"), CancellationToken.None))
+                .Should().ThrowAsync<ForumNotFoundException>())
+                .Which.ErrorCode.Should().Be(DomainErrorCode.Gone);
         }
 
 

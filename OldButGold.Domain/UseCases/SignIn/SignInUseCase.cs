@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.Extensions.Options;
 using OldButGold.Domain.Authentication;
+using OldButGold.Domain.Exceptions;
 
 namespace OldButGold.Domain.UseCases.SignIn
 {
@@ -34,13 +36,29 @@ namespace OldButGold.Domain.UseCases.SignIn
             var recognisedUser = await storage.FindUser(command.Login, cancellationToken);
             if(recognisedUser is null)
             {
-                throw new Exception();
+                throw new ValidationException(new ValidationFailure[]
+                {
+                    new()
+                    { 
+                        PropertyName = nameof(command.Login), 
+                        ErrorCode = ValidationErrorCode.Invalid,
+                        AttemptedValue = command.Login
+                    }
+                });
             }
 
             var passwordMatch = passwordManager.ComparePassword(command.Password, recognisedUser.Salt, recognisedUser.PasswordHash);
             if (!passwordMatch)
             {
-                throw new Exception();
+                throw new ValidationException(new ValidationFailure[]
+                {
+                    new()
+                    {
+                        PropertyName = nameof(command.Password),
+                        ErrorCode = ValidationErrorCode.Invalid,
+                        AttemptedValue = command.Password
+                    }
+                });
             }
 
             var token = await encryptor.Encrypt(recognisedUser.UserId.ToString(), configuration.Key, cancellationToken);
