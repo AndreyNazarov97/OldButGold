@@ -1,5 +1,7 @@
+using OldButGold.API.Authentication;
 using OldButGold.API.DependencyInjection;
 using OldButGold.API.Middleware;
+using OldButGold.Domain.Authentication;
 using OldButGold.Domain.DependencyIncjection;
 using OldButGold.Storage.DependencyIncjection;
 using System.Reflection;
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddApiLogging(builder.Configuration, builder.Environment);
+builder.Services.Configure<AuthenticationConfiguration>(builder.Configuration.GetSection("Authentication").Bind);
+builder.Services.AddScoped<IAuthTokenStorage, AuthTokenStorage>();
 
 
 builder.Services

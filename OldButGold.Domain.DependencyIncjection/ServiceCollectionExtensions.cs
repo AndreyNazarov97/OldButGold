@@ -7,6 +7,8 @@ using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Domain.UseCases.GetTopics;
+using OldButGold.Domain.UseCases.SignIn;
+using OldButGold.Domain.UseCases.SignOn;
 
 namespace OldButGold.Domain.DependencyIncjection
 {
@@ -20,11 +22,17 @@ namespace OldButGold.Domain.DependencyIncjection
                 .AddScoped<IGetForumsUseCase, GetForumsUseCase>()
                 .AddScoped<ICreateTopicUseCase, CreateTopicUseCase>()
                 .AddScoped<IGetTopicsUseCase, GetTopicsUseCase>()
+                .AddScoped<ISignInUseCase, SignInUseCase>()
+                .AddScoped<ISignOnUseCase, SignOnUseCase>()
                 .AddScoped<IIntentionResolver, TopicIntentionResolver>();
 
             services
                 .AddScoped<IIntentionManager, IntentionManager>()
-                .AddScoped<IIdentityProvider, IdentityProvider>();
+                .AddScoped<IIdentityProvider, IdentityProvider>()
+                .AddScoped<IAuthenticationService, AuthenticationService>()
+                .AddScoped<ISymmetricDecryptor, AesSymmetricEncryptorDecryptor>()
+                .AddScoped<ISymmetricEncryptor, AesSymmetricEncryptorDecryptor>()
+                .AddScoped<IPasswordManager, PasswordManager>();
             
             services.AddValidatorsFromAssemblyContaining<Forum>(includeInternalTypes: true);
 

@@ -1,6 +1,6 @@
 ﻿namespace OldButGold.Domain.Authentication
 {
-    internal interface ISymmetricEncryptor
+    public interface ISymmetricEncryptor
     {
         Task<string> Encrypt(string plainText, byte[] key, CancellationToken cancellationToken);
     }

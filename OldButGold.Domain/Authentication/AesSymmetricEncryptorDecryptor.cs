@@ -4,12 +4,15 @@ using System.Text;
 
 namespace OldButGold.Domain.Authentication
 {
-    internal class AesSymmetricDecryptor : ISymmetricEncryptor, ISymmetricDecryptor
+    public class AesSymmetricEncryptorDecryptor : ISymmetricEncryptor, ISymmetricDecryptor
     {
         private const int IvSize = 16;
         private readonly Lazy<Aes> aes = new (Aes.Create);
-
-        async Task<string> ISymmetricDecryptor.Decrypt(string encryptedText, byte[] key, CancellationToken cancellationToken)
+        public AesSymmetricEncryptorDecryptor()
+        {
+            
+        }
+        public async Task<string> Decrypt(string encryptedText, byte[] key, CancellationToken cancellationToken)
         {
             var encryptedBytes = Convert.FromBase64String(encryptedText);
 
@@ -27,7 +30,7 @@ namespace OldButGold.Domain.Authentication
             return Encoding.UTF8.GetString(decryptedStream.ToArray());
         }
 
-        async Task<string> ISymmetricEncryptor.Encrypt(string plainText, byte[] key, CancellationToken cancellationToken)
+        public async Task<string> Encrypt(string plainText, byte[] key, CancellationToken cancellationToken)
         {
             var iv = RandomNumberGenerator.GetBytes(IvSize);
 

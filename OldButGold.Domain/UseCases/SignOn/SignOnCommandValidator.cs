@@ -9,7 +9,8 @@ namespace OldButGold.Domain.UseCases.SignOn
         public SignOnCommandValidator()
         {
             RuleFor(c => c.Login).Cascade(CascadeMode.Stop)
-                .NotEmpty().WithErrorCode(ValidationErrorCode.Empty);
+                .NotEmpty().WithErrorCode(ValidationErrorCode.Empty)
+                .MaximumLength(30).WithErrorCode(ValidationErrorCode.TooLong);
             RuleFor(c => c.Password)
                 .NotEmpty().WithErrorCode(ValidationErrorCode.Empty);
         }

@@ -4,6 +4,8 @@ using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Domain.UseCases.GetTopics;
+using OldButGold.Domain.UseCases.SignIn;
+using OldButGold.Domain.UseCases.SignOn;
 using OldButGold.Storage.Storages;
 using System.Reflection;
 
@@ -18,6 +20,8 @@ namespace OldButGold.Storage.DependencyIncjection
                 .AddScoped<IGetForumsStorage, GetForumStorage>()
                 .AddScoped<ICreateTopicStorage, CreateTopicStorage>()
                 .AddScoped<IGetTopicsStorage, GetTopicsStorage>()
+                .AddScoped<ISignInStorage, SignInStorage>()
+                .AddScoped<ISignOnStorage, SignOnStorage>()
                 .AddScoped<IGuidFactory, GuidFactory>()
                 .AddScoped<IMomentProvider, MomentProvider>();
 

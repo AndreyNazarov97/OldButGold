@@ -2,6 +2,6 @@
 {
     internal class IdentityProvider : IIdentityProvider
     {
-        public IIdentity Current => new User(Guid.Parse("0f76b85b-13ed-4edf-ab23-f320d0150914"));
+        public IIdentity Current { get; set; }
     }
 }

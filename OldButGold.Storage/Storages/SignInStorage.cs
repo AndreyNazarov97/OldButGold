@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using OldButGold.Domain.Authentication;
 using OldButGold.Domain.UseCases.SignIn;
 
 namespace OldButGold.Storage.Storages
 {
-    internal class SignInStorage : IAuthenticationStorage
+    internal class SignInStorage : ISignInStorage
     {
         private readonly IMapper mapper;
         private readonly ForumDbContext dbContext;
