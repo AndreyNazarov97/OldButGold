@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using Serilog.Filters;
 
-namespace OldButGold.API.DependencyInjection
+namespace OldButGold.API.Monitoring
 {
     public static class LoggingServiceCollectionExtensions
     {
@@ -17,8 +17,6 @@ namespace OldButGold.API.DependencyInjection
                     .WriteTo.OpenSearch(
                         configuration.GetConnectionString("Logs"),
                         "forum-logs-{0:yyyy.MM.dd}"))
-                .WriteTo.Logger(lc => lc
-                    .WriteTo.Console())
                 .CreateLogger()));
         }
 

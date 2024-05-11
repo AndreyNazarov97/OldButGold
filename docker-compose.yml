@@ -8,6 +8,8 @@ volumes :
   obg-pg:    
   obg-logs:
   obg-os:  
+  obg-prom:
+  obg-grafana:
   
 services:
   postgres:
@@ -43,3 +45,26 @@ services:
       DISABLE_SECURITY_DASHBOARDS_PLUGIN: 'true'
     depends_on:
       - opensearch
+
+  prometheus:
+    container_name: "obg-prom"
+    image: "prom/prometheus"
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - obg-prom:/prometheus
+  
+  grafana:
+    container_name: 'obg-grafana'
+    image: 'grafana/grafana'
+    restart: unless-stopped
+    environment :
+      GF_INSTALL_PLUGINS: 'grafana-clock-panel, grafana-simple-json-datasource'
+    volumes:
+      - obg-grafana:/var/lib/grafana
+    ports:
+      - '3000:3000'
+    depends_on: 
+      - prometheus
+      

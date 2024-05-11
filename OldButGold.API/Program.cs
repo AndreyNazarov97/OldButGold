@@ -1,6 +1,6 @@
 using OldButGold.API.Authentication;
-using OldButGold.API.DependencyInjection;
 using OldButGold.API.Middleware;
+using OldButGold.API.Monitoring;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.DependencyIncjection;
 using OldButGold.Storage.DependencyIncjection;
@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddApiLogging(builder.Configuration, builder.Environment);
+builder.Services.AddApiMetrics();
 builder.Services.Configure<AuthenticationConfiguration>(builder.Configuration.GetSection("Authentication").Bind);
 builder.Services.AddScoped<IAuthTokenStorage, AuthTokenStorage>();
 
@@ -33,6 +34,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapPrometheusScrapingEndpoint();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

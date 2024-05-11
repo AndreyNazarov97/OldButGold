@@ -2,6 +2,7 @@
 using Moq;
 using Moq.Language.Flow;
 using OldButGold.Domain.Models;
+using OldButGold.Domain.Monitoring;
 using OldButGold.Domain.UseCases.GetForums;
 
 namespace OldButGold.Domain.Tests.GetForums
@@ -17,7 +18,7 @@ namespace OldButGold.Domain.Tests.GetForums
             storage = new Mock<IGetForumsStorage>();
             getforumsSetup = storage.Setup(s => s.GetForums(It.IsAny<CancellationToken>()));
 
-            sut = new GetForumsUseCase(storage.Object);
+            sut = new GetForumsUseCase(storage.Object, new DomainMetrics());
         }
 
         [Fact]

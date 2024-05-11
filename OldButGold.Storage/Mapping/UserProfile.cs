@@ -9,6 +9,7 @@ namespace OldButGold.Storage.Mapping
         public UserProfile()
         {
             CreateMap<User, RecognisedUser>();
+            CreateMap<Session, Domain.Authentication.Session>();
         }
     }
 }

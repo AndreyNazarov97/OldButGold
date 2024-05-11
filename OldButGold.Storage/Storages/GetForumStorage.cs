@@ -2,7 +2,6 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using OldButGold.Domain.Models;
 using OldButGold.Domain.UseCases.GetForums;
 
 namespace OldButGold.Storage.Storages

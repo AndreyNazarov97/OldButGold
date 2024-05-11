@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
 using OldButGold.Domain.Models;
+using OldButGold.Domain.Monitoring;
 using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
@@ -37,6 +38,8 @@ namespace OldButGold.Domain.DependencyIncjection
                 .AddScoped<IPasswordManager, PasswordManager>();
             
             services.AddValidatorsFromAssemblyContaining<Forum>(includeInternalTypes: true);
+
+            services.AddSingleton<DomainMetrics>(); 
 
             
 

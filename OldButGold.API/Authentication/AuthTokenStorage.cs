@@ -7,10 +7,10 @@ namespace OldButGold.API.Authentication
 
         public bool TryExtract(HttpContext httpContext, out string token)
         {
-            if (httpContext.Request.Headers.TryGetValue(HeaderKey, out var values) &&
-                !string.IsNullOrWhiteSpace(values.FirstOrDefault()))
+            if(httpContext.Request.Cookies.TryGetValue(HeaderKey, out var value) &&
+                !string.IsNullOrWhiteSpace(value))
             {
-                token = values.First();
+                token = value;
                 return true;
             }
 
@@ -20,7 +20,7 @@ namespace OldButGold.API.Authentication
 
         public void Store(HttpContext httpContext, string token)
         {
-            httpContext.Response.Headers[HeaderKey] = token;
+            httpContext.Response.Cookies.Append(HeaderKey, token) ;
         }
 
     }

@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 		docker-compose.yml = docker-compose.yml
+		prometheus.yml = prometheus.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -24,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage.Dependen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.E2E", "OldButGold.E2E\OldButGold.E2E.csproj", "{E49274EC-7C88-43C6-963B-93724E424E99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Storage.Tests", "OldButGold.Storage.Tests\OldButGold.Storage.Tests.csproj", "{684DBC49-2C65-4833-BBAB-302B9AFAA387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage.Tests", "OldButGold.Storage.Tests\OldButGold.Storage.Tests.csproj", "{684DBC49-2C65-4833-BBAB-302B9AFAA387}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
