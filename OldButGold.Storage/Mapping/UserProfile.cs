@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OldButGold.Domain.UseCases.SignIn;
+using OldButGold.Storage.Entities;
 
 namespace OldButGold.Storage.Mapping
 {

@@ -17,6 +17,8 @@ namespace OldButGold.Domain.Tests.SignIn
         private readonly ISetup<IPasswordManager, (byte[] Salt, byte[] Hash)> generatePasswordPartsSetup;
         private readonly Mock<ISignInStorage> storage;
         private readonly ISetup<ISignInStorage, Task<RecognisedUser>> findUserSetup;
+        private readonly ISetup<ISignInStorage, Task<Guid>> createSessionSetup;
+        private readonly Mock<ISymmetricEncryptor> encryptor;
         private readonly ISetup<ISymmetricEncryptor, Task<string>> encryptorSetup;
 
         public SignInUseCaseShould()
@@ -32,8 +34,9 @@ namespace OldButGold.Domain.Tests.SignIn
 
             storage = new Mock<ISignInStorage>();
             findUserSetup = storage.Setup(s => s.FindUser(It.IsAny<string>(), It.IsAny<CancellationToken>()));
+            createSessionSetup = storage.Setup(s => s.CreateSession(It.IsAny<Guid>(), It.IsAny<DateTimeOffset>(), It.IsAny<CancellationToken>()));
 
-            var encryptor = new Mock<ISymmetricEncryptor>();
+            encryptor = new Mock<ISymmetricEncryptor>();
             encryptorSetup = encryptor.Setup(e => e.Encrypt(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<CancellationToken>()));
 
             var configuration = new Mock<IOptions<AuthenticationConfiguration>>();
@@ -69,9 +72,24 @@ namespace OldButGold.Domain.Tests.SignIn
         }
 
         [Fact]
-        public async Task ReturnToken()
+        public async Task CreateSession_WhenPasswordMathces()
+        {
+            var userId = Guid.Parse("1d2331ba-9850-4021-9706-0240e0d3b9f0");
+            var sessionId = Guid.Parse("e1785f6f-0249-4624-800f-dcabc0f51e49");
+
+            findUserSetup.ReturnsAsync(new RecognisedUser(){UserId = userId,});
+            comparePasswordsSetup.Returns(true);
+            createSessionSetup.ReturnsAsync(sessionId);
+
+            await sut.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None);
+            storage.Verify(s => s.CreateSession(userId, It.IsAny<DateTimeOffset>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task ReturnTokenAndIdentity()
         {
             var userId = Guid.Parse("336f2aa9-4ae4-4ee4-b908-e29a5211a4be");
+            var sessionId = Guid.Parse("ec06bad3-0b00-488a-a71a-f37bb492a7ec");
             findUserSetup.ReturnsAsync(new RecognisedUser
             {
                 UserId = userId,
@@ -79,11 +97,28 @@ namespace OldButGold.Domain.Tests.SignIn
                 Salt = new byte[] {2},
             });
             comparePasswordsSetup.Returns(true);
+            createSessionSetup.ReturnsAsync(sessionId);
             encryptorSetup.ReturnsAsync("token");
 
             var (identity, token) = await sut.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None);
             identity.UserId.Should().Be(userId);
+            identity.SessionId.Should().Be(sessionId);
             token.Should().Be("token");
+        }
+
+        [Fact]
+        public async Task EncryptSessionIdIntoToken()
+        {
+            var userId = Guid.Parse("1d2331ba-9850-4021-9706-0240e0d3b9f0");
+            var sessionId = Guid.Parse("e1785f6f-0249-4624-800f-dcabc0f51e49");
+
+            findUserSetup.ReturnsAsync(new RecognisedUser() { UserId = userId, });
+            comparePasswordsSetup.Returns(true);
+            createSessionSetup.ReturnsAsync(sessionId);
+
+            await sut.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None);
+            encryptor.Verify(s => s
+                .Encrypt("e1785f6f-0249-4624-800f-dcabc0f51e49", It.IsAny<byte[]>(), It.IsAny<CancellationToken>()));
         }
     }
 }

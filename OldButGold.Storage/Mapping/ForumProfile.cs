@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OldButGold.Storage.Entities;
 
 namespace OldButGold.Storage.Mapping
 {

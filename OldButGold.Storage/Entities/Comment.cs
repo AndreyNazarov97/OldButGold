@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OldButGold.Storage
+namespace OldButGold.Storage.Entities
 {
     public class Comment
     {
-        [Key] 
+        [Key]
         public Guid CommentId { get; set; }
 
 
@@ -25,6 +25,6 @@ namespace OldButGold.Storage
 
 
         public string Text { get; set; }
-        
+
     }
 }

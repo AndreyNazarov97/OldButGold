@@ -41,7 +41,7 @@ namespace OldButGold.Domain.Tests.Authorization
                 .Returns(expectedResolverResult);
 
             identityProvider.Setup(p => p.Current)
-                .Returns(new User(Guid.Parse("675359ce-239a-4f64-b041-6c491e520207")));
+                .Returns(new User(Guid.Parse("675359ce-239a-4f64-b041-6c491e520207"), Guid.Empty));
 
             var sut = new IntentionManager(
                 new IIntentionResolver[] {resolver.Object}, 

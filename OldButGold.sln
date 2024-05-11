@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Domain.Dependenc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage.DependencyInjection", "OldButGold.Storage.DependencyIncjection\OldButGold.Storage.DependencyInjection.csproj", "{CBF375A1-1B8C-4DE7-96DA-435A2DFE61DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.E2E", "OldButGold.E2E\OldButGold.E2E.csproj", "{E49274EC-7C88-43C6-963B-93724E424E99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.E2E", "OldButGold.E2E\OldButGold.E2E.csproj", "{E49274EC-7C88-43C6-963B-93724E424E99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Storage.Tests", "OldButGold.Storage.Tests\OldButGold.Storage.Tests.csproj", "{684DBC49-2C65-4833-BBAB-302B9AFAA387}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{E49274EC-7C88-43C6-963B-93724E424E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E49274EC-7C88-43C6-963B-93724E424E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E49274EC-7C88-43C6-963B-93724E424E99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{684DBC49-2C65-4833-BBAB-302B9AFAA387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684DBC49-2C65-4833-BBAB-302B9AFAA387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684DBC49-2C65-4833-BBAB-302B9AFAA387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684DBC49-2C65-4833-BBAB-302B9AFAA387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

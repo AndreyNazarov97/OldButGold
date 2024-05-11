@@ -9,6 +9,7 @@ using OldButGold.Domain.UseCases.GetForums;
 using OldButGold.Domain.UseCases.GetTopics;
 using OldButGold.Domain.UseCases.SignIn;
 using OldButGold.Domain.UseCases.SignOn;
+using OldButGold.Domain.UseCases.SignOut;
 
 namespace OldButGold.Domain.DependencyIncjection
 {
@@ -24,6 +25,7 @@ namespace OldButGold.Domain.DependencyIncjection
                 .AddScoped<IGetTopicsUseCase, GetTopicsUseCase>()
                 .AddScoped<ISignInUseCase, SignInUseCase>()
                 .AddScoped<ISignOnUseCase, SignOnUseCase>()
+                .AddScoped<ISignOutUseCase, SignOutUseCase>()
                 .AddScoped<IIntentionResolver, TopicIntentionResolver>();
 
             services

@@ -3,9 +3,9 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using OldButGold.Domain.UseCases.CreateForum;
-using OldButGold.Storage.Storages;
+using OldButGold.Storage.Entities;
 
-namespace OldButGold.Storage.DependencyIncjection
+namespace OldButGold.Storage.Storages
 {
     internal class CreateForumStorage : ICreateForumStorage
     {

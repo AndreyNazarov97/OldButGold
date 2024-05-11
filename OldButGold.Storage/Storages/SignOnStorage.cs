@@ -1,4 +1,5 @@
 ﻿using OldButGold.Domain.UseCases.SignOn;
+using OldButGold.Storage.Entities;
 
 namespace OldButGold.Storage.Storages
 {

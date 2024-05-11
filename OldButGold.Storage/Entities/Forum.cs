@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OldButGold.Storage
+namespace OldButGold.Storage.Entities
 {
     public class Forum
     {

@@ -25,7 +25,7 @@ namespace OldButGold.Domain.UseCases.SignOn
             var(salt, hash) = passwordManager.GeneratePasswordParts(command.Password);
             var userid = await storage.CreateUser(command.Login, salt, hash, cancellationToken);
 
-            return new User(userid);
+            return new User(userid, Guid.Empty);
         }
     }
 }

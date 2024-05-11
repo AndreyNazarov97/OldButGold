@@ -3,6 +3,7 @@
     public interface IIdentity
     {
         Guid UserId { get; }
+        Guid SessionId {  get; }
     }
 
     internal static class IIdentityExtensions

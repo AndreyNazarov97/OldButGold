@@ -61,9 +61,11 @@ namespace OldButGold.Domain.UseCases.SignIn
                 });
             }
 
-            var token = await encryptor.Encrypt(recognisedUser.UserId.ToString(), configuration.Key, cancellationToken);
+            // TODO: Expiration momnent generation is ugly
+            var sessionId = await storage.CreateSession(recognisedUser.UserId, DateTimeOffset.UtcNow.AddMinutes(60), cancellationToken);
+            var token = await encryptor.Encrypt(sessionId.ToString(), configuration.Key, cancellationToken);
 
-            return (new User(recognisedUser.UserId), token);
+            return (new User(recognisedUser.UserId, sessionId), token);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OldButGold.Storage.Entities;
 
 namespace OldButGold.Storage
 {
@@ -14,6 +15,8 @@ namespace OldButGold.Storage
         public DbSet<Topic> Topics { get; set; }
 
         public DbSet<Comment> Comments {  get; set; }    
+
+        public DbSet<Session> Sessions { get; set; }
 
 
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using OldButGold.Domain.UseCases.CreateTopic;
+using OldButGold.Storage.Entities;
 
 namespace OldButGold.Storage.Storages
 {
