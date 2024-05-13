@@ -18,7 +18,7 @@ namespace OldButGold.Domain.Tests.GetForums
             storage = new Mock<IGetForumsStorage>();
             getforumsSetup = storage.Setup(s => s.GetForums(It.IsAny<CancellationToken>()));
 
-            sut = new GetForumsUseCase(storage.Object, new DomainMetrics());
+            sut = new GetForumsUseCase(storage.Object);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace OldButGold.Domain.Tests.GetForums
 
             getforumsSetup.ReturnsAsync(forums);
 
-            var actual = await sut.Execute(CancellationToken.None);
+            var actual = await sut.Handle(new GetForumsQuery() ,CancellationToken.None);
             actual.Should().BeSameAs(forums);
             storage.Verify(s => s.GetForums(CancellationToken.None), Times.Once());
             storage.VerifyNoOtherCalls();

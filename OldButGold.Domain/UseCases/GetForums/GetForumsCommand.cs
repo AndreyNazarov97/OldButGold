@@ -1,11 +1,12 @@
 ﻿using MediatR;
+using OldButGold.Domain.Models;
 using OldButGold.Domain.Monitoring;
 
-namespace OldButGold.Domain.UseCases.SignOut
+namespace OldButGold.Domain.UseCases.GetForums
 {
-    public record SignOutCommand() : IRequest, IMonitoredRequest
+    public record GetForumsQuery() : IRequest<IEnumerable<Forum>>, IMonitoredRequest
     {
-        private const string CounterName = "user.sign-out";
+        private const string CounterName = "forums.fetched";
         public void MonitorFailure(DomainMetrics metrics)
         {
             metrics.IncrementCount(

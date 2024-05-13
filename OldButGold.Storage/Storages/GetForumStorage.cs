@@ -28,7 +28,7 @@ namespace OldButGold.Storage.Storages
                 nameof(GetForums),
                 entry =>
                 {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10);
                 return dbContext.Forums
                     .ProjectTo<Domain.Models.Forum>(mapper.ConfigurationProvider)
                     .ToArrayAsync(cancellationToken);

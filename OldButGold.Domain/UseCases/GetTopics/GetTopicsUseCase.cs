@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
+using MediatR;
 using OldButGold.Domain.Models;
 using OldButGold.Domain.UseCases.GetForums;
 
 namespace OldButGold.Domain.UseCases.GetTopics
 {
-    internal class GetTopicsUseCase : IGetTopicsUseCase
+    internal class GetTopicsUseCase : 
+        IRequestHandler<GetTopicsQuery, (IEnumerable<Topic> resources, int totalCount)>
     {
         private readonly IValidator<GetTopicsQuery> validator;
         private readonly IGetForumsStorage getForumsStorage;
@@ -20,7 +22,7 @@ namespace OldButGold.Domain.UseCases.GetTopics
             this.storage = storage;
         }
 
-        public async Task<(IEnumerable<Topic> resources, int totalCount)> Execute(GetTopicsQuery query, CancellationToken cancellationToken)
+        public async Task<(IEnumerable<Topic> resources, int totalCount)> Handle(GetTopicsQuery query, CancellationToken cancellationToken)
         {
             await validator.ValidateAndThrowAsync(query, cancellationToken);
             await getForumsStorage.ThrowIfFormNotExist(query.ForumId, cancellationToken);

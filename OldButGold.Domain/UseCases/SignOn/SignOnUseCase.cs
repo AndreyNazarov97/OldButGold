@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using MediatR;
 using OldButGold.Domain.Authentication;
 
 namespace OldButGold.Domain.UseCases.SignOn
 {
-    internal class SignOnUseCase : ISignOnUseCase
+    internal class SignOnUseCase : IRequestHandler<SignOnCommand, IIdentity>
     {
         private readonly IValidator<SignOnCommand> validator;
         private readonly IPasswordManager passwordManager;
@@ -18,7 +19,7 @@ namespace OldButGold.Domain.UseCases.SignOn
             this.passwordManager = passwordManager;
             this.storage = storage;
         }
-        public async Task<IIdentity> Execute(SignOnCommand command, CancellationToken cancellationToken)
+        public async Task<IIdentity> Handle(SignOnCommand command, CancellationToken cancellationToken)
         {
             await validator.ValidateAndThrowAsync(command, cancellationToken);
 

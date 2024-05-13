@@ -55,7 +55,7 @@ namespace OldButGold.Domain.Tests.SignIn
         {
             findUserSetup.ReturnsAsync(() => null);
 
-            (await sut.Invoking(s => s.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None))
+            (await sut.Invoking(s => s.Handle(new SignInCommand("Test", "qwerty"), CancellationToken.None))
                 .Should().ThrowAsync<ValidationException>())
                 .Which.Errors.Should().Contain(e => e.PropertyName == "Login");
         }
@@ -66,7 +66,7 @@ namespace OldButGold.Domain.Tests.SignIn
             findUserSetup.ReturnsAsync(new RecognisedUser());
             comparePasswordsSetup.Returns(false);
 
-            (await sut.Invoking(s => s.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None))
+            (await sut.Invoking(s => s.Handle(new SignInCommand("Test", "qwerty"), CancellationToken.None))
                 .Should().ThrowAsync<ValidationException>())
                 .Which.Errors.Should().Contain(e => e.PropertyName == "Password");
         }
@@ -81,7 +81,7 @@ namespace OldButGold.Domain.Tests.SignIn
             comparePasswordsSetup.Returns(true);
             createSessionSetup.ReturnsAsync(sessionId);
 
-            await sut.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None);
+            await sut.Handle(new SignInCommand("Test", "qwerty"), CancellationToken.None);
             storage.Verify(s => s.CreateSession(userId, It.IsAny<DateTimeOffset>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
@@ -100,7 +100,7 @@ namespace OldButGold.Domain.Tests.SignIn
             createSessionSetup.ReturnsAsync(sessionId);
             encryptorSetup.ReturnsAsync("token");
 
-            var (identity, token) = await sut.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None);
+            var (identity, token) = await sut.Handle(new SignInCommand("Test", "qwerty"), CancellationToken.None);
             identity.UserId.Should().Be(userId);
             identity.SessionId.Should().Be(sessionId);
             token.Should().Be("token");
@@ -116,7 +116,7 @@ namespace OldButGold.Domain.Tests.SignIn
             comparePasswordsSetup.Returns(true);
             createSessionSetup.ReturnsAsync(sessionId);
 
-            await sut.Execute(new SignInCommand("Test", "qwerty"), CancellationToken.None);
+            await sut.Handle(new SignInCommand("Test", "qwerty"), CancellationToken.None);
             encryptor.Verify(s => s
                 .Encrypt("e1785f6f-0249-4624-800f-dcabc0f51e49", It.IsAny<byte[]>(), It.IsAny<CancellationToken>()));
         }

@@ -1,12 +1,14 @@
 ﻿using FluentValidation;
+using MediatR;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
+using OldButGold.Domain.Monitoring;
 using OldButGold.Domain.UseCases.GetForums;
 using Topic = OldButGold.Domain.Models.Topic;
 
 namespace OldButGold.Domain.UseCases.CreateTopic
 {
-    internal class CreateTopicUseCase : ICreateTopicUseCase
+    internal class CreateTopicUseCase : IRequestHandler<CreateTopicCommand, Topic>
     {
         private readonly IValidator<CreateTopicCommand> validator;
         private readonly IIntentionManager intentionManager;
@@ -27,7 +29,8 @@ namespace OldButGold.Domain.UseCases.CreateTopic
             this.getForumsStorage = getForumsStorage;
             this.storage = storage;
         }
-        public async Task<Topic> Execute(CreateTopicCommand command, CancellationToken cancellationToken)
+
+        public async Task<Topic> Handle(CreateTopicCommand command, CancellationToken cancellationToken)
         {
             await validator.ValidateAndThrowAsync(command, cancellationToken);
 
@@ -35,7 +38,6 @@ namespace OldButGold.Domain.UseCases.CreateTopic
             intentionManager.ThrowIfForbidden(TopicIntention.Create);
 
             await getForumsStorage.ThrowIfFormNotExist(forumId, cancellationToken);
-           
 
             return await storage.CreateTopic(forumId, identityProvider.Current.UserId, title, cancellationToken);
         }

@@ -40,7 +40,7 @@ namespace OldButGold.Domain.Tests.SignOn
             byte[] hash = new byte[] { 2 };
             generatePasswordPartsSetup.Returns((Salt: salt, Hash: hash));
 
-            var actual = await sut.Execute(new SignOnCommand("Login", "Password"), CancellationToken.None);
+            var actual = await sut.Handle(new SignOnCommand("Login", "Password"), CancellationToken.None);
 
             storage.Verify(s => s.CreateUser("Login", salt, hash, It.IsAny<CancellationToken>()), Times.Once());
             storage.VerifyNoOtherCalls();
@@ -55,7 +55,7 @@ namespace OldButGold.Domain.Tests.SignOn
             createUserSetup.ReturnsAsync(Guid.Parse("162e20bf-ca2b-4695-8db5-810e0320d5dc"));
 
 
-            var actual = await sut.Execute(new SignOnCommand("Login", "Password"), CancellationToken.None);
+            var actual = await sut.Handle(new SignOnCommand("Login", "Password"), CancellationToken.None);
             actual.UserId.Should().Be(Guid.Parse("162e20bf-ca2b-4695-8db5-810e0320d5dc"));
         }
 

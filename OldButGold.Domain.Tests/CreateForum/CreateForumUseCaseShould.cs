@@ -44,7 +44,7 @@ namespace OldButGold.Domain.Tests.CreateForum
             };
             createForumSetup.ReturnsAsync(forum);
 
-            var actual = await sut.Execute(new CreateForumCommand(forumTitle), CancellationToken.None);
+            var actual = await sut.Handle(new CreateForumCommand(forumTitle), CancellationToken.None);
             actual.Should().BeEquivalentTo(forum);
 
             storage.Verify(s => s.CreateForum(forumTitle, It.IsAny<CancellationToken>()), Times.Once);

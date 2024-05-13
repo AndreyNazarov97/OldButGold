@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using OldButGold.API.Authentication;
 using OldButGold.API.Models;
 using OldButGold.Domain.UseCases.SignIn;
@@ -10,13 +11,19 @@ namespace OldButGold.API.Controllers
     [Route("account")]
     public class AccountController : ControllerBase
     {
+        private readonly IMediator mediator;
+
+        public AccountController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
         [HttpPost]
         public async Task<IActionResult> SignOn(
             [FromBody] SignOn request,
-            [FromServices] ISignOnUseCase useCase,
             CancellationToken cancellationToken)
         {
-            var identity = await useCase.Execute(new SignOnCommand(request.Login, request.Password), cancellationToken);
+            var identity = await mediator.Send(new SignOnCommand(request.Login, request.Password), cancellationToken);
 
             return Ok(identity);
         }
@@ -24,11 +31,10 @@ namespace OldButGold.API.Controllers
         [HttpPost("signin")]
         public async Task<IActionResult> SignIn(
             [FromBody] SignIn request,
-            [FromServices] ISignInUseCase useCase,
             [FromServices] IAuthTokenStorage authTokenStorage,
             CancellationToken cancellationToken)
         {
-            var (identity, token) = await useCase.Execute(new SignInCommand(request.Login, request.Password), cancellationToken);
+            var (identity, token) = await mediator.Send(new SignInCommand(request.Login, request.Password), cancellationToken);
 
             authTokenStorage.Store(HttpContext, token);
 

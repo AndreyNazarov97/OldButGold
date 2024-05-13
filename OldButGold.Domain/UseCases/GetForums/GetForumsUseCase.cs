@@ -1,34 +1,23 @@
-﻿using OldButGold.Domain.Monitoring;
+﻿using MediatR;
 using Forum = OldButGold.Domain.Models.Forum;
 
 namespace OldButGold.Domain.UseCases.GetForums
 {
-    internal class GetForumsUseCase : IGetForumsUseCase
+    internal class GetForumsUseCase : IRequestHandler<GetForumsQuery ,IEnumerable<Forum>>
     {
         private readonly IGetForumsStorage storage;
-        private readonly DomainMetrics metrics;
 
         public GetForumsUseCase(
-            IGetForumsStorage storage,
-            DomainMetrics metrics)
+            IGetForumsStorage storage)
         {
             this.storage = storage;
-            this.metrics = metrics;
         }
 
-        public async Task<IEnumerable<Forum>> Execute(CancellationToken cancellationToken)
+        public  Task<IEnumerable<Forum>> Handle(GetForumsQuery query ,CancellationToken cancellationToken)
         {
-            try
-            {
-                IEnumerable<Forum> result = await storage.GetForums(cancellationToken);
-                metrics.ForumsFetched(true);
-                return result;
-            }
-            catch 
-            {
-                metrics.ForumsFetched(false);
-                throw;
-            }
+            return storage.GetForums(cancellationToken);
+
         }
+
     }
 }

@@ -41,7 +41,7 @@ namespace OldButGold.Domain.Tests.GetTopics
             getForumsSetup.ReturnsAsync(new Forum[] { new(){ Id = Guid.Parse("3d18459f-4ffe-44b6-8bd5-899c4fd600b8"),} });
 
             var query = new GetTopicsQuery(forumId, 0, 1);
-            await sut.Invoking(s => s.Execute(query, CancellationToken.None))
+            await sut.Invoking(s => s.Handle(query, CancellationToken.None))
                 .Should().ThrowAsync<ForumNotFoundException>();
         }
 
@@ -56,7 +56,7 @@ namespace OldButGold.Domain.Tests.GetTopics
             var expectedTotalCount = 6;
             getTopicsSetup.ReturnsAsync((expectedResources ,expectedTotalCount));
 
-            var(actualResources, actualTotalCount) = await sut.Execute(
+            var(actualResources, actualTotalCount) = await sut.Handle(
                 new GetTopicsQuery(forumId, 5, 10), CancellationToken.None);
 
             actualResources.Should().BeEquivalentTo(expectedResources);

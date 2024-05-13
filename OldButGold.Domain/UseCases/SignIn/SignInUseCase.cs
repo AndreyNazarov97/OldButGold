@@ -1,12 +1,13 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using MediatR;
 using Microsoft.Extensions.Options;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Exceptions;
 
 namespace OldButGold.Domain.UseCases.SignIn
 {
-    internal class SignInUseCase : ISignInUseCase
+    internal class SignInUseCase : IRequestHandler<SignInCommand, (IIdentity identity, string token)>
     {
         private readonly IValidator<SignInCommand> validator;
         private readonly ISignInStorage storage;
@@ -28,7 +29,7 @@ namespace OldButGold.Domain.UseCases.SignIn
             configuration = options.Value;
         }
 
-        public async Task<(IIdentity identity, string token)> Execute(
+        public async Task<(IIdentity identity, string token)> Handle(
             SignInCommand command, CancellationToken cancellationToken)
         {
             await validator.ValidateAndThrowAsync(command, cancellationToken);

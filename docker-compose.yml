@@ -60,7 +60,7 @@ services:
     image: 'grafana/grafana'
     restart: unless-stopped
     environment :
-      GF_INSTALL_PLUGINS: 'grafana-clock-panel, grafana-simple-json-datasource'
+      GF_INSTALL_PLUGINS: 'grafana-clock-panel,grafana-simple-json-datasource'
     volumes:
       - obg-grafana:/var/lib/grafana
     ports:

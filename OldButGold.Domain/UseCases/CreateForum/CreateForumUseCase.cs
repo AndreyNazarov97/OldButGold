@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using OldButGold.Domain.Authentication;
+using MediatR;
 using OldButGold.Domain.Authorization;
 using OldButGold.Domain.Models;
 
 namespace OldButGold.Domain.UseCases.CreateForum
 {
-    public class CreateForumUseCase : ICreateForumUseCase
+    public class CreateForumUseCase : IRequestHandler<CreateForumCommand, Forum>
     {
         private readonly IValidator<CreateForumCommand> validator;
         private readonly IIntentionManager intentionManager;
@@ -21,12 +21,12 @@ namespace OldButGold.Domain.UseCases.CreateForum
             this.storage = storage;
         }
 
-        public async Task<Forum> Execute(CreateForumCommand command, CancellationToken cancellationToken)
+
+        public async Task<Forum> Handle(CreateForumCommand command, CancellationToken cancellationToken)
         {
             await validator.ValidateAndThrowAsync(command, cancellationToken);
 
             intentionManager.ThrowIfForbidden(ForumIntention.Create);
-
 
             return await storage.CreateForum(command.Title, cancellationToken);
         }
