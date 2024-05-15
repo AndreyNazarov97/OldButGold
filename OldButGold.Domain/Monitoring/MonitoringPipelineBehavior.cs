@@ -1,9 +1,16 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Context.Propagation;
+using System.Diagnostics;
 
 namespace OldButGold.Domain.Monitoring
 {
-    internal class MonitoringPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    internal abstract class MonitoringPipelineBehavior
+    {
+        protected static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
+    }
+
+    internal class MonitoringPipelineBehavior<TRequest, TResponse> : MonitoringPipelineBehavior, IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly DomainMetrics metrics;
@@ -19,6 +26,12 @@ namespace OldButGold.Domain.Monitoring
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             if (request is not IMonitoredRequest monitoredRequest) return await next.Invoke();
+
+            using var activity = DomainMetrics.ActivitySource.StartActivity(
+                "usecase", ActivityKind.Internal ,default(ActivityContext));
+            var activityContext = activity?.Context ?? Activity.Current?.Context ?? default;
+
+            activity?.AddTag("obg.command", request.GetType().Name);
 
             try
             {

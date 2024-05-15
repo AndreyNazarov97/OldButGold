@@ -9,15 +9,17 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddApiLogging(builder.Configuration, builder.Environment);
-builder.Services.AddApiMetrics();
+builder.Services
+    .AddApiLogging(builder.Configuration, builder.Environment)
+    .AddApiMetrics(builder.Configuration);
+
 builder.Services.Configure<AuthenticationConfiguration>(builder.Configuration.GetSection("Authentication").Bind);
 builder.Services.AddScoped<IAuthTokenStorage, AuthTokenStorage>();
 
 
 builder.Services
     .AddForumDomain()
-    .AddForumStorage(builder.Configuration.GetConnectionString("Postgres"));
+    .AddForumStorage(builder.Configuration.GetConnectionString("Postgres")!);
 builder.Services.AddAutoMapper(config => config.AddMaps(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddControllers();

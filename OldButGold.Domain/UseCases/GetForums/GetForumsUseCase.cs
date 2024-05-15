@@ -13,10 +13,9 @@ namespace OldButGold.Domain.UseCases.GetForums
             this.storage = storage;
         }
 
-        public  Task<IEnumerable<Forum>> Handle(GetForumsQuery query ,CancellationToken cancellationToken)
+        public  async Task<IEnumerable<Forum>> Handle(GetForumsQuery query ,CancellationToken cancellationToken)
         {
-            return storage.GetForums(cancellationToken);
-
+            return await storage.GetForums(cancellationToken);
         }
 
     }

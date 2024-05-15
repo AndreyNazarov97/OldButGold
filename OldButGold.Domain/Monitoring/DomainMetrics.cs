@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 
 namespace OldButGold.Domain.Monitoring
@@ -7,8 +8,8 @@ namespace OldButGold.Domain.Monitoring
     {
         private readonly Meter meter = new Meter("OldButGold.Domain");
         private readonly ConcurrentDictionary<string, Counter<int>> counters = new();
+        internal static readonly ActivitySource ActivitySource = new("OldButGold.Domain");
 
-        
         public void IncrementCount(string name, int value, IDictionary<string, object?>? additionalTags = null)
         {
             var counter = counters.GetOrAdd(name, _ => meter.CreateCounter<int>(name));
@@ -20,5 +21,6 @@ namespace OldButGold.Domain.Monitoring
             ["succes"] = succes,
         };
 
+        
     }
 }
