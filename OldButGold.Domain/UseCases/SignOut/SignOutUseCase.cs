@@ -5,22 +5,11 @@ using OldButGold.Domain.Authorization;
 
 namespace OldButGold.Domain.UseCases.SignOut
 {
-    internal class SignOutUseCase : IRequestHandler<SignOutCommand>
+    internal class SignOutUseCase(
+        IIntentionManager intentionManager,
+        IIdentityProvider identityProvider,
+        ISignOutStorage storage) : IRequestHandler<SignOutCommand>
     {
-        private readonly IIntentionManager intentionManager;
-        private readonly IIdentityProvider identityProvider;
-        private readonly ISignOutStorage storage;
-
-        public SignOutUseCase(
-            IIntentionManager intentionManager,
-            IIdentityProvider identityProvider,
-            ISignOutStorage storage)
-        {
-            this.intentionManager = intentionManager;
-            this.identityProvider = identityProvider;
-            this.storage = storage;
-        }
-
         public async Task Handle(SignOutCommand command, CancellationToken cancellationToken)
         {
             intentionManager.ThrowIfForbidden(AccountIntention.SignOut);

@@ -1,11 +1,6 @@
 ﻿namespace OldButGold.Domain.Exceptions
 {
-    public partial class ForumNotFoundException : DomainException
+    public partial class ForumNotFoundException(Guid forumId) : DomainException(DomainErrorCode.Gone, $"Forum with id {forumId} was not found")
     {
-        public ForumNotFoundException(Guid forumId) : base(DomainErrorCode.Gone, $"Forum with id {forumId} was not found")
-        {
-            
-        }
-
     }
 }

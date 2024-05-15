@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using FluentValidation;
-using FluentValidation.Results;
 using Moq;
 using Moq.Language.Flow;
 using OldButGold.Domain.Authentication;
@@ -18,11 +16,6 @@ namespace OldButGold.Domain.Tests.SignOn
 
         public SignOnUseCaseShould()
         {
-            var validator = new Mock<IValidator<SignOnCommand>>();
-            validator
-                .Setup(x => x.ValidateAsync(It.IsAny<SignOnCommand>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new ValidationResult());
-
             var passwordManager = new Mock<IPasswordManager>();
             comparePasswordsSetup = passwordManager.Setup(m => m.ComparePassword(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()));
             generatePasswordPartsSetup = passwordManager.Setup(m => m.GeneratePasswordParts(It.IsAny<string>()));
@@ -30,7 +23,7 @@ namespace OldButGold.Domain.Tests.SignOn
             storage = new Mock<ISignOnStorage>();
             createUserSetup = storage.Setup(s => s.CreateUser(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<byte[]>(), It.IsAny<CancellationToken>()));
 
-            sut = new SignOnUseCase(validator.Object, passwordManager.Object, storage.Object);
+            sut = new SignOnUseCase(passwordManager.Object, storage.Object);
         }
 
         [Fact]

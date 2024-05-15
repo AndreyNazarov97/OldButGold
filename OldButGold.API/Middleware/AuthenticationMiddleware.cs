@@ -3,15 +3,8 @@ using OldButGold.Domain.Authentication;
 
 namespace OldButGold.API.Middleware
 {
-    public class AuthenticationMiddleware
+    public class AuthenticationMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate next;
-
-        public AuthenticationMiddleware(RequestDelegate next)
-        {
-            this.next = next;
-        }
-
         public async Task InvokeAsync(
             HttpContext httpContext,
             IAuthTokenStorage authTokenStorage,

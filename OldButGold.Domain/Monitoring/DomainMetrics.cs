@@ -4,9 +4,10 @@ using System.Diagnostics.Metrics;
 
 namespace OldButGold.Domain.Monitoring
 {
-    public class DomainMetrics
+    public class DomainMetrics(
+        IMeterFactory meterFactory)
     {
-        private readonly Meter meter = new Meter("OldButGold.Domain");
+        private readonly Meter meter = meterFactory.Create("OldButGold.Domain");
         private readonly ConcurrentDictionary<string, Counter<int>> counters = new();
         internal static readonly ActivitySource ActivitySource = new("OldButGold.Domain");
 

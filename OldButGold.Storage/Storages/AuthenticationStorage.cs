@@ -5,19 +5,10 @@ using OldButGold.Domain.Authentication;
 
 namespace OldButGold.Storage.Storages
 {
-    internal class AuthenticationStorage : IAuthenticationStorage
+    internal class AuthenticationStorage(
+        ForumDbContext dbContext,
+        IMapper mapper) : IAuthenticationStorage
     {
-        private readonly ForumDbContext dbContext;
-        private readonly IMapper mapper;
-
-        public AuthenticationStorage(
-            ForumDbContext dbContext,
-            IMapper mapper)
-        {
-            this.dbContext = dbContext;
-            this.mapper = mapper;
-        }
-
         public async Task<Session> FindSession(Guid sessionId, CancellationToken cancellationToken)
         {
             return await dbContext.Sessions

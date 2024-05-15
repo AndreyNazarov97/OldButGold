@@ -4,22 +4,13 @@ using OldButGold.Storage.Storages;
 
 namespace OldButGold.Storage.Tests
 {
-    public class CreateForumStorageShould : IClassFixture<StorageTestFixture>
+    public class CreateForumStorageShould(StorageTestFixture fixture) : IClassFixture<StorageTestFixture>
     {
-        private readonly CreateForumStorage sut;
-        private readonly StorageTestFixture fixture;
-
-        public CreateForumStorageShould(StorageTestFixture fixture)
-        {
-            this.fixture = fixture;
- 
-            sut = new CreateForumStorage(
+        private readonly CreateForumStorage sut = new CreateForumStorage(
                 fixture.GetMemoryCache(),
                 new GuidFactory(),
                 fixture.GetDbContext(),
                 fixture.GetMapper());
-            
-        }
 
         [Fact]
         public async Task InsertNewForumInDatbase()

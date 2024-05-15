@@ -10,19 +10,11 @@ namespace OldButGold.Domain.Monitoring
         protected static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
     }
 
-    internal class MonitoringPipelineBehavior<TRequest, TResponse> : MonitoringPipelineBehavior, IPipelineBehavior<TRequest, TResponse>
+    internal class MonitoringPipelineBehavior<TRequest, TResponse>(
+        DomainMetrics metrics,
+        ILogger<MonitoringPipelineBehavior<TRequest, TResponse>> logger) : MonitoringPipelineBehavior, IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
-        private readonly DomainMetrics metrics;
-        private readonly ILogger<MonitoringPipelineBehavior<TRequest, TResponse>> logger;
-
-        public MonitoringPipelineBehavior(
-            DomainMetrics metrics,
-            ILogger<MonitoringPipelineBehavior<TRequest, TResponse>> logger)
-        {
-            this.metrics = metrics;
-            this.logger = logger;
-        }
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             if (request is not IMonitoredRequest monitoredRequest) return await next.Invoke();

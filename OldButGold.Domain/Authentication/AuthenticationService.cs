@@ -5,24 +5,13 @@ using System.Security.Cryptography;
 
 namespace OldButGold.Domain.Authentication
 {
-    internal class AuthenticationService : IAuthenticationService
+    internal class AuthenticationService(
+        ISymmetricDecryptor decryptor,
+        IAuthenticationStorage storage,
+        ILogger<AuthenticationService> logger,
+        IOptions<AuthenticationConfiguration> options) : IAuthenticationService
     {
-        private readonly AuthenticationConfiguration configuration;
-        private readonly ISymmetricDecryptor decryptor;
-        private readonly IAuthenticationStorage storage;
-        private readonly ILogger<AuthenticationService> logger;
-
-        public AuthenticationService(
-            ISymmetricDecryptor decryptor,
-            IAuthenticationStorage storage,
-            ILogger<AuthenticationService> logger, 
-            IOptions<AuthenticationConfiguration> options)
-        {
-            configuration = options.Value;
-            this.decryptor = decryptor;
-            this.storage = storage;
-            this.logger = logger;
-        }
+        private readonly AuthenticationConfiguration configuration = options.Value;
 
         public async Task<IIdentity> Authenticate(string authToken, CancellationToken cancellationToken)
         {

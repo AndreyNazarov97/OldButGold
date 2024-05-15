@@ -31,18 +31,10 @@ namespace OldButGold.Storage.Tests
         }
     }
 
-    public class SignInStorageShould : IClassFixture<SignInStorageFixture>
+    public class SignInStorageShould(
+        SignInStorageFixture fixture) : IClassFixture<SignInStorageFixture>
     {
-        private readonly SignInStorageFixture fixture;
-        private readonly SignInStorage sut;
-
-        public SignInStorageShould(
-            SignInStorageFixture fixture)
-        {
-            this.fixture = fixture;
-
-            sut = new SignInStorage(new GuidFactory() ,fixture.GetMapper(), fixture.GetDbContext());
-        }
+        private readonly SignInStorage sut = new SignInStorage(new GuidFactory(), fixture.GetMapper(), fixture.GetDbContext());
 
         [Fact]
         public async Task ReturnUser_WhenDatabaseContainsUserWithSameLogin()

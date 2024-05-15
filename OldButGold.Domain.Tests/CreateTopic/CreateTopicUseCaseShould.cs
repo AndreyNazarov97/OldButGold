@@ -1,6 +1,4 @@
 using FluentAssertions;
-using FluentValidation;
-using FluentValidation.Results;
 using Moq;
 using Moq.Language.Flow;
 using OldButGold.Domain.Authentication;
@@ -41,13 +39,7 @@ namespace OldButGold.Domain.Tests.CreateTopic
             intentionManager = new Mock<IIntentionManager>();
             intentionIsAllowedSetup = intentionManager.Setup(p => p.IsAllowed(It.IsAny<TopicIntention>()));
 
-            var validator = new Mock<IValidator<CreateTopicCommand>>();
-            validator
-                .Setup(v => v.ValidateAsync(It.IsAny<CreateTopicCommand>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new ValidationResult());
-
             sut = new CreateTopicUseCase(
-                validator.Object, 
                 intentionManager.Object, 
                 identityProvider.Object, 
                 getForumsStorage.Object , 

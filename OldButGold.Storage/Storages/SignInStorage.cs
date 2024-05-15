@@ -6,22 +6,11 @@ using OldButGold.Storage.Entities;
 
 namespace OldButGold.Storage.Storages
 {
-    internal class SignInStorage : ISignInStorage
+    internal class SignInStorage(
+        IGuidFactory guidFactory,
+        IMapper mapper,
+        ForumDbContext dbContext) : ISignInStorage
     {
-        private readonly IGuidFactory guidFactory;
-        private readonly IMapper mapper;
-        private readonly ForumDbContext dbContext;
-
-        public SignInStorage(
-            IGuidFactory guidFactory,
-            IMapper mapper,
-            ForumDbContext dbContext)
-        {
-            this.guidFactory = guidFactory;
-            this.mapper = mapper;
-            this.dbContext = dbContext;
-        }
-
         public async Task<Guid> CreateSession(Guid userId, DateTimeOffset expirationMoment, CancellationToken cancellationToken)
         {
             var sessionId = guidFactory.Create();

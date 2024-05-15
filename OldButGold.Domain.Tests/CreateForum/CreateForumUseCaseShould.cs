@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using FluentValidation;
-using FluentValidation.Results;
 using Moq;
 using Moq.Language.Flow;
 using OldButGold.Domain.Authorization;
@@ -17,11 +15,6 @@ namespace OldButGold.Domain.Tests.CreateForum
 
         public CreateForumUseCaseShould()
         {
-            var validator = new Mock<IValidator<CreateForumCommand>>();
-            validator
-                .Setup(v => v.ValidateAsync(It.IsAny<CreateForumCommand>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new ValidationResult());
-
             var intentionManager = new Mock<IIntentionManager>();
             intentionManager
                 .Setup(m => m.IsAllowed(It.IsAny<ForumIntention>()))
@@ -30,7 +23,7 @@ namespace OldButGold.Domain.Tests.CreateForum
             storage = new Mock<ICreateForumStorage>();
             createForumSetup = storage.Setup(s => s.CreateForum(It.IsAny<string>(), It.IsAny<CancellationToken>()));
 
-            sut = new CreateForumUseCase(validator.Object, intentionManager.Object, storage.Object);
+            sut = new CreateForumUseCase(intentionManager.Object, storage.Object);
         }
 
         [Fact]

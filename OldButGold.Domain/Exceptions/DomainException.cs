@@ -1,15 +1,8 @@
 ﻿namespace OldButGold.Domain.Exceptions
 {
-    public abstract class DomainException : Exception
+    public abstract class DomainException(DomainErrorCode errorCode, string message) : Exception(message)
     {
-        public DomainErrorCode ErrorCode { get; }
-
-
-        protected DomainException(DomainErrorCode errorCode, string message) : base(message)
-        {
-            ErrorCode = errorCode;
-        }
-
+        public DomainErrorCode ErrorCode { get; } = errorCode;
     }
 
     

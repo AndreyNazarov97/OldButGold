@@ -1,12 +1,10 @@
 ﻿using FluentAssertions;
 using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Language.Flow;
 using OldButGold.Domain.Authentication;
 using OldButGold.Domain.UseCases.SignIn;
-using OldButGold.Domain.UseCases.SignOn;
 
 namespace OldButGold.Domain.Tests.SignIn
 {
@@ -22,12 +20,7 @@ namespace OldButGold.Domain.Tests.SignIn
         private readonly ISetup<ISymmetricEncryptor, Task<string>> encryptorSetup;
 
         public SignInUseCaseShould()
-        {
-            var validator = new Mock<IValidator<SignInCommand>>();
-            validator
-                .Setup(x => x.ValidateAsync(It.IsAny<SignInCommand>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new ValidationResult());
-
+        {           
             var passwordManager = new Mock<IPasswordManager>();
             comparePasswordsSetup = passwordManager.Setup(m => m.ComparePassword(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()));
             generatePasswordPartsSetup = passwordManager.Setup(m => m.GeneratePasswordParts(It.IsAny<string>()));
@@ -47,7 +40,7 @@ namespace OldButGold.Domain.Tests.SignIn
                     Base64Key = "XtDotH86WLjaEoFev6uZFN/3C0EQIApoD+5iqqmPtpg="
                 });
 
-            sut = new SignInUseCase(validator.Object, storage.Object, passwordManager.Object, encryptor.Object, configuration.Object);
+            sut = new SignInUseCase(storage.Object, passwordManager.Object, encryptor.Object, configuration.Object);
         }
 
         [Fact]
