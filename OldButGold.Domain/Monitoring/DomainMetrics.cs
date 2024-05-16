@@ -7,9 +7,12 @@ namespace OldButGold.Domain.Monitoring
     public class DomainMetrics(
         IMeterFactory meterFactory)
     {
-        private readonly Meter meter = meterFactory.Create("OldButGold.Domain");
+        public const string ApplicationName = "OldButGold.Domain";
+
+        private readonly Meter meter = meterFactory.Create(ApplicationName);
         private readonly ConcurrentDictionary<string, Counter<int>> counters = new();
-        internal static readonly ActivitySource ActivitySource = new("OldButGold.Domain");
+
+        internal static readonly ActivitySource ActivitySource = new(ApplicationName);
 
         public void IncrementCount(string name, int value, IDictionary<string, object?>? additionalTags = null)
         {

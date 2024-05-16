@@ -9,4 +9,9 @@ scrape_configs:
       - targets:
         - host.docker.internal:7000
         labels:
-          app: obg
+          app: obg-local
+      - targets:
+        - obg-api:8080      
+        labels:
+          app: obg-docker
+  

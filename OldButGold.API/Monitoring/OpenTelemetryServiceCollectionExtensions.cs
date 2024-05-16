@@ -17,7 +17,16 @@ namespace OldButGold.API.Monitoring
                     .AddPrometheusExporter())
                 .WithTracing(builder => builder
                     .ConfigureResource(r => r.AddService("OldButGold"))
-                    .AddAspNetCoreInstrumentation()
+                    .AddAspNetCoreInstrumentation(options =>
+                    {
+                        options.Filter += context =>
+                        {
+                            return !context.Request.Path.Value!.Contains("metrics", StringComparison.InvariantCultureIgnoreCase) &&
+                                   !context.Request.Path.Value!.Contains("swagger", StringComparison.InvariantCultureIgnoreCase);
+                        };
+                        options.EnrichWithHttpResponse = (activity, response) =>
+                            activity.AddTag("error", response.StatusCode >= 400);
+                    })
                     .AddEntityFrameworkCoreInstrumentation(cfg => cfg.SetDbStatementForText = true)
                     .AddSource("OldButGold.Domain")
                     .AddConsoleExporter()

@@ -29,11 +29,13 @@ namespace OldButGold.Domain.Monitoring
             {
                 var result = await next.Invoke();
                 monitoredRequest.MonitorSucces(metrics);
+                activity?.AddTag("error", false);
                 return result;
             }
             catch(Exception ex)
             {
                 monitoredRequest.MonitorFailure(metrics);
+                activity?.AddTag("error", true);
                 logger.LogError(ex, "Unhandled error caught while hadling command {Command}", request);
                 throw;
             }

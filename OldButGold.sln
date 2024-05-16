@@ -9,8 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage", "OldBu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{EA38BF32-D2B8-4138-8F1D-459673315BCA}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		Directory.Build.props = Directory.Build.props
 		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		loki-config.yml = loki-config.yml
 		prometheus.yml = prometheus.yml
 		README.md = README.md
 	EndProjectSection

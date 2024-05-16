@@ -61,7 +61,6 @@ namespace OldButGold.Storage.Tests
 
             await using var dbContext = fixture.GetDbContext();
             dbContext.Sessions
-                .AsNoTracking()
                 .FirstAsync(s => s.SessionId == sessionId).Should().NotBeNull();
 
         }
