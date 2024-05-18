@@ -78,4 +78,3 @@ services:
       ConnectionStrings__Logs: 'http://obg-loki:3100'
       ConnectionStrings__Tracing: 'http://obg-jaeger:14268/api/traces'
 
-      

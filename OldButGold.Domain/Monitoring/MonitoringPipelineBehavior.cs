@@ -28,8 +28,11 @@ namespace OldButGold.Domain.Monitoring
             try
             {
                 var result = await next.Invoke();
+
+                logger.LogInformation("Command succesfully handled {Command}", request);
                 monitoredRequest.MonitorSucces(metrics);
                 activity?.AddTag("error", false);
+
                 return result;
             }
             catch(Exception ex)

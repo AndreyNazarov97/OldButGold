@@ -4,7 +4,7 @@ using OpenTelemetry.Trace;
 
 namespace OldButGold.API.Monitoring
 {
-    internal static class OpenTelemetryServiceCollectionExtensions
+    internal static class MetricsServiceCollectionExtensions
     {
         public static IServiceCollection AddApiMetrics(
             this IServiceCollection services,
@@ -16,7 +16,7 @@ namespace OldButGold.API.Monitoring
                     .AddMeter("OldButGold.Domain")
                     .AddPrometheusExporter())
                 .WithTracing(builder => builder
-                    .ConfigureResource(r => r.AddService("OldButGold"))
+                    .ConfigureResource(r => r.AddService("OldButGold.API"))
                     .AddAspNetCoreInstrumentation(options =>
                     {
                         options.Filter += context =>

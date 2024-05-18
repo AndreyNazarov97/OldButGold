@@ -12,11 +12,20 @@ namespace OldButGold.API.Monitoring
         public static IServiceCollection AddApiLogging(this IServiceCollection services,
             IConfiguration configuration, IWebHostEnvironment environment)
         {
+            var loggingLevelSwitch = new LoggingLevelSwitch();
+            services.AddSingleton(loggingLevelSwitch);
+
+
+            loggingLevelSwitch.MinimumLevelChanged += (sender, args) =>
+            {
+                Console.WriteLine($"Log level was switched from {args.OldLevel} to {args.NewLevel}");
+            };
+
             return services.AddLogging(b => b
                 .Configure(options => options.ActivityTrackingOptions =
                     ActivityTrackingOptions.SpanId | ActivityTrackingOptions.TraceId)
                 .AddSerilog(new LoggerConfiguration()
-                    .MinimumLevel.Debug()
+                    .MinimumLevel.ControlledBy(loggingLevelSwitch)
                     .Enrich.WithProperty("Application", "OldButGold.API")
                     .Enrich.WithProperty("Environment", environment.EnvironmentName)
                     .Enrich.With<TracingContextEnricher>()
