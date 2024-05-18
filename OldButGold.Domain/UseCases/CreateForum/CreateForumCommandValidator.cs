@@ -11,7 +11,7 @@ namespace OldButGold.Domain.UseCases.CreateForum
             RuleFor(c => c.Title)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithErrorCode(ValidationErrorCode.Empty)
-                .MaximumLength(100).WithErrorCode(ValidationErrorCode.TooLong);
+                .MaximumLength(50).WithErrorCode(ValidationErrorCode.TooLong);
         }
     }
 }

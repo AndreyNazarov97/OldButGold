@@ -5,7 +5,7 @@ namespace OldButGold.Domain.UseCases.CreateTopic
 {
     internal class TopicIntentionResolver : IIntentionResolver<TopicIntention>
     {
-        public bool isAllowed(IIdentity subject, TopicIntention intention)
+        public bool IsAllowed(IIdentity subject, TopicIntention intention)
         {
             return intention switch
             {

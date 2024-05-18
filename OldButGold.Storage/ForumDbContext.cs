@@ -13,7 +13,7 @@ namespace OldButGold.Storage
 
         public DbSet<Session> Sessions { get; set; }
 
-
+        public DbSet<DomainEvent> DomainEvents { get; set; }
 
     }
 }

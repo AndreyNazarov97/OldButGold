@@ -5,6 +5,7 @@ using OldButGold.Domain.Authentication;
 using OldButGold.Domain.Authorization;
 using OldButGold.Domain.Exceptions;
 using OldButGold.Domain.Models;
+using OldButGold.Domain.UseCases;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
 using Topic = OldButGold.Domain.Models.Topic;
@@ -13,22 +14,33 @@ namespace OldButGold.Domain.Tests.CreateTopic
 {
     public class CreateTopicUseCaseShould
     {
-        private readonly Mock<ICreateTopicStorage> storage;
+        private readonly Mock<IUnitOfWork> unitOfWork = new();
+        private readonly Mock<ICreateTopicStorage> storage = new();
+        private readonly Mock<IDomainEventStorage> domainEventStorage = new();
+        private readonly Mock<IIntentionManager> intentionManager = new();
+
+
         private readonly ISetup<ICreateTopicStorage, Task<Topic>> createTopicSetup;
-        private readonly Mock<IGetForumsStorage> getForumsStorage;
         private readonly ISetup<IGetForumsStorage, Task<IEnumerable<Models.Forum>>> getForumsSetup;
         private readonly ISetup<IIdentity, Guid> getCurrentUserIdSetup;
-        private readonly Mock<IIntentionManager> intentionManager;
         private readonly ISetup<IIntentionManager, bool> intentionIsAllowedSetup;
+
         private readonly CreateTopicUseCase sut;
 
         public CreateTopicUseCaseShould()
         {
-            storage = new Mock<ICreateTopicStorage>();
+            var unitOfWorkScope = new Mock<IUnitOfWorkScope>();
+
+            unitOfWork
+                .Setup(u => u.CreateScope(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(unitOfWorkScope.Object);
+            unitOfWorkScope.Setup(s => s.GetStorage<ICreateTopicStorage>()).Returns(storage.Object);
+            unitOfWorkScope.Setup(s => s.GetStorage<IDomainEventStorage>()).Returns(domainEventStorage.Object);
+
             createTopicSetup = storage.Setup(s =>
                 s.CreateTopic(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<CancellationToken>()));
 
-            getForumsStorage = new Mock<IGetForumsStorage>();
+            var getForumsStorage = new Mock<IGetForumsStorage>();
             getForumsSetup = getForumsStorage.Setup(s => s.GetForums(It.IsAny<CancellationToken>()));
 
             var identity = new Mock<IIdentity>();
@@ -43,7 +55,7 @@ namespace OldButGold.Domain.Tests.CreateTopic
                 intentionManager.Object, 
                 identityProvider.Object, 
                 getForumsStorage.Object , 
-                storage.Object);
+                unitOfWork.Object);
         }
 
         [Fact]

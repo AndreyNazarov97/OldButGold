@@ -5,7 +5,7 @@ namespace OldButGold.Domain.UseCases.SignOut
 {
     internal class AccountIntentionResolver : IIntentionResolver<AccountIntention>
     {
-        public bool isAllowed(IIdentity subject, AccountIntention intention)
+        public bool IsAllowed(IIdentity subject, AccountIntention intention)
         {
             return intention switch
             {

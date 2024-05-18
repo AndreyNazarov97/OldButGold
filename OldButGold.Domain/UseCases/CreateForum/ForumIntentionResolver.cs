@@ -5,7 +5,7 @@ namespace OldButGold.Domain.UseCases.CreateForum
 {
     public class ForumIntentionResolver : IIntentionResolver<ForumIntention>
     {
-        public bool isAllowed(IIdentity subject, ForumIntention intention)
+        public bool IsAllowed(IIdentity subject, ForumIntention intention)
         {
             return intention switch
             {

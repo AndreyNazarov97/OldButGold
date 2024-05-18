@@ -38,7 +38,9 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapPrometheusScrapingEndpoint();
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
+app
+    .UseMiddleware<ErrorHandlingMiddleware>()
+    .UseMiddleware<AuthenticationMiddleware>();
 
 app.Run();
 

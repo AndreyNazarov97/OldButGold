@@ -37,7 +37,7 @@ namespace OldButGold.Domain.Tests.Authorization
         {
             var resolver = new Mock<IIntentionResolver<ForumIntention>>();
             resolver
-                .Setup(r => r.isAllowed(It.IsAny<IIdentity>(), It.IsAny<ForumIntention>()))
+                .Setup(r => r.IsAllowed(It.IsAny<IIdentity>(), It.IsAny<ForumIntention>()))
                 .Returns(expectedResolverResult);
 
             identityProvider.Setup(p => p.Current)

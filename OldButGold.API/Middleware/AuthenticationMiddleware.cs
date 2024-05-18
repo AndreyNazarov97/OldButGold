@@ -9,11 +9,10 @@ namespace OldButGold.API.Middleware
             HttpContext httpContext,
             IAuthTokenStorage authTokenStorage,
             IAuthenticationService authenticationService,
-            IIdentityProvider identityProvider,
-            CancellationToken cancellationToken)
+            IIdentityProvider identityProvider)
         {
             var identity = authTokenStorage.TryExtract(httpContext, out var authToken)
-                ? await authenticationService.Authenticate(authToken, cancellationToken)
+                ? await authenticationService.Authenticate(authToken, httpContext.RequestAborted)
                 : User.Guest;
 
             identityProvider.Current = identity;

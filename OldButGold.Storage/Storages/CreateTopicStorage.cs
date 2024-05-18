@@ -1,19 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
+using OldButGold.Domain.Models;
 using OldButGold.Domain.UseCases.CreateTopic;
-using OldButGold.Storage.Entities;
+
 
 namespace OldButGold.Storage.Storages
 {
     internal class CreateTopicStorage(
         IGuidFactory guidFactory,
+        IMapper mapper,
         IMomentProvider momentProvider,
         ForumDbContext dbContext) : ICreateTopicStorage
     {
-        public async Task<Domain.Models.Topic> CreateTopic(Guid forumId, Guid userId, string title, CancellationToken cancellationToken)
+        public async Task<Topic> CreateTopic(Guid forumId, Guid userId, string title, CancellationToken cancellationToken)
         {
 
             var topicId = guidFactory.Create();
-            var topic = new Topic()
+            var topic = new Entities.Topic()
             {
                 TopicId = topicId,
                 ForumId = forumId,
@@ -27,15 +31,8 @@ namespace OldButGold.Storage.Storages
 
             return await dbContext.Topics
                 .Where(t => t.TopicId == topicId)
-                .Select(t => new Domain.Models.Topic
-                {
-                    Id = t.TopicId,
-                    UserId=t.UserId,
-                    Title = t.Title,
-                    CreatedAt = t.CreatedAt,
-                    ForumId=t.ForumId,
-                })
-                .FirstAsync();
+                .ProjectTo<Topic>(mapper.ConfigurationProvider)
+                .FirstAsync(cancellationToken);
         }
 
     }

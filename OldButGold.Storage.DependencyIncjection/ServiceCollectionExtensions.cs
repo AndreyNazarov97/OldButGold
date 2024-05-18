@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OldButGold.Domain;
 using OldButGold.Domain.Authentication;
+using OldButGold.Domain.UseCases;
 using OldButGold.Domain.UseCases.CreateForum;
 using OldButGold.Domain.UseCases.CreateTopic;
 using OldButGold.Domain.UseCases.GetForums;
@@ -18,6 +20,7 @@ namespace OldButGold.Storage.DependencyIncjection
         public static IServiceCollection AddForumStorage(this  IServiceCollection services, string dbConnectionString)
         {
             services
+                .AddScoped<IDomainEventStorage, DomainEventStorage>()
                 .AddScoped<IAuthenticationStorage, AuthenticationStorage>()
                 .AddScoped<ICreateForumStorage, CreateForumStorage>()
                 .AddScoped<IGetForumsStorage, GetForumStorage>()
@@ -28,6 +31,9 @@ namespace OldButGold.Storage.DependencyIncjection
                 .AddScoped<ISignOutStorage, SignOutStorage>()
                 .AddScoped<IGuidFactory, GuidFactory>()
                 .AddScoped<IMomentProvider, MomentProvider>();
+
+            services
+                .AddScoped<IUnitOfWork>(sp => new UnitOfWork(sp));
 
             services.AddDbContextPool<ForumDbContext>(options =>
                 options.UseNpgsql(dbConnectionString));

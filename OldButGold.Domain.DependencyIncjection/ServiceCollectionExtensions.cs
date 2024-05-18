@@ -35,8 +35,6 @@ namespace OldButGold.Domain.DependencyIncjection
 
             services.AddSingleton<DomainMetrics>(); 
 
-            
-
             return services;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace OldButGold.Domain.UseCases.CreateForum
 {
-    public interface ICreateForumStorage
+    public interface ICreateForumStorage : IStorage
     {
         Task<Forum> CreateForum(string title, CancellationToken cancellationToken);
     }

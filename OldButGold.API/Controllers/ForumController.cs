@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using OldButGold.API.Models;
 using OldButGold.API.Models.Topic;
 using OldButGold.Domain.UseCases.CreateForum;
@@ -16,7 +15,9 @@ namespace OldButGold.API.Controllers
 {
     [ApiController]
     [Route("forums")]
-    public class ForumController(IMediator mediator) : ControllerBase
+    public class ForumController(
+        ISender mediator,
+        IMapper mapper) : ControllerBase
     {
         [HttpPost]
         [ProducesResponseType(400)]
@@ -25,7 +26,6 @@ namespace OldButGold.API.Controllers
         [ProducesResponseType(201, Type = typeof(Forum))]
         public async Task<IActionResult> CreateForum(
         [FromBody] CreateForum request,
-        [FromServices] IMapper mapper,
         CancellationToken cancellationToken)
         {
             var command = new CreateForumCommand(request.Title);
@@ -43,7 +43,6 @@ namespace OldButGold.API.Controllers
         [HttpGet(Name = nameof(GetForums))]
         [ProducesResponseType(200, Type = typeof(Forum))]
         public async Task<IActionResult> GetForums(
-            [FromServices] IMapper mapper,
             CancellationToken cancellationToken)
         {
             var forums = await mediator.Send(new GetForumsQuery() ,cancellationToken);
@@ -76,7 +75,6 @@ namespace OldButGold.API.Controllers
             [FromRoute] Guid forumId,
             [FromQuery] int skip,
             [FromQuery] int take,
-            [FromServices] IMapper mapper,
             CancellationToken cancellationToken)
         {
             var query = new GetTopicsQuery(forumId, skip, take);
