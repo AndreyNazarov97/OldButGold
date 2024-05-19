@@ -17,7 +17,7 @@ namespace OldButGold.Forums.Domain.DependencyInjection
             services.AddMediatR(cfg => cfg
             .AddOpenBehavior(typeof(MonitoringPipelineBehavior<,>))
             .AddOpenBehavior(typeof(ValidationPipelineBehavior<,>))
-            .RegisterServicesFromAssemblyContaining<Models.Forum>());
+            .RegisterServicesFromAssemblyContaining<Forum>());
 
             services
                 .AddScoped<IIntentionManager, IntentionManager>()
