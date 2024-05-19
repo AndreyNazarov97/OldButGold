@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.Monitoring;
+using OldButGold.Forums.Domain.Models;
+using OldButGold.Forums.Domain.Monitoring;
 
-namespace OldButGold.Domain.UseCases.GetTopics
+namespace OldButGold.Forums.Domain.UseCases.GetTopics
 {
     public record GetTopicsQuery(Guid ForumId, int Skip, int Take)
         : IRequest<(IEnumerable<Topic> resources, int totalCount)>, IMonitoredRequest

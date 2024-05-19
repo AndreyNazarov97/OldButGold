@@ -1,9 +1,9 @@
-﻿namespace OldButGold.Domain.Authentication
+﻿namespace OldButGold.Forums.Domain.Authentication
 {
     public interface IIdentity
     {
         Guid UserId { get; }
-        Guid SessionId {  get; }
+        Guid SessionId { get; }
     }
 
     internal static class IIdentityExtensions

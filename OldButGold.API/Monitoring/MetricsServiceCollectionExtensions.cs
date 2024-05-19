@@ -2,7 +2,7 @@
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace OldButGold.API.Monitoring
+namespace OldButGold.Forums.API.Monitoring
 {
     internal static class MetricsServiceCollectionExtensions
     {

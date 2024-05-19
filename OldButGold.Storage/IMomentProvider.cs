@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Storage
+﻿namespace OldButGold.Forums.Storage
 {
     internal interface IMomentProvider
     {

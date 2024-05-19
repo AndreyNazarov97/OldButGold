@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using OldButGold.Domain.Authentication;
+using OldButGold.Forums.Domain.Authentication;
 
-namespace OldButGold.Domain.UseCases.SignOn
+namespace OldButGold.Forums.Domain.UseCases.SignOn
 {
     internal class SignOnUseCase(
         IPasswordManager passwordManager,
@@ -9,7 +9,7 @@ namespace OldButGold.Domain.UseCases.SignOn
     {
         public async Task<IIdentity> Handle(SignOnCommand command, CancellationToken cancellationToken)
         {
-            var(salt, hash) = passwordManager.GeneratePasswordParts(command.Password);
+            var (salt, hash) = passwordManager.GeneratePasswordParts(command.Password);
             var userid = await storage.CreateUser(command.Login, salt, hash, cancellationToken);
 
             return new User(userid, Guid.Empty);

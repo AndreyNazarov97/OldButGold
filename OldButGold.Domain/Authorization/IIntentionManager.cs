@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.Authorization
+﻿namespace OldButGold.Forums.Domain.Authorization
 {
     public interface IIntentionManager
     {

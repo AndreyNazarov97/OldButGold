@@ -3,10 +3,10 @@ using FluentValidation;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Language.Flow;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.UseCases.SignIn;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.UseCases.SignIn;
 
-namespace OldButGold.Domain.Tests.SignIn
+namespace OldButGold.Forums.Domain.Tests.SignIn
 {
     public class SignInUseCaseShould
     {
@@ -20,7 +20,7 @@ namespace OldButGold.Domain.Tests.SignIn
         private readonly ISetup<ISymmetricEncryptor, Task<string>> encryptorSetup;
 
         public SignInUseCaseShould()
-        {           
+        {
             var passwordManager = new Mock<IPasswordManager>();
             comparePasswordsSetup = passwordManager.Setup(m => m.ComparePassword(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()));
             generatePasswordPartsSetup = passwordManager.Setup(m => m.GeneratePasswordParts(It.IsAny<string>()));
@@ -70,7 +70,7 @@ namespace OldButGold.Domain.Tests.SignIn
             var userId = Guid.Parse("1d2331ba-9850-4021-9706-0240e0d3b9f0");
             var sessionId = Guid.Parse("e1785f6f-0249-4624-800f-dcabc0f51e49");
 
-            findUserSetup.ReturnsAsync(new RecognisedUser(){UserId = userId,});
+            findUserSetup.ReturnsAsync(new RecognisedUser() { UserId = userId, });
             comparePasswordsSetup.Returns(true);
             createSessionSetup.ReturnsAsync(sessionId);
 
@@ -86,8 +86,8 @@ namespace OldButGold.Domain.Tests.SignIn
             findUserSetup.ReturnsAsync(new RecognisedUser
             {
                 UserId = userId,
-                PasswordHash = new byte[] {1},
-                Salt = new byte[] {2},
+                PasswordHash = new byte[] { 1 },
+                Salt = new byte[] { 2 },
             });
             comparePasswordsSetup.Returns(true);
             createSessionSetup.ReturnsAsync(sessionId);

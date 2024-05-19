@@ -1,7 +1,7 @@
-﻿using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
+﻿using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
 
-namespace OldButGold.Domain.UseCases.CreateTopic
+namespace OldButGold.Forums.Domain.UseCases.CreateTopic
 {
     internal class TopicIntentionResolver : IIntentionResolver<TopicIntention>
     {
@@ -14,6 +14,6 @@ namespace OldButGold.Domain.UseCases.CreateTopic
             };
         }
 
-       
+
     }
 }

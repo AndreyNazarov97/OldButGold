@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using OldButGold.Domain.Monitoring;
+using OldButGold.Forums.Domain.Monitoring;
 
-namespace OldButGold.Domain.UseCases.SignOut
+namespace OldButGold.Forums.Domain.UseCases.SignOut
 {
     public record SignOutCommand() : IRequest, IMonitoredRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.UseCases.SignIn
+﻿namespace OldButGold.Forums.Domain.UseCases.SignIn
 {
     public class RecognisedUser
     {

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Domain", "OldButGold.Domain\OldButGold.Domain.csproj", "{5FB7689E-F010-4C78-9C21-23DC9846936C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.Domain", "OldButGold.Domain\OldButGold.Forums.Domain.csproj", "{5FB7689E-F010-4C78-9C21-23DC9846936C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage", "OldButGold.Storage\OldButGold.Storage.csproj", "{E5E2D765-0FF1-4C7D-8099-8FECD68B3575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.Storage", "OldButGold.Storage\OldButGold.Forums.Storage.csproj", "{E5E2D765-0FF1-4C7D-8099-8FECD68B3575}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{EA38BF32-D2B8-4138-8F1D-459673315BCA}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,17 +21,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-
 		kafka-connect\worker.properties = kafka-connect\worker.properties
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.API", "OldButGold.API\OldButGold.API.csproj", "{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.API", "OldButGold.API\OldButGold.Forums.API.csproj", "{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Domain.Tests", "OldButGold.Domain.Tests\OldButGold.Domain.Tests.csproj", "{27398D8C-84EF-4D47-9915-A34A054B3BA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.Domain.Tests", "OldButGold.Domain.Tests\OldButGold.Forums.Domain.Tests.csproj", "{27398D8C-84EF-4D47-9915-A34A054B3BA6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Domain.DependencyInjection", "OldButGold.Domain.DependencyIncjection\OldButGold.Domain.DependencyInjection.csproj", "{FDEC44D3-D224-4120-966E-A0DC66EF226E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.Domain.DependencyInjection", "OldButGold.Domain.DependencyIncjection\OldButGold.Forums.Domain.DependencyInjection.csproj", "{FDEC44D3-D224-4120-966E-A0DC66EF226E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage.DependencyInjection", "OldButGold.Storage.DependencyIncjection\OldButGold.Storage.DependencyInjection.csproj", "{CBF375A1-1B8C-4DE7-96DA-435A2DFE61DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.Storage.DependencyInjection", "OldButGold.Storage.DependencyIncjection\OldButGold.Forums.Storage.DependencyInjection.csproj", "{CBF375A1-1B8C-4DE7-96DA-435A2DFE61DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.E2E", "OldButGold.E2E\OldButGold.E2E.csproj", "{E49274EC-7C88-43C6-963B-93724E424E99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.E2E", "OldButGold.E2E\OldButGold.Forums.E2E.csproj", "{E49274EC-7C88-43C6-963B-93724E424E99}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Storage.Tests", "OldButGold.Storage.Tests\OldButGold.Storage.Tests.csproj", "{684DBC49-2C65-4833-BBAB-302B9AFAA387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.Storage.Tests", "OldButGold.Storage.Tests\OldButGold.Forums.Storage.Tests.csproj", "{684DBC49-2C65-4833-BBAB-302B9AFAA387}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OldButGold.Forum", "OldButGold.Forum", "{82386DF0-6814-40C9-AC30-FA7C2076236D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +76,16 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5FB7689E-F010-4C78-9C21-23DC9846936C} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
+		{E5E2D765-0FF1-4C7D-8099-8FECD68B3575} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
+		{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
+		{27398D8C-84EF-4D47-9915-A34A054B3BA6} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
+		{FDEC44D3-D224-4120-966E-A0DC66EF226E} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
+		{CBF375A1-1B8C-4DE7-96DA-435A2DFE61DA} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
+		{E49274EC-7C88-43C6-963B-93724E424E99} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
+		{684DBC49-2C65-4833-BBAB-302B9AFAA387} = {82386DF0-6814-40C9-AC30-FA7C2076236D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7466AEB4-B364-4590-B855-581373AE497C}

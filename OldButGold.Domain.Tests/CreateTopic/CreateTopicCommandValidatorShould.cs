@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using OldButGold.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Domain.UseCases.CreateTopic;
 
-namespace OldButGold.Domain.Tests.CreateTopic
+namespace OldButGold.Forums.Domain.Tests.CreateTopic
 {
     public class CreateTopicCommandValidatorShould
     {

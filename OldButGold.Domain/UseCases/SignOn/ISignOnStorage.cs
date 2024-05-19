@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.UseCases.SignOn
+﻿namespace OldButGold.Forums.Domain.UseCases.SignOn
 {
     public interface ISignOnStorage
     {

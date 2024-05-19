@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Storage.Tests
+﻿namespace OldButGold.Forums.Storage.Tests
 {
     public class AuthenticationStorageShould
     {

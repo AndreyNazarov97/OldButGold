@@ -1,6 +1,6 @@
-﻿using OldButGold.Domain.Authentication;
+﻿using OldButGold.Forums.Domain.Authentication;
 
-namespace OldButGold.Domain.Authorization
+namespace OldButGold.Forums.Domain.Authorization
 {
     public interface IIntentionResolver
     {

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using OldButGold.Domain.UseCases.SignIn;
-using OldButGold.Storage.Entities;
+using OldButGold.Forums.Domain.UseCases.SignIn;
+using OldButGold.Forums.Storage.Entities;
 
-namespace OldButGold.Storage.Mapping
+namespace OldButGold.Forums.Storage.Mapping
 {
     internal class UserProfile : Profile
     {

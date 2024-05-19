@@ -1,6 +1,6 @@
-﻿using OldButGold.Domain.Models;
+﻿using OldButGold.Forums.Domain.Models;
 
-namespace OldButGold.Domain.UseCases.GetTopics
+namespace OldButGold.Forums.Domain.UseCases.GetTopics
 {
     public interface IGetTopicsStorage
     {

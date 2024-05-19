@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Domain.Models;
+using OldButGold.Forums.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Storage;
 
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages
 {
     internal class CreateTopicStorage(
         IGuidFactory guidFactory,

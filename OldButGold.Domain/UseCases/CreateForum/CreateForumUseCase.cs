@@ -1,14 +1,13 @@
 ﻿using MediatR;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Models;
+using OldButGold.Forums.Domain.Authorization;
 
-namespace OldButGold.Domain.UseCases.CreateForum
+namespace OldButGold.Forums.Domain.UseCases.CreateForum
 {
     public class CreateForumUseCase(
         IIntentionManager intentionManager,
-        ICreateForumStorage storage) : IRequestHandler<CreateForumCommand, Forum>
+        ICreateForumStorage storage) : IRequestHandler<CreateForumCommand, Models.Forum>
     {
-        public async Task<Forum> Handle(CreateForumCommand command, CancellationToken cancellationToken)
+        public async Task<Models.Forum> Handle(CreateForumCommand command, CancellationToken cancellationToken)
         {
             intentionManager.ThrowIfForbidden(ForumIntention.Create);
 

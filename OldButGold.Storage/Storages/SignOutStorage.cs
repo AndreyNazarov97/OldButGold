@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OldButGold.Domain.UseCases.SignOut;
+using OldButGold.Forums.Domain.UseCases.SignOut;
+using OldButGold.Forums.Storage;
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages
 {
     internal class SignOutStorage(
         ForumDbContext dbContext) : ISignOutStorage
@@ -10,7 +11,7 @@ namespace OldButGold.Storage.Storages
         {
             var session = await dbContext.Sessions
                 .FirstOrDefaultAsync(s => s.SessionId == sessionId);
-            
+
         }
     }
 }

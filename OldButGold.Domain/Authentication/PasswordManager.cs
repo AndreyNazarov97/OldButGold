@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace OldButGold.Domain.Authentication
+namespace OldButGold.Forums.Domain.Authentication
 {
     internal class PasswordManager : IPasswordManager
     {

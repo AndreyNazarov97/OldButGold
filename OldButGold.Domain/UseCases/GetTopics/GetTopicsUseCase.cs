@@ -1,14 +1,14 @@
 ﻿using FluentValidation;
 using MediatR;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.UseCases.GetForums;
+using OldButGold.Forums.Domain.Models;
+using OldButGold.Forums.Domain.UseCases.GetForums;
 
-namespace OldButGold.Domain.UseCases.GetTopics
+namespace OldButGold.Forums.Domain.UseCases.GetTopics
 {
     internal class GetTopicsUseCase(
         IValidator<GetTopicsQuery> validator,
         IGetForumsStorage getForumsStorage,
-        IGetTopicsStorage storage) : 
+        IGetTopicsStorage storage) :
         IRequestHandler<GetTopicsQuery, (IEnumerable<Topic> resources, int totalCount)>
     {
         public async Task<(IEnumerable<Topic> resources, int totalCount)> Handle(GetTopicsQuery query, CancellationToken cancellationToken)

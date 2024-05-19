@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using OldButGold.Domain.Exceptions;
-using OldButGold.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Domain.Exceptions;
 
-namespace OldButGold.Domain.UseCases.SignIn
+namespace OldButGold.Forums.Domain.UseCases.SignIn
 {
     internal class SignInCommandValidator : AbstractValidator<SignInCommand>
     {

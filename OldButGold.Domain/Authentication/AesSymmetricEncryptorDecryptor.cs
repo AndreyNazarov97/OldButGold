@@ -1,16 +1,15 @@
-﻿
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace OldButGold.Domain.Authentication
+namespace OldButGold.Forums.Domain.Authentication
 {
     public class AesSymmetricEncryptorDecryptor : ISymmetricEncryptor, ISymmetricDecryptor
     {
         private const int IvSize = 16;
-        private readonly Lazy<Aes> aes = new (Aes.Create);
+        private readonly Lazy<Aes> aes = new(Aes.Create);
         public AesSymmetricEncryptorDecryptor()
         {
-            
+
         }
         public async Task<string> Decrypt(string encryptedText, byte[] key, CancellationToken cancellationToken)
         {
@@ -26,7 +25,7 @@ namespace OldButGold.Domain.Authentication
             {
                 await stream.WriteAsync(encryptedBytes.AsMemory(IvSize), cancellationToken);
             }
-            
+
             return Encoding.UTF8.GetString(decryptedStream.ToArray());
         }
 

@@ -1,9 +1,9 @@
-﻿namespace OldButGold.Domain.Models
+﻿namespace OldButGold.Forums.Domain.Models
 {
     public class Forum
     {
         public Guid Id { get; set; }
 
-        public string Title {  get; set; }
+        public string Title { get; set; }
     }
 }

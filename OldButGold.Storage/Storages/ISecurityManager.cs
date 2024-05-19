@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Storage.Storages
+﻿namespace OldButGold.Forums.Storage.Storages
 {
     internal interface ISecurityManager
     {

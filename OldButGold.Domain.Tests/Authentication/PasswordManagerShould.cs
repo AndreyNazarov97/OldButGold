@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using OldButGold.Domain.Authentication;
+using OldButGold.Forums.Domain.Authentication;
 
-namespace OldButGold.Domain.Tests.Authentication
+namespace OldButGold.Forums.Domain.Tests.Authentication
 {
     public class PasswordManagerShould
     {
@@ -15,7 +15,7 @@ namespace OldButGold.Domain.Tests.Authentication
         [InlineData("qwerty123")]
         public void GenerateMeaningfullSaltAndHash(string password)
         {
-            var(salt, hash) = sut.GeneratePasswordParts(password);
+            var (salt, hash) = sut.GeneratePasswordParts(password);
             salt.Should().HaveCount(100).And.NotBeEquivalentTo(EmptySalt);
             hash.Should().HaveCount(32).And.NotBeEquivalentTo(EmptyHash);
 

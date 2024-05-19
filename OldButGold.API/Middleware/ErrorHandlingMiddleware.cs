@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Exceptions;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.Exceptions;
 using System;
 
-namespace OldButGold.API.Middleware
+namespace OldButGold.Forums.API.Middleware
 {
     public class ErrorHandlingMiddleware(RequestDelegate next)
     {
         public async Task InvokeAsync(
-            HttpContext httpContext, 
+            HttpContext httpContext,
             ILogger<ErrorHandlingMiddleware> logger,
             ProblemDetailsFactory problemDetailsFactory)
         {

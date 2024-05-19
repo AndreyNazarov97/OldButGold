@@ -1,7 +1,7 @@
-﻿using OldButGold.API.Authentication;
-using OldButGold.Domain.Authentication;
+﻿using OldButGold.Forums.API.Authentication;
+using OldButGold.Forums.Domain.Authentication;
 
-namespace OldButGold.API.Middleware
+namespace OldButGold.Forums.API.Middleware
 {
     public class AuthenticationMiddleware(RequestDelegate next)
     {

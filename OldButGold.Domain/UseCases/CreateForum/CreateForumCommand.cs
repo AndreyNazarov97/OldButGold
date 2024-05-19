@@ -1,17 +1,16 @@
 ﻿using MediatR;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.Monitoring;
+using OldButGold.Forums.Domain.Monitoring;
 
-namespace OldButGold.Domain.UseCases.CreateForum
+namespace OldButGold.Forums.Domain.UseCases.CreateForum
 {
-    public record CreateForumCommand(string Title) : IRequest<Forum>, IMonitoredRequest
+    public record CreateForumCommand(string Title) : IRequest<Models.Forum>, IMonitoredRequest
     {
         private const string CounterName = "forums.created";
         public void MonitorFailure(DomainMetrics metrics)
         {
             metrics.IncrementCount(
-                CounterName, 
-                1, 
+                CounterName,
+                1,
                 DomainMetrics.ResultTags(false));
         }
 

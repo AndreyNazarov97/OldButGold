@@ -1,14 +1,14 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.Monitoring;
-using OldButGold.Domain.UseCases;
-using OldButGold.Domain.UseCases.CreateForum;
-using OldButGold.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.Models;
+using OldButGold.Forums.Domain.Monitoring;
+using OldButGold.Forums.Domain.UseCases;
+using OldButGold.Forums.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Domain.UseCases.CreateTopic;
 
-namespace OldButGold.Domain.DependencyIncjection
+namespace OldButGold.Forums.Domain.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
@@ -17,7 +17,7 @@ namespace OldButGold.Domain.DependencyIncjection
             services.AddMediatR(cfg => cfg
             .AddOpenBehavior(typeof(MonitoringPipelineBehavior<,>))
             .AddOpenBehavior(typeof(ValidationPipelineBehavior<,>))
-            .RegisterServicesFromAssemblyContaining<Forum>());
+            .RegisterServicesFromAssemblyContaining<Models.Forum>());
 
             services
                 .AddScoped<IIntentionManager, IntentionManager>()
@@ -30,10 +30,10 @@ namespace OldButGold.Domain.DependencyIncjection
                 .AddScoped<ISymmetricDecryptor, AesSymmetricEncryptorDecryptor>()
                 .AddScoped<ISymmetricEncryptor, AesSymmetricEncryptorDecryptor>()
                 .AddScoped<IPasswordManager, PasswordManager>();
-            
+
             services.AddValidatorsFromAssemblyContaining<Forum>(includeInternalTypes: true);
 
-            services.AddSingleton<DomainMetrics>(); 
+            services.AddSingleton<DomainMetrics>();
 
             return services;
         }

@@ -1,7 +1,7 @@
-﻿using OldButGold.Domain.UseCases.SignOn;
-using OldButGold.Storage.Entities;
+﻿using OldButGold.Forums.Domain.UseCases.SignOn;
+using OldButGold.Forums.Storage.Entities;
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages
 {
     internal class SignOnStorage(
         ForumDbContext dbContext,
@@ -18,7 +18,7 @@ namespace OldButGold.Storage.Storages
                 Salt = salt,
                 PasswordHash = hash,
             }, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken); 
+            await dbContext.SaveChangesAsync(cancellationToken);
 
 
             return userId;

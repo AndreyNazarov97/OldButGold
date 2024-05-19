@@ -1,23 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using OldButGold.Domain;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.UseCases;
-using OldButGold.Domain.UseCases.CreateForum;
-using OldButGold.Domain.UseCases.CreateTopic;
-using OldButGold.Domain.UseCases.GetForums;
-using OldButGold.Domain.UseCases.GetTopics;
-using OldButGold.Domain.UseCases.SignIn;
-using OldButGold.Domain.UseCases.SignOn;
-using OldButGold.Domain.UseCases.SignOut;
-using OldButGold.Storage.Storages;
+using OldButGold.Forums.Domain;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.UseCases;
+using OldButGold.Forums.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Domain.UseCases.GetForums;
+using OldButGold.Forums.Domain.UseCases.GetTopics;
+using OldButGold.Forums.Domain.UseCases.SignIn;
+using OldButGold.Forums.Domain.UseCases.SignOn;
+using OldButGold.Forums.Domain.UseCases.SignOut;
+using OldButGold.Forums.Storage.Storages;
 using System.Reflection;
 
-namespace OldButGold.Storage.DependencyIncjection
+namespace OldButGold.Forums.Storage.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddForumStorage(this  IServiceCollection services, string dbConnectionString)
+        public static IServiceCollection AddForumStorage(this IServiceCollection services, string dbConnectionString)
         {
             services
                 .AddScoped<IDomainEventStorage, DomainEventStorage>()
@@ -41,7 +41,7 @@ namespace OldButGold.Storage.DependencyIncjection
             services.AddMemoryCache();
 
             services.AddAutoMapper(config => config
-                .AddMaps(Assembly.GetAssembly(typeof(ForumDbContext)))); 
+                .AddMaps(Assembly.GetAssembly(typeof(ForumDbContext))));
 
             return services;
         }

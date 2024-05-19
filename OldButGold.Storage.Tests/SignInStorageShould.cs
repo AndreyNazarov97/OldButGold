@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using OldButGold.Storage.Entities;
-using OldButGold.Storage.Storages;
+using OldButGold.Forums.Storage.Entities;
+using OldButGold.Forums.Storage.Storages;
 
-namespace OldButGold.Storage.Tests
+namespace OldButGold.Forums.Storage.Tests
 {
     public class SignInStorageFixture : StorageTestFixture
     {
@@ -55,13 +55,14 @@ namespace OldButGold.Storage.Tests
         public async Task ReturnNewlyCreatedSessionId()
         {
             var sessionId = await sut.CreateSession(
-                Guid.Parse("92b9d2f2-fd60-44a3-9f46-ef4d6ae7d04d"), 
+                Guid.Parse("92b9d2f2-fd60-44a3-9f46-ef4d6ae7d04d"),
                 new DateTimeOffset(2024, 05, 10, 20, 14, 00, TimeSpan.Zero),
                 CancellationToken.None);
 
             await using var dbContext = fixture.GetDbContext();
-            dbContext.Sessions
-                .FirstAsync(s => s.SessionId == sessionId).Should().NotBeNull();
+            (await dbContext.Sessions
+                .AsNoTracking()
+                .FirstOrDefaultAsync(s => s.SessionId == sessionId)).Should().NotBeNull();
 
         }
     }

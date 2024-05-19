@@ -1,16 +1,15 @@
 ﻿using FluentAssertions;
 using Moq;
 using Moq.Language.Flow;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.UseCases.CreateForum;
 
-namespace OldButGold.Domain.Tests.CreateForum
+namespace OldButGold.Forums.Domain.Tests.CreateForum
 {
     public class CreateForumUseCaseShould
     {
         private readonly Mock<ICreateForumStorage> storage;
-        private readonly ISetup<ICreateForumStorage, Task<Forum>> createForumSetup;
+        private readonly ISetup<ICreateForumStorage, Task<Models.Forum>> createForumSetup;
         private readonly CreateForumUseCase sut;
 
         public CreateForumUseCaseShould()
@@ -30,7 +29,7 @@ namespace OldButGold.Domain.Tests.CreateForum
         public async Task ReturnCreatedForum()
         {
             var forumTitle = "Hello";
-            Forum forum = new Forum()
+            var forum = new Models.Forum()
             {
                 Title = forumTitle,
                 Id = Guid.Parse("d4f47c25-40ce-4580-9e7c-0cf566d3467d"),

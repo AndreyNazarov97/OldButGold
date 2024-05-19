@@ -1,10 +1,10 @@
-﻿namespace OldButGold.API.Models
+﻿namespace OldButGold.Forums.API.Models
 {
     public class Forum
     {
         public Guid Id { get; set; }
 
-        public string Title {  get; set; }
+        public string Title { get; set; }
 
     }
 }

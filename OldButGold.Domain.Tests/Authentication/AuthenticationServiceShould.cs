@@ -3,10 +3,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Language.Flow;
-using OldButGold.Domain.Authentication;
+using OldButGold.Forums.Domain.Authentication;
 using System.Security.Cryptography;
 
-namespace OldButGold.Domain.Tests.Authentication
+namespace OldButGold.Forums.Domain.Tests.Authentication
 {
     public class AuthenticationServiceShould
     {
@@ -23,7 +23,7 @@ namespace OldButGold.Domain.Tests.Authentication
             var storage = new Mock<IAuthenticationStorage>();
             findSessionSetup = storage.Setup(s => s.FindSession(It.IsAny<Guid>(), It.IsAny<CancellationToken>()));
 
-            var logger = new Mock<ILogger<AuthenticationService>>();    
+            var logger = new Mock<ILogger<AuthenticationService>>();
 
             var options = new Mock<IOptions<AuthenticationConfiguration>>();
             options
@@ -34,14 +34,14 @@ namespace OldButGold.Domain.Tests.Authentication
 
                 });
 
-            sut = new AuthenticationService(decryptor.Object, storage.Object ,logger.Object, options.Object);
+            sut = new AuthenticationService(decryptor.Object, storage.Object, logger.Object, options.Object);
         }
 
         [Fact]
         public async Task ReturnGuestIdentity_WhenTokenCannotBeDecrypted()
         {
             setupDecryptor.Throws<CryptographicException>();
-            var actual =  await sut.Authenticate("bad-token", CancellationToken.None);
+            var actual = await sut.Authenticate("bad-token", CancellationToken.None);
 
             actual.Should().BeEquivalentTo(User.Guest);
         }
@@ -93,10 +93,10 @@ namespace OldButGold.Domain.Tests.Authentication
                 ExpiresAt = DateTimeOffset.UtcNow.AddDays(1)
             });
 
-            var actualIdentity  = await sut.Authenticate("good-token", CancellationToken.None);
+            var actualIdentity = await sut.Authenticate("good-token", CancellationToken.None);
 
-            
-            actualIdentity.Should().BeEquivalentTo( new User(userId, sessionId));
+
+            actualIdentity.Should().BeEquivalentTo(new User(userId, sessionId));
         }
     }
 

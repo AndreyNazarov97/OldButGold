@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.Monitoring;
+using OldButGold.Forums.Domain.Models;
+using OldButGold.Forums.Domain.Monitoring;
 
-namespace OldButGold.Domain.UseCases.CreateTopic
+namespace OldButGold.Forums.Domain.UseCases.CreateTopic
 {
     public record CreateTopicCommand(Guid ForumId, string Title) : IRequest<Topic>, IMonitoredRequest
     {

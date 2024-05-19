@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OldButGold.Storage.Entities
+namespace OldButGold.Forums.Storage.Entities
 {
     public class User
     {
@@ -24,7 +24,7 @@ namespace OldButGold.Storage.Entities
         ICollection<Comment> Comments { get; set; }
 
         [InverseProperty(nameof(Session.User))]
-        ICollection<Session> Sessions {  get; set; }
+        ICollection<Session> Sessions { get; set; }
 
     }
 }

@@ -1,10 +1,10 @@
 ﻿
 using Confluent.Kafka;
-using OldButGold.Domain.Models;
+using OldButGold.Forums.Domain.Models;
 using System.Text;
 using System.Text.Json;
 
-namespace OldButGold.API
+namespace OldButGold.Forums.API
 {
     public class KafkaConsumer(
         IConsumer<byte[], byte[]> consumer,
@@ -21,7 +21,7 @@ namespace OldButGold.API
             do
             {
                 var consumeResult = consumer.Consume(stoppingToken);
-                if(consumeResult is null || consumeResult.IsPartitionEOF)
+                if (consumeResult is null || consumeResult.IsPartitionEOF)
                 {
                     await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
                     continue;

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
-using OldButGold.Domain;
+using OldButGold.Forums.Domain;
 
-namespace OldButGold.Storage
+namespace OldButGold.Forums.Storage
 {
     internal class UnitOfWork(IServiceProvider serviceProvider) : IUnitOfWork
     {

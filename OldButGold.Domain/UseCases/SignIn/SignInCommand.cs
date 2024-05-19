@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Monitoring;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Monitoring;
 
-namespace OldButGold.Domain.UseCases.SignIn
+namespace OldButGold.Forums.Domain.UseCases.SignIn
 {
     public record SignInCommand(string Login, string Password) : IRequest<(IIdentity identity, string token)>, IMonitoredRequest
     {

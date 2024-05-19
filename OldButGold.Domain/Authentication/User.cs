@@ -1,5 +1,4 @@
-﻿
-namespace OldButGold.Domain.Authentication
+﻿namespace OldButGold.Forums.Domain.Authentication
 {
     public class User(Guid userId, Guid sessionId) : IIdentity
     {

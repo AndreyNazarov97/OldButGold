@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.UseCases.SignOut
+﻿namespace OldButGold.Forums.Domain.UseCases.SignOut
 {
     public enum AccountIntention
     {

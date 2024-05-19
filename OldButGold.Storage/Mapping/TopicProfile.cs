@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using OldButGold.Storage.Entities;
+using OldButGold.Forums.Storage.Entities;
 
-namespace OldButGold.Storage.Mapping
+namespace OldButGold.Forums.Storage.Mapping
 {
     internal class TopicProfile : Profile
     {

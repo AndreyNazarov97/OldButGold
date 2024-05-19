@@ -2,10 +2,10 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using OldButGold.Domain.UseCases.CreateForum;
-using OldButGold.Storage.Entities;
+using OldButGold.Forums.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Storage.Entities;
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages
 {
     internal class CreateForumStorage(
         IMemoryCache memoryCache,
@@ -26,7 +26,7 @@ namespace OldButGold.Storage.Storages
             await dbContext.Forums.AddAsync(forum, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            memoryCache.Remove(nameof(GetForumStorage.GetForums)) ;    
+            memoryCache.Remove(nameof(GetForumStorage.GetForums));
 
             return await dbContext.Forums
                 .Where(f => f.ForumId == forumId)

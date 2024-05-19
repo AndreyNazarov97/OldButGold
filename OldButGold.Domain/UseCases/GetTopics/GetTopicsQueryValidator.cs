@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using OldButGold.Domain.Exceptions;
+using OldButGold.Forums.Domain.Exceptions;
 
-namespace OldButGold.Domain.UseCases.GetTopics
+namespace OldButGold.Forums.Domain.UseCases.GetTopics
 {
     internal class GetTopicsQueryValidator : AbstractValidator<GetTopicsQuery>
     {

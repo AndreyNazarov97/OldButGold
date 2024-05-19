@@ -2,10 +2,10 @@
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.Options;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Exceptions;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Exceptions;
 
-namespace OldButGold.Domain.UseCases.SignIn
+namespace OldButGold.Forums.Domain.UseCases.SignIn
 {
     internal class SignInUseCase(
         ISignInStorage storage,
@@ -19,13 +19,13 @@ namespace OldButGold.Domain.UseCases.SignIn
             SignInCommand command, CancellationToken cancellationToken)
         {
             var recognisedUser = await storage.FindUser(command.Login, cancellationToken);
-            if(recognisedUser is null)
+            if (recognisedUser is null)
             {
                 throw new ValidationException(new ValidationFailure[]
                 {
                     new()
-                    { 
-                        PropertyName = nameof(command.Login), 
+                    {
+                        PropertyName = nameof(command.Login),
                         ErrorCode = ValidationErrorCode.Invalid,
                         AttemptedValue = command.Login
                     }

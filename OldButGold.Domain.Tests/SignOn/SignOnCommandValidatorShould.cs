@@ -1,15 +1,15 @@
 ﻿using FluentAssertions;
-using OldButGold.Domain.UseCases.SignOn;
+using OldButGold.Forums.Domain.UseCases.SignOn;
 
-namespace OldButGold.Domain.Tests.SignOn
+namespace OldButGold.Forums.Domain.Tests.SignOn
 {
     public class SignOnCommandValidatorShould
     {
         private readonly SignOnCommandValidator sut = new();
 
         [Fact]
-        public void ReturnSucces_WhenCommandValid() 
-        { 
+        public void ReturnSucces_WhenCommandValid()
+        {
             var validCommand = new SignOnCommand("Login", "Password");
 
             sut.Validate(validCommand).IsValid.Should().BeTrue();
@@ -19,11 +19,11 @@ namespace OldButGold.Domain.Tests.SignOn
         {
             var validCommand = new SignOnCommand("Login", "Password");
 
-            yield return new object[] { validCommand with { Password = string.Empty} };
-            yield return new object[] { validCommand with { Password = "          "} };
-            yield return new object[] { validCommand with { Login =  string.Empty} };
+            yield return new object[] { validCommand with { Password = string.Empty } };
+            yield return new object[] { validCommand with { Password = "          " } };
+            yield return new object[] { validCommand with { Login = string.Empty } };
             yield return new object[] { validCommand with { Login = "          " } };
-            yield return new object[] { validCommand with { Login =  string.Join("a", Enumerable.Range(0, 30))} };
+            yield return new object[] { validCommand with { Login = string.Join("a", Enumerable.Range(0, 30)) } };
         }
 
         [Theory]

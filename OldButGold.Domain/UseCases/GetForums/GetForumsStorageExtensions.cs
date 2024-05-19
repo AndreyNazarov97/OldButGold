@@ -1,6 +1,6 @@
-﻿using OldButGold.Domain.Exceptions;
+﻿using OldButGold.Forums.Domain.Exceptions;
 
-namespace OldButGold.Domain.UseCases.GetForums
+namespace OldButGold.Forums.Domain.UseCases.GetForums
 {
     internal static class GetForumsStorageExtensions
     {
@@ -14,7 +14,7 @@ namespace OldButGold.Domain.UseCases.GetForums
         public static async Task ThrowIfFormNotExist(this IGetForumsStorage storage, Guid forumId,
             CancellationToken cancellationToken)
         {
-            if(!await ForumExists(storage, forumId, cancellationToken))
+            if (!await storage.ForumExists(forumId, cancellationToken))
             {
                 throw new ForumNotFoundException(forumId);
             }

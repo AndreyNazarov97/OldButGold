@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.Monitoring;
+using OldButGold.Forums.Domain.Monitoring;
 
-namespace OldButGold.Domain.UseCases.GetForums
+namespace OldButGold.Forums.Domain.UseCases.GetForums
 {
-    public record GetForumsQuery() : IRequest<IEnumerable<Forum>>, IMonitoredRequest
+    public record GetForumsQuery() : IRequest<IEnumerable<Models.Forum>>, IMonitoredRequest
     {
         private const string CounterName = "forums.fetched";
         public void MonitorFailure(DomainMetrics metrics)

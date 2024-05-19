@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using OldButGold.Domain.Models;
+using OldButGold.Forums.Domain.Models;
 
-namespace OldButGold.API.Mapping
+namespace OldButGold.Forums.API.Mapping
 {
     public class ApiProfile : Profile
     {

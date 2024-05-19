@@ -1,8 +1,8 @@
-﻿using OldButGold.Domain.UseCases;
-using OldButGold.Storage.Entities;
+﻿using OldButGold.Forums.Domain.UseCases;
+using OldButGold.Forums.Storage.Entities;
 using System.Text.Json;
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages
 {
     internal class DomainEventStorage(
         ForumDbContext dbContext,

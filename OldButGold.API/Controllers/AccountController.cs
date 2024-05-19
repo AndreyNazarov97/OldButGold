@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OldButGold.API.Authentication;
-using OldButGold.API.Models;
-using OldButGold.Domain.UseCases.SignIn;
-using OldButGold.Domain.UseCases.SignOn;
+using OldButGold.Forums.Domain.UseCases.SignIn;
+using OldButGold.Forums.Domain.UseCases.SignOn;
+using OldButGold.Forums.API.Authentication;
+using OldButGold.Forums.API.Models;
 
-namespace OldButGold.API.Controllers
+namespace OldButGold.Forums.API.Controllers
 {
     [ApiController]
     [Route("account")]

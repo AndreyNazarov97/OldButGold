@@ -1,9 +1,9 @@
 ﻿
 using MediatR;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
 
-namespace OldButGold.Domain.UseCases.SignOut
+namespace OldButGold.Forums.Domain.UseCases.SignOut
 {
     internal class SignOutUseCase(
         IIntentionManager intentionManager,

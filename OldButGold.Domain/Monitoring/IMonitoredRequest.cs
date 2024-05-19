@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.Monitoring
+﻿namespace OldButGold.Forums.Domain.Monitoring
 {
     internal interface IMonitoredRequest
     {

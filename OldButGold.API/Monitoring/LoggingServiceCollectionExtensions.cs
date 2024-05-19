@@ -5,7 +5,7 @@ using Serilog.Filters;
 using Serilog.Sinks.Grafana.Loki;
 using System.Diagnostics;
 
-namespace OldButGold.API.Monitoring
+namespace OldButGold.Forums.API.Monitoring
 {
     public static class LoggingServiceCollectionExtensions
     {
@@ -45,7 +45,7 @@ namespace OldButGold.API.Monitoring
             public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
             {
                 var activity = Activity.Current;
-                if(activity is null)  return;
+                if (activity is null) return;
 
                 logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
                         "TraceId", activity.TraceId));
@@ -55,5 +55,5 @@ namespace OldButGold.API.Monitoring
         }
     }
 
-    
+
 }

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry.Context.Propagation;
 using System.Diagnostics;
 
-namespace OldButGold.Domain.Monitoring
+namespace OldButGold.Forums.Domain.Monitoring
 {
     internal abstract class MonitoringPipelineBehavior
     {
@@ -20,7 +20,7 @@ namespace OldButGold.Domain.Monitoring
             if (request is not IMonitoredRequest monitoredRequest) return await next.Invoke();
 
             using var activity = DomainMetrics.ActivitySource.StartActivity(
-                "usecase", ActivityKind.Internal ,default(ActivityContext));
+                "usecase", ActivityKind.Internal, default(ActivityContext));
             var activityContext = activity?.Context ?? Activity.Current?.Context ?? default;
 
             activity?.AddTag("obg.command", request.GetType().Name);
@@ -35,7 +35,7 @@ namespace OldButGold.Domain.Monitoring
 
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 monitoredRequest.MonitorFailure(metrics);
                 activity?.AddTag("error", true);

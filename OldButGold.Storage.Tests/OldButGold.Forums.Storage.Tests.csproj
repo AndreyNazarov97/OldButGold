@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OldButGold.Storage\OldButGold.Storage.csproj" />
+    <ProjectReference Include="..\OldButGold.Storage\OldButGold.Forums.Storage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

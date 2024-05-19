@@ -33,9 +33,9 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OldButGold.Domain.DependencyIncjection\OldButGold.Domain.DependencyInjection.csproj" />
-    <ProjectReference Include="..\OldButGold.Domain\OldButGold.Domain.csproj" />
-    <ProjectReference Include="..\OldButGold.Storage.DependencyIncjection\OldButGold.Storage.DependencyInjection.csproj" />
+    <ProjectReference Include="..\OldButGold.Domain.DependencyIncjection\OldButGold.Forums.Domain.DependencyInjection.csproj" />
+    <ProjectReference Include="..\OldButGold.Domain\OldButGold.Forums.Domain.csproj" />
+    <ProjectReference Include="..\OldButGold.Storage.DependencyIncjection\OldButGold.Forums.Storage.DependencyInjection.csproj" />
   </ItemGroup>
 
   <ItemGroup>

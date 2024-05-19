@@ -1,4 +1,4 @@
-﻿namespace OldButGold.API.Models
+﻿namespace OldButGold.Forums.API.Models
 {
     public class SignIn
     {

@@ -1,9 +1,9 @@
-﻿namespace OldButGold.API.Models
+﻿namespace OldButGold.Forums.API.Models
 {
     public class SignOn
     {
         public string Login { get; set; }
 
-        public string Password { get; set; }    
+        public string Password { get; set; }
     }
 }

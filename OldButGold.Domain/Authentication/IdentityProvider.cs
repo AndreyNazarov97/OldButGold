@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.Authentication
+﻿namespace OldButGold.Forums.Domain.Authentication
 {
     internal class IdentityProvider : IIdentityProvider
     {

@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Moq;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.UseCases.CreateTopic;
 
 
-namespace OldButGold.Domain.Tests.Authorization
+namespace OldButGold.Forums.Domain.Tests.Authorization
 {
     public class TopicIntentionResolverShould
     {
@@ -13,7 +13,7 @@ namespace OldButGold.Domain.Tests.Authorization
         [Fact]
         public void ReturnFalse_WhenIntentionNotInEnum()
         {
-            var intention = (TopicIntention) (-1);
+            var intention = (TopicIntention)(-1);
             sut.IsAllowed(new Mock<IIdentity>().Object, intention).Should().BeFalse();
         }
 

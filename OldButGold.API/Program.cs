@@ -1,11 +1,11 @@
 using Confluent.Kafka;
-using OldButGold.API;
-using OldButGold.API.Authentication;
-using OldButGold.API.Middleware;
-using OldButGold.API.Monitoring;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.DependencyIncjection;
-using OldButGold.Storage.DependencyIncjection;
+using OldButGold.Forums.Domain.DependencyInjection;
+using OldButGold.Forums.API;
+using OldButGold.Forums.API.Authentication;
+using OldButGold.Forums.API.Middleware;
+using OldButGold.Forums.API.Monitoring;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Storage.DependencyInjection;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

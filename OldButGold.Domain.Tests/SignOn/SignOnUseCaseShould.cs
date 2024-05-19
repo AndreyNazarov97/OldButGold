@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Moq;
 using Moq.Language.Flow;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.UseCases.SignOn;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.UseCases.SignOn;
 
-namespace OldButGold.Domain.Tests.SignOn
+namespace OldButGold.Forums.Domain.Tests.SignOn
 {
     public class SignOnUseCaseShould
     {
@@ -39,7 +39,7 @@ namespace OldButGold.Domain.Tests.SignOn
             storage.VerifyNoOtherCalls();
         }
 
-        [Fact] 
+        [Fact]
         public async Task ReturnIdentityOfNewlyCreatedUser()
         {
             byte[] salt = new byte[] { 1 };

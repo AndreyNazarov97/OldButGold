@@ -1,7 +1,7 @@
-﻿using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
+﻿using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
 
-namespace OldButGold.Domain.UseCases.CreateForum
+namespace OldButGold.Forums.Domain.UseCases.CreateForum
 {
     public class ForumIntentionResolver : IIntentionResolver<ForumIntention>
     {

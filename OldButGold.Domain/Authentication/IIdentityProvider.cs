@@ -1,6 +1,6 @@
-﻿namespace OldButGold.Domain.Authentication
+﻿namespace OldButGold.Forums.Domain.Authentication
 {
-    public interface IIdentityProvider 
+    public interface IIdentityProvider
     {
         IIdentity Current { get; set; }
     }

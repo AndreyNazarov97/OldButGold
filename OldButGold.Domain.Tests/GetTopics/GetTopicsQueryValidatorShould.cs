@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using OldButGold.Domain.UseCases.GetTopics;
+using OldButGold.Forums.Domain.UseCases.GetTopics;
 
-namespace OldButGold.Domain.Tests.GetTopics
+namespace OldButGold.Forums.Domain.Tests.GetTopics
 {
     public class GetTopicsQueryValidatorShould
     {

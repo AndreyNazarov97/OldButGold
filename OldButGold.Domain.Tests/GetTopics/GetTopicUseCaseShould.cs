@@ -3,12 +3,12 @@ using FluentValidation;
 using FluentValidation.Results;
 using Moq;
 using Moq.Language.Flow;
-using OldButGold.Domain.Exceptions;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.UseCases.GetForums;
-using OldButGold.Domain.UseCases.GetTopics;
+using OldButGold.Forums.Domain.Exceptions;
+using OldButGold.Forums.Domain.Models;
+using OldButGold.Forums.Domain.UseCases.GetForums;
+using OldButGold.Forums.Domain.UseCases.GetTopics;
 
-namespace OldButGold.Domain.Tests.GetTopics
+namespace OldButGold.Forums.Domain.Tests.GetTopics
 {
     public class GetTopicUseCaseShould
     {
@@ -38,7 +38,7 @@ namespace OldButGold.Domain.Tests.GetTopics
         {
             var forumId = Guid.Parse("e93762dc-6b55-4ffc-a3f4-bfc2f18cb429");
 
-            getForumsSetup.ReturnsAsync(new Forum[] { new(){ Id = Guid.Parse("3d18459f-4ffe-44b6-8bd5-899c4fd600b8"),} });
+            getForumsSetup.ReturnsAsync(new Forum[] { new() { Id = Guid.Parse("3d18459f-4ffe-44b6-8bd5-899c4fd600b8"), } });
 
             var query = new GetTopicsQuery(forumId, 0, 1);
             await sut.Invoking(s => s.Handle(query, CancellationToken.None))
@@ -54,9 +54,9 @@ namespace OldButGold.Domain.Tests.GetTopics
             getForumsSetup.ReturnsAsync(new Forum[] { new() { Id = forumId } });
             var expectedResources = new Topic[] { new() };
             var expectedTotalCount = 6;
-            getTopicsSetup.ReturnsAsync((expectedResources ,expectedTotalCount));
+            getTopicsSetup.ReturnsAsync((expectedResources, expectedTotalCount));
 
-            var(actualResources, actualTotalCount) = await sut.Handle(
+            var (actualResources, actualTotalCount) = await sut.Handle(
                 new GetTopicsQuery(forumId, 5, 10), CancellationToken.None);
 
             actualResources.Should().BeEquivalentTo(expectedResources);

@@ -1,9 +1,9 @@
-﻿using OldButGold.Domain.Models;
+﻿using OldButGold.Forums.Domain;
 
-namespace OldButGold.Domain.UseCases.CreateForum
+namespace OldButGold.Forums.Domain.UseCases.CreateForum
 {
     public interface ICreateForumStorage : IStorage
     {
-        Task<Forum> CreateForum(string title, CancellationToken cancellationToken);
+        Task<Models.Forum> CreateForum(string title, CancellationToken cancellationToken);
     }
 }

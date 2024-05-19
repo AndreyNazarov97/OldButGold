@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Exceptions;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.Exceptions;
 
 
-namespace OldButGold.API.Middleware
+namespace OldButGold.Forums.API.Middleware
 {
     public static class problemDetailsFactoryExtensions
     {
@@ -43,7 +43,7 @@ namespace OldButGold.API.Middleware
         {
             var modelStateDictionary = new ModelStateDictionary();
 
-            foreach(var error in validationException.Errors)
+            foreach (var error in validationException.Errors)
             {
                 modelStateDictionary.AddModelError(error.PropertyName, error.ErrorCode);
             }

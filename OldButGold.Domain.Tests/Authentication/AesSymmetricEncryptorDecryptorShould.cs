@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using OldButGold.Domain.Authentication;
+using OldButGold.Forums.Domain.Authentication;
 using System.Security.Cryptography;
 
-namespace OldButGold.Domain.Tests.Authentication
+namespace OldButGold.Forums.Domain.Tests.Authentication
 {
     public class AesSymmetricEncryptorDecryptorShould
     {
@@ -32,7 +32,7 @@ namespace OldButGold.Domain.Tests.Authentication
         public async Task ThrowException_WhenDecryptingWithDifferentKey()
         {
             var encrypted = await sut.Encrypt("Hello world!", RandomNumberGenerator.GetBytes(32), CancellationToken.None);
-            await sut.Invoking(s=> s.Decrypt(encrypted, RandomNumberGenerator.GetBytes(32), CancellationToken.None))
+            await sut.Invoking(s => s.Decrypt(encrypted, RandomNumberGenerator.GetBytes(32), CancellationToken.None))
                 .Should().ThrowAsync<CryptographicException>();
 
 

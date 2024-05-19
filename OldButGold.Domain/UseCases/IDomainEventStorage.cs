@@ -1,4 +1,6 @@
-﻿namespace OldButGold.Domain.UseCases
+﻿using OldButGold.Forums.Domain;
+
+namespace OldButGold.Forums.Domain.UseCases
 {
     public interface IDomainEventStorage : IStorage
     {

@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using Moq;
 using Moq.Language.Flow;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.UseCases.SignOut;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.UseCases.SignOut;
 
-namespace OldButGold.Domain.Tests.SignOut
+namespace OldButGold.Forums.Domain.Tests.SignOut
 {
     public class SignOutUseCaseShould
     {

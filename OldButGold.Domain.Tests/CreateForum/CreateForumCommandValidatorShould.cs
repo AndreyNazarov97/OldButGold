@@ -1,14 +1,14 @@
 ﻿using FluentAssertions;
-using OldButGold.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Domain.UseCases.CreateForum;
 
-namespace OldButGold.Domain.Tests.CreateForum
+namespace OldButGold.Forums.Domain.Tests.CreateForum
 {
     public class CreateForumCommandValidatorShould
     {
         private readonly CreateForumCommandValidator sut = new();
 
         [Fact]
-        public void ReturnsSucces_WhenCommandValid() 
+        public void ReturnsSucces_WhenCommandValid()
         {
             var validCommand = new CreateForumCommand("Title");
             sut.Validate(validCommand).IsValid.Should().BeTrue();
@@ -24,11 +24,11 @@ namespace OldButGold.Domain.Tests.CreateForum
 
         [Theory]
         [MemberData(nameof(GetInvalidCommands))]
-        public void ReturnsFailure_WhenCommandInvalid(CreateForumCommand command) 
+        public void ReturnsFailure_WhenCommandInvalid(CreateForumCommand command)
         {
             sut.Validate(command).IsValid.Should().BeFalse();
         }
 
-       
+
     }
 }

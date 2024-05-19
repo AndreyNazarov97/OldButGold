@@ -2,12 +2,12 @@
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 
-namespace OldButGold.Domain.Monitoring
+namespace OldButGold.Forums.Domain.Monitoring
 {
     public class DomainMetrics(
         IMeterFactory meterFactory)
     {
-        public const string ApplicationName = "OldButGold.Domain";
+        public const string ApplicationName = "OldButGold.Forum.Domain";
 
         private readonly Meter meter = meterFactory.Create(ApplicationName);
         private readonly ConcurrentDictionary<string, Counter<int>> counters = new();
@@ -25,6 +25,6 @@ namespace OldButGold.Domain.Monitoring
             ["succes"] = succes,
         };
 
-        
+
     }
 }

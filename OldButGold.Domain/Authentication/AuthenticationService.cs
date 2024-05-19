@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 
-namespace OldButGold.Domain.Authentication
+namespace OldButGold.Forums.Domain.Authentication
 {
     internal class AuthenticationService(
         ISymmetricDecryptor decryptor,
@@ -20,7 +20,7 @@ namespace OldButGold.Domain.Authentication
             try
             {
                 sessionIdString = await decryptor.Decrypt(authToken, configuration.Key, cancellationToken);
-               
+
             }
             catch (CryptographicException cryptographicException)
             {
@@ -28,25 +28,25 @@ namespace OldButGold.Domain.Authentication
                 return User.Guest;
             }
 
-            if(!Guid.TryParse(sessionIdString, out var sessionId))
+            if (!Guid.TryParse(sessionIdString, out var sessionId))
             {
                 return User.Guest;
             }
 
             var session = await storage.FindSession(sessionId, cancellationToken);
-            if(session is null)
+            if (session is null)
             {
                 return User.Guest;
             }
 
-            if(session.ExpiresAt < DateTimeOffset.UtcNow)
+            if (session.ExpiresAt < DateTimeOffset.UtcNow)
             {
                 return User.Guest;
             }
-   
+
             return new User(session.UserId, sessionId);
         }
 
-        
+
     }
 }

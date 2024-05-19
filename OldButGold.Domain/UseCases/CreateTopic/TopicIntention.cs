@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.UseCases.CreateTopic
+﻿namespace OldButGold.Forums.Domain.UseCases.CreateTopic
 {
     public enum TopicIntention
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OldButGold.Storage.Entities;
+using OldButGold.Forums.Storage.Entities;
 
-namespace OldButGold.Storage
+namespace OldButGold.Forums.Storage
 {
     public class ForumDbContext(DbContextOptions<ForumDbContext> options) : DbContext(options)
     {
@@ -9,7 +9,7 @@ namespace OldButGold.Storage
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Topic> Topics { get; set; }
 
-        public DbSet<Comment> Comments {  get; set; }    
+        public DbSet<Comment> Comments { get; set; }
 
         public DbSet<Session> Sessions { get; set; }
 

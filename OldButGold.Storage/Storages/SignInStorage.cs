@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using OldButGold.Domain.UseCases.SignIn;
-using OldButGold.Storage.Entities;
+using OldButGold.Forums.Domain.UseCases.SignIn;
+using OldButGold.Forums.Storage.Entities;
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages
 {
     internal class SignInStorage(
         IGuidFactory guidFactory,
@@ -30,7 +30,7 @@ namespace OldButGold.Storage.Storages
 
         public Task<RecognisedUser?> FindUser(string login, CancellationToken cancellationToken)
         {
-            return  dbContext.Users
+            return dbContext.Users
                 .Where(u => u.Login.Equals(login))
                 .ProjectTo<RecognisedUser>(mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);

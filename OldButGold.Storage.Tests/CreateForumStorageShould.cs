@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using OldButGold.Storage.Storages;
+using OldButGold.Forums.Storage;
+using OldButGold.Forums.Storage.Storages;
 
-namespace OldButGold.Storage.Tests
+namespace OldButGold.Forums.Storage.Tests
 {
     public class CreateForumStorageShould(StorageTestFixture fixture) : IClassFixture<StorageTestFixture>
     {

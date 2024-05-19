@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 
-namespace OldButGold.Domain.UseCases
+namespace OldButGold.Forums.Domain.UseCases
 {
     internal class ValidationPipelineBehavior<TRequest, TResponse>(
         IValidator<TRequest> validator) : IPipelineBehavior<TRequest, TResponse>

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System.Reflection;
 using Testcontainers.PostgreSql;
 
-namespace OldButGold.Storage.Tests
+namespace OldButGold.Forums.Storage.Tests
 {
     public class StorageTestFixture : IAsyncLifetime
     {

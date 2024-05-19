@@ -1,11 +1,12 @@
 ﻿using MediatR;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.UseCases.CreateForum;
-using OldButGold.Domain.UseCases.GetForums;
-using Topic = OldButGold.Domain.Models.Topic;
+using OldButGold.Forums.Domain;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.UseCases;
+using OldButGold.Forums.Domain.UseCases.GetForums;
+using Topic = OldButGold.Forums.Domain.Models.Topic;
 
-namespace OldButGold.Domain.UseCases.CreateTopic
+namespace OldButGold.Forums.Domain.UseCases.CreateTopic
 {
     internal class CreateTopicUseCase(
         IIntentionManager intentionManager,
@@ -25,7 +26,7 @@ namespace OldButGold.Domain.UseCases.CreateTopic
             await using var scope = await unitOfWork.CreateScope(cancellationToken);
             var topicStorage = scope.GetStorage<ICreateTopicStorage>();
             var domainEventStorage = scope.GetStorage<IDomainEventStorage>();
-            var topic =  await topicStorage.CreateTopic(forumId, identityProvider.Current.UserId, title, cancellationToken);
+            var topic = await topicStorage.CreateTopic(forumId, identityProvider.Current.UserId, title, cancellationToken);
             await domainEventStorage.AddEvent(topic, cancellationToken);
 
             await scope.Commit(cancellationToken);

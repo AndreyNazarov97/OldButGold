@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using OldButGold.Domain.Authentication;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Storage;
 
-namespace OldButGold.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages
 {
     internal class AuthenticationStorage(
         ForumDbContext dbContext,
@@ -14,7 +15,7 @@ namespace OldButGold.Storage.Storages
             return await dbContext.Sessions
                 .Where(s => s.SessionId == sessionId)
                 .ProjectTo<Session>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken); 
+                .FirstOrDefaultAsync(cancellationToken);
 
         }
     }

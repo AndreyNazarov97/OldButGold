@@ -1,9 +1,9 @@
-﻿namespace OldButGold.API.Authentication
+﻿namespace OldButGold.Forums.API.Authentication
 {
     public interface IAuthTokenStorage
     {
         bool TryExtract(HttpContext httpContext, out string token);
 
-        void Store (HttpContext httpContext, string token);
+        void Store(HttpContext httpContext, string token);
     }
 }

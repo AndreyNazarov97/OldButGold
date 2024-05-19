@@ -1,8 +1,8 @@
-﻿namespace OldButGold.Domain.Authentication
+﻿namespace OldButGold.Forums.Domain.Authentication
 {
     public class Session
     {
-        public Guid UserId {  get; set; }
+        public Guid UserId { get; set; }
 
         public DateTimeOffset ExpiresAt { get; set; }
     }

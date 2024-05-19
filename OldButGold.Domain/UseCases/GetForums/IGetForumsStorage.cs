@@ -1,9 +1,7 @@
-﻿using OldButGold.Domain.Models;
-
-namespace OldButGold.Domain.UseCases.GetForums
+﻿namespace OldButGold.Forums.Domain.UseCases.GetForums
 {
     public interface IGetForumsStorage
     {
-        Task<IEnumerable<Forum>> GetForums(CancellationToken cancellationToken);
+        Task<IEnumerable<Models.Forum>> GetForums(CancellationToken cancellationToken);
     }
 }

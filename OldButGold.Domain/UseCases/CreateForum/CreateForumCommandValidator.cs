@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
-using OldButGold.Domain.Exceptions;
-using OldButGold.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Domain.Exceptions;
 
-namespace OldButGold.Domain.UseCases.CreateForum
+namespace OldButGold.Forums.Domain.UseCases.CreateForum
 {
     internal class CreateForumCommandValidator : AbstractValidator<CreateForumCommand>
     {

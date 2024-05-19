@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using Moq;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Exceptions;
-using OldButGold.Domain.UseCases.CreateForum;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.Exceptions;
+using OldButGold.Forums.Domain.UseCases.CreateForum;
 using System.Net;
 
-namespace OldButGold.Domain.Tests.Authorization
+namespace OldButGold.Forums.Domain.Tests.Authorization
 {
     public class IntentionManagerShould
     {
@@ -25,7 +25,7 @@ namespace OldButGold.Domain.Tests.Authorization
                 new Mock<IIntentionResolver<HttpStatusCode>>().Object,
 
             };
-                
+
             var sut = new IntentionManager(resolvers, identityProvider.Object);
             sut.IsAllowed(ForumIntention.Create).Should().BeFalse();
         }
@@ -44,7 +44,7 @@ namespace OldButGold.Domain.Tests.Authorization
                 .Returns(new User(Guid.Parse("675359ce-239a-4f64-b041-6c491e520207"), Guid.Empty));
 
             var sut = new IntentionManager(
-                new IIntentionResolver[] {resolver.Object}, 
+                new IIntentionResolver[] { resolver.Object },
                 identityProvider.Object);
 
             sut.IsAllowed(ForumIntention.Create).Should().Be(expected);

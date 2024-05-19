@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain
+﻿namespace OldButGold.Forums.Domain
 {
     public interface IUnitOfWork
     {

@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Domain.Exceptions
+﻿namespace OldButGold.Forums.Domain.Exceptions
 {
     public static class ValidationErrorCode
     {

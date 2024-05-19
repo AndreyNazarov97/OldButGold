@@ -1,16 +1,16 @@
 using FluentAssertions;
 using Moq;
 using Moq.Language.Flow;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.Authorization;
-using OldButGold.Domain.Exceptions;
-using OldButGold.Domain.Models;
-using OldButGold.Domain.UseCases;
-using OldButGold.Domain.UseCases.CreateTopic;
-using OldButGold.Domain.UseCases.GetForums;
-using Topic = OldButGold.Domain.Models.Topic;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.Authorization;
+using OldButGold.Forums.Domain.Exceptions;
+using OldButGold.Forums.Domain.Models;
+using OldButGold.Forums.Domain.UseCases;
+using OldButGold.Forums.Domain.UseCases.CreateTopic;
+using OldButGold.Forums.Domain.UseCases.GetForums;
+using Topic = OldButGold.Forums.Domain.Models.Topic;
 
-namespace OldButGold.Domain.Tests.CreateTopic
+namespace OldButGold.Forums.Domain.Tests.CreateTopic
 {
     public class CreateTopicUseCaseShould
     {
@@ -52,9 +52,9 @@ namespace OldButGold.Domain.Tests.CreateTopic
             intentionIsAllowedSetup = intentionManager.Setup(p => p.IsAllowed(It.IsAny<TopicIntention>()));
 
             sut = new CreateTopicUseCase(
-                intentionManager.Object, 
-                identityProvider.Object, 
-                getForumsStorage.Object , 
+                intentionManager.Object,
+                identityProvider.Object,
+                getForumsStorage.Object,
                 unitOfWork.Object);
         }
 
@@ -93,7 +93,7 @@ namespace OldButGold.Domain.Tests.CreateTopic
             var title = "Hello World";
 
             intentionIsAllowedSetup.Returns(true);
-            getForumsSetup.ReturnsAsync(new Forum[] {new() { Id = forumId,  Title = title} } );
+            getForumsSetup.ReturnsAsync(new Forum[] { new() { Id = forumId, Title = title } });
             getCurrentUserIdSetup.Returns(userId);
             var expected = new Topic();
             createTopicSetup.ReturnsAsync(expected);

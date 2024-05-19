@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Moq;
-using OldButGold.Domain.Authentication;
-using OldButGold.Domain.UseCases.SignOut;
+using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.UseCases.SignOut;
 
-namespace OldButGold.Domain.Tests.Authorization
+namespace OldButGold.Forums.Domain.Tests.Authorization
 {
     public class AccountIntentionResolverShould
     {

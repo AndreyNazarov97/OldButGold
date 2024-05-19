@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using OldButGold.Domain.UseCases.SignIn;
+using OldButGold.Forums.Domain.UseCases.SignIn;
 
-namespace OldButGold.Domain.Tests.SignIn
+namespace OldButGold.Forums.Domain.Tests.SignIn
 {
     public class SignInCommandValidatorShould
     {
