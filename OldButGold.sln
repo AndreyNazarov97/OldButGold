@@ -13,9 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-
 		Directory.Build.props = Directory.Build.props
 		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
+		kafka-connect\Dockerfile = kafka-connect\Dockerfile
 		loki-config.yml = loki-config.yml
+		kafka-connect\obg-source-connector.properties = kafka-connect\obg-source-connector.properties
 		prometheus.yml = prometheus.yml
 		README.md = README.md
+		kafka-connect\worker.properties = kafka-connect\worker.properties
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.API", "OldButGold.API\OldButGold.API.csproj", "{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}"

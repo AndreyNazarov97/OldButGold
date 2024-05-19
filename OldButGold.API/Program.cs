@@ -1,3 +1,5 @@
+using Confluent.Kafka;
+using OldButGold.API;
 using OldButGold.API.Authentication;
 using OldButGold.API.Middleware;
 using OldButGold.API.Monitoring;
@@ -25,6 +27,20 @@ builder.Services.AddAutoMapper(config => config.AddMaps(Assembly.GetExecutingAss
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddSingleton(new ConsumerBuilder<byte[], byte[]>(new ConsumerConfig
+{
+    BootstrapServers = "localhost:9092",
+    EnableAutoCommit = false,
+    EnablePartitionEof = true,
+    AutoOffsetReset = AutoOffsetReset.Earliest,
+    GroupId = "obg.experiment"
+}).Build() );
+
+builder.Services.AddHostedService<KafkaConsumer>();
+builder.Services.Configure<HostOptions>(options =>
+    options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.StopHost);
 
 var app = builder.Build();
 
