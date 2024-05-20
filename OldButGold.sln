@@ -37,15 +37,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OldButGold.Forum", "OldButG
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OldButGold.Search", "OldButGold.Search", "{D99F378D-89A5-4344-90EA-F6C0E1E2F70A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Search.API", "OldButGold.Search.API\OldButGold.Search.API.csproj", "{AEC08DA9-FD65-4712-9C6E-52E76DD695FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Search.API", "OldButGold.Search.API\OldButGold.Search.API.csproj", "{AEC08DA9-FD65-4712-9C6E-52E76DD695FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Search.Domain", "OldButGold.Search.Domain\OldButGold.Search.Domain.csproj", "{74A46232-85C9-4AA4-B628-A95B892638AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Search.Domain", "OldButGold.Search.Domain\OldButGold.Search.Domain.csproj", "{74A46232-85C9-4AA4-B628-A95B892638AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Search.Storage", "OldButGold.Search.Storage\OldButGold.Search.Storage.csproj", "{BF303DC5-BCC6-436D-B677-1A3D5CD3AECB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Search.Storage", "OldButGold.Search.Storage\OldButGold.Search.Storage.csproj", "{BF303DC5-BCC6-436D-B677-1A3D5CD3AECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Search.Domain.DependencyInjection", "OldButGold.Search.Domain.DependencyInjection\OldButGold.Search.Domain.DependencyInjection.csproj", "{36761A9F-4D35-42CC-B427-152A81CA1297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Search.Domain.DependencyInjection", "OldButGold.Search.Domain.DependencyInjection\OldButGold.Search.Domain.DependencyInjection.csproj", "{36761A9F-4D35-42CC-B427-152A81CA1297}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Search.Storage.DependencyInjection", "OldButGold.Search.Storage.DependencyInjection\OldButGold.Search.Storage.DependencyInjection.csproj", "{392DA816-6DF0-4F00-84A4-DA862AA7C97E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Search.Storage.DependencyInjection", "OldButGold.Search.Storage.DependencyInjection\OldButGold.Search.Storage.DependencyInjection.csproj", "{392DA816-6DF0-4F00-84A4-DA862AA7C97E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

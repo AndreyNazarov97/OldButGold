@@ -25,8 +25,8 @@ namespace OldButGold.Search.API.Controllers
             string query,
             CancellationToken cancellationToken)
         {
-            var result = await mediator.Send(new SearchQuery(query),cancellationToken);
-            return Ok(result);
+            var (resources, totalCount) = await mediator.Send(new SearchQuery(query),cancellationToken);
+            return Ok(new {resources, totalCount});
         }
 
     }

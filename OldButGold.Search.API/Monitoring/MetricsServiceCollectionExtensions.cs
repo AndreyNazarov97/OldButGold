@@ -2,7 +2,7 @@
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace OldButGold.Forums.API.Monitoring
+namespace OldButGold.Search.API.Monitoring
 {
     internal static class MetricsServiceCollectionExtensions
     {
@@ -10,15 +10,13 @@ namespace OldButGold.Forums.API.Monitoring
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var searchEngineHost = configuration.GetConnectionString("SearchEngine")!;
-
             services.AddOpenTelemetry()
                 .WithMetrics(builder => builder
                     .AddAspNetCoreInstrumentation()
-                    .AddMeter("OldButGold.Forums.Domain")
+                    .AddMeter("OldButGold.Search.Domain")
                     .AddPrometheusExporter())
                 .WithTracing(builder => builder
-                    .ConfigureResource(r => r.AddService("OldButGold.Forums"))
+                    .ConfigureResource(r => r.AddService("OldButGold.Search"))
                     .AddAspNetCoreInstrumentation(options =>
                     {
                         options.Filter += context =>
@@ -29,13 +27,7 @@ namespace OldButGold.Forums.API.Monitoring
                         options.EnrichWithHttpResponse = (activity, response) =>
                             activity.AddTag("error", response.StatusCode >= 400);
                     })
-                    .AddEntityFrameworkCoreInstrumentation(cfg => cfg.SetDbStatementForText = true)
-                    .AddHttpClientInstrumentation(options =>
-                    {
-                        options.FilterHttpRequestMessage += message =>
-                            !message.RequestUri!.ToString().Contains(searchEngineHost);
-                    })
-                    .AddGrpcClientInstrumentation()
+                    .AddHttpClientInstrumentation()
                     .AddJaegerExporter(cfg => cfg.Endpoint = new Uri(configuration.GetConnectionString("Tracing")!))); ;
 
 

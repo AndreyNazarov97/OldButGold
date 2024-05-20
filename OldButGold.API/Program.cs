@@ -1,9 +1,11 @@
+using Microsoft.Extensions.DependencyInjection;
 using OldButGold.Forums.API.Authentication;
 using OldButGold.Forums.API.Middleware;
 using OldButGold.Forums.API.Monitoring;
 using OldButGold.Forums.Domain.Authentication;
 using OldButGold.Forums.Domain.DependencyInjection;
 using OldButGold.Forums.Storage.DependencyInjection;
+using OldButGold.Search.API.Grpc;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddGrpcClient<SearchEngine.SearchEngineClient>(optinons =>
+{
+    optinons.Address = new Uri(builder.Configuration.GetConnectionString("SearchEngine")!);
+});
 
 var app = builder.Build();
 
@@ -44,6 +50,7 @@ app
     .UseMiddleware<AuthenticationMiddleware>();
 
 app.Run();
+
 
 
 public partial class Program { }

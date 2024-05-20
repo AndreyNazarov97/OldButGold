@@ -9,6 +9,7 @@ using OldButGold.Forums.Domain.UseCases.CreateTopic;
 using OldButGold.Forums.Domain.UseCases.GetTopics;
 using OldButGold.Forums.API.Models;
 using OldButGold.Forums.API.Models.Topic;
+using OldButGold.Search.API.Grpc;
 
 
 namespace OldButGold.Forums.API.Controllers
@@ -43,8 +44,14 @@ namespace OldButGold.Forums.API.Controllers
         [HttpGet(Name = nameof(GetForums))]
         [ProducesResponseType(200, Type = typeof(Forum))]
         public async Task<IActionResult> GetForums(
+            [FromServices] SearchEngine.SearchEngineClient client,
             CancellationToken cancellationToken)
         {
+            await client.SearchAsync(new SearchRequest
+            {
+                Query = "hello"
+            },cancellationToken: cancellationToken);
+
             var forums = await mediator.Send(new GetForumsQuery(), cancellationToken);
 
             return Ok(forums.Select(mapper.Map<Forum>));

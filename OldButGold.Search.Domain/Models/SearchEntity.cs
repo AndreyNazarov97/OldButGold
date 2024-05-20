@@ -13,7 +13,7 @@
 
     public enum SearchEntityType
     {
-        ForumTopic = 101,
-        ForumComment = 102,
+        ForumTopic,
+        ForumComment,
     }
 }

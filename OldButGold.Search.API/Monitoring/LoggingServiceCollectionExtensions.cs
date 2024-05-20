@@ -5,7 +5,7 @@ using Serilog.Filters;
 using Serilog.Sinks.Grafana.Loki;
 using System.Diagnostics;
 
-namespace OldButGold.Forums.API.Monitoring
+namespace OldButGold.Search.API.Monitoring
 {
     public static class LoggingServiceCollectionExtensions
     {
@@ -17,7 +17,7 @@ namespace OldButGold.Forums.API.Monitoring
                     ActivityTrackingOptions.SpanId | ActivityTrackingOptions.TraceId)
                 .AddSerilog(new LoggerConfiguration()
                     .MinimumLevel.Debug()
-                    .Enrich.WithProperty("Application", "OldButGold.Forums.API")
+                    .Enrich.WithProperty("Application", "OldButGold.Search.API")
                     .Enrich.WithProperty("Environment", environment.EnvironmentName)
                     .Enrich.With<TracingContextEnricher>()
                     .WriteTo.Logger(lc => lc
