@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Search.Domain.De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Search.Storage.DependencyInjection", "OldButGold.Search.Storage.DependencyInjection\OldButGold.Search.Storage.DependencyInjection.csproj", "{392DA816-6DF0-4F00-84A4-DA862AA7C97E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldButGold.Search.ForumConsumer", "OldButGold.Search.ForumConsumer\OldButGold.Search.ForumConsumer.csproj", "{6FC06F33-656C-4374-8171-5157A84088C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{392DA816-6DF0-4F00-84A4-DA862AA7C97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{392DA816-6DF0-4F00-84A4-DA862AA7C97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{392DA816-6DF0-4F00-84A4-DA862AA7C97E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FC06F33-656C-4374-8171-5157A84088C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FC06F33-656C-4374-8171-5157A84088C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FC06F33-656C-4374-8171-5157A84088C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FC06F33-656C-4374-8171-5157A84088C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{BF303DC5-BCC6-436D-B677-1A3D5CD3AECB} = {D99F378D-89A5-4344-90EA-F6C0E1E2F70A}
 		{36761A9F-4D35-42CC-B427-152A81CA1297} = {D99F378D-89A5-4344-90EA-F6C0E1E2F70A}
 		{392DA816-6DF0-4F00-84A4-DA862AA7C97E} = {D99F378D-89A5-4344-90EA-F6C0E1E2F70A}
+		{6FC06F33-656C-4374-8171-5157A84088C3} = {D99F378D-89A5-4344-90EA-F6C0E1E2F70A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7466AEB4-B364-4590-B855-581373AE497C}

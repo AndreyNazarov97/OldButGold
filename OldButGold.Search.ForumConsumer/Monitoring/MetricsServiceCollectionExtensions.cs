@@ -2,7 +2,7 @@
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace OldButGold.Forums.API.Monitoring
+namespace OldButGold.Search.ForumConsumer.Monitoring
 {
     internal static class MetricsServiceCollectionExtensions
     {
@@ -13,10 +13,9 @@ namespace OldButGold.Forums.API.Monitoring
             services.AddOpenTelemetry()
                 .WithMetrics(builder => builder
                     .AddAspNetCoreInstrumentation()
-                    .AddMeter("OldButGold.Forums.Domain")
                     .AddPrometheusExporter())
                 .WithTracing(builder => builder
-                    .ConfigureResource(r => r.AddService("OldButGold.Forums.API"))
+                    .ConfigureResource(r => r.AddService("OldButGold.Search.ForumConsumer"))
                     .AddAspNetCoreInstrumentation(options =>
                     {
                         options.Filter += context =>
@@ -27,7 +26,9 @@ namespace OldButGold.Forums.API.Monitoring
                         options.EnrichWithHttpResponse = (activity, response) =>
                             activity.AddTag("error", response.StatusCode >= 400);
                     })
-                    .AddEntityFrameworkCoreInstrumentation(cfg => cfg.SetDbStatementForText = true)
+                    .AddSource("ForumSearchConsumer")
+                    .AddGrpcClientInstrumentation()
+                    .AddHttpClientInstrumentation()
                     .AddJaegerExporter(cfg => cfg.Endpoint = new Uri(configuration.GetConnectionString("Tracing")!))); ;
 
 

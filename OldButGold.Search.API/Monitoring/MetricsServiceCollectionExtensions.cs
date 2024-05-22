@@ -16,7 +16,7 @@ namespace OldButGold.Search.API.Monitoring
                     .AddMeter("OldButGold.Search.Domain")
                     .AddPrometheusExporter())
                 .WithTracing(builder => builder
-                    .ConfigureResource(r => r.AddService("OldButGold.Search"))
+                    .ConfigureResource(r => r.AddService("OldButGold.Search.API"))
                     .AddAspNetCoreInstrumentation(options =>
                     {
                         options.Filter += context =>

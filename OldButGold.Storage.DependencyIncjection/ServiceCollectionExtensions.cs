@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using OldButGold.Forums.Domain;
 using OldButGold.Forums.Domain.Authentication;
-using OldButGold.Forums.Domain.UseCases;
+using OldButGold.Forums.Domain.DomainEvents;
 using OldButGold.Forums.Domain.UseCases.CreateForum;
 using OldButGold.Forums.Domain.UseCases.CreateTopic;
 using OldButGold.Forums.Domain.UseCases.GetForums;
