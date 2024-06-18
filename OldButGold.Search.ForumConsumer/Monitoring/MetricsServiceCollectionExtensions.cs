@@ -18,15 +18,13 @@ namespace OldButGold.Search.ForumConsumer.Monitoring
                     .ConfigureResource(r => r.AddService("OldButGold.Search.ForumConsumer"))
                     .AddAspNetCoreInstrumentation(options =>
                     {
-                        options.Filter += context =>
-                        {
-                            return !context.Request.Path.Value!.Contains("metrics", StringComparison.InvariantCultureIgnoreCase) &&
-                                   !context.Request.Path.Value!.Contains("swagger", StringComparison.InvariantCultureIgnoreCase);
-                        };
+                        options.Filter += context => 
+                            !context.Request.Path.Value!.Contains("metrics", StringComparison.InvariantCultureIgnoreCase) &&
+                            !context.Request.Path.Value!.Contains("swagger", StringComparison.InvariantCultureIgnoreCase);
                         options.EnrichWithHttpResponse = (activity, response) =>
                             activity.AddTag("error", response.StatusCode >= 400);
                     })
-                    .AddSource("ForumSearchConsumer")
+                    .AddSource(Metrics.ApplicationName)
                     .AddGrpcClientInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddJaegerExporter(cfg => cfg.Endpoint = new Uri(configuration.GetConnectionString("Tracing")!))); ;

@@ -18,8 +18,8 @@ namespace OldButGold.Forums.Domain.Tests.CreateForum
         {
             var validCommand = new CreateForumCommand("Title");
 
-            yield return new object[] { validCommand with { Title = string.Empty } };
-            yield return new object[] { validCommand with { Title = string.Join("a", Enumerable.Range(0, 100)) } };
+            yield return [validCommand with { Title = string.Empty }];
+            yield return [validCommand with { Title = string.Join("a", Enumerable.Range(0, 100)) }];
         }
 
         [Theory]

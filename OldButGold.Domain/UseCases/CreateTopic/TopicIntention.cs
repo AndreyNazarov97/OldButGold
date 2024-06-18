@@ -3,5 +3,6 @@
     public enum TopicIntention
     {
         Create,
+        CreateComment,
     }
 }

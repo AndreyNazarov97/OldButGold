@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
 using OldButGold.Forums.Domain.Authentication;
+using OldButGold.Forums.Domain.UseCases.CreateComment;
 using OldButGold.Forums.Domain.UseCases.CreateTopic;
 
 

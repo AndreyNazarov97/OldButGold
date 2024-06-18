@@ -29,8 +29,8 @@ namespace OldButGold.Forums.Domain.Tests.SignOn
         [Fact]
         public async Task CreateUser_WithGeneratedPasswordParts()
         {
-            byte[] salt = new byte[] { 1 };
-            byte[] hash = new byte[] { 2 };
+            byte[] salt = [1];
+            byte[] hash = [2];
             generatePasswordPartsSetup.Returns((Salt: salt, Hash: hash));
 
             var actual = await sut.Handle(new SignOnCommand("Login", "Password"), CancellationToken.None);
@@ -42,8 +42,8 @@ namespace OldButGold.Forums.Domain.Tests.SignOn
         [Fact]
         public async Task ReturnIdentityOfNewlyCreatedUser()
         {
-            byte[] salt = new byte[] { 1 };
-            byte[] hash = new byte[] { 2 };
+            byte[] salt = [1];
+            byte[] hash = [2];
             generatePasswordPartsSetup.Returns((Salt: salt, Hash: hash));
             createUserSetup.ReturnsAsync(Guid.Parse("162e20bf-ca2b-4695-8db5-810e0320d5dc"));
 

@@ -20,9 +20,9 @@ namespace OldButGold.Forums.Domain.Tests.GetTopics
         {
             var validQuery = new GetTopicsQuery(Guid.Parse("186960ac-2f63-4549-ad10-3a94e7f8d7ce"), 10, 5);
 
-            yield return new object[] { validQuery with { ForumId = Guid.Empty } };
-            yield return new object[] { validQuery with { Skip = -10 } };
-            yield return new object[] { validQuery with { Take = -10 } };
+            yield return [validQuery with { ForumId = Guid.Empty }];
+            yield return [validQuery with { Skip = -10 }];
+            yield return [validQuery with { Take = -10 }];
         }
 
         [Theory]

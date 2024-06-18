@@ -86,8 +86,8 @@ namespace OldButGold.Forums.Domain.Tests.SignIn
             findUserSetup.ReturnsAsync(new RecognisedUser
             {
                 UserId = userId,
-                PasswordHash = new byte[] { 1 },
-                Salt = new byte[] { 2 },
+                PasswordHash = [1],
+                Salt = [2],
             });
             comparePasswordsSetup.Returns(true);
             createSessionSetup.ReturnsAsync(sessionId);

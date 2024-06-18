@@ -2,7 +2,7 @@
 
 namespace OldButGold.Forums.Domain.UseCases.GetForums
 {
-    internal static class GetForumsStorageExtensions
+    internal static class GetTopicsStorageExtensions
     {
         public static async Task<bool> ForumExists(this IGetForumsStorage storage, Guid forumId,
             CancellationToken cancellationToken)

@@ -23,10 +23,10 @@ namespace OldButGold.Forums.Domain.Tests.CreateTopic
         {
             var validCommand = new CreateTopicCommand(Guid.Parse("ba125fd6-08bd-4a0d-bc8f-64a163f2ac4f"), "Hello");
 
-            yield return new[] { validCommand with { ForumId = Guid.Empty } };
-            yield return new[] { validCommand with { Title = string.Empty } };
-            yield return new[] { validCommand with { Title = "    " } };
-            yield return new[] { validCommand with { Title = string.Join("a", Enumerable.Range(0, 100)) } };
+            yield return [validCommand with { ForumId = Guid.Empty }];
+            yield return [validCommand with { Title = string.Empty }];
+            yield return [validCommand with { Title = "    " }];
+            yield return [validCommand with { Title = string.Join("a", Enumerable.Range(0, 100)) }];
         }
 
         [Theory]

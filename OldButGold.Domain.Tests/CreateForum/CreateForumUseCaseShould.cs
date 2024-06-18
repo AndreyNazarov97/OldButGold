@@ -8,8 +8,8 @@ namespace OldButGold.Forums.Domain.Tests.CreateForum
 {
     public class CreateForumUseCaseShould
     {
-        private readonly Mock<ICreateForumStorage> storage;
-        private readonly ISetup<ICreateForumStorage, Task<Models.Forum>> createForumSetup;
+        private readonly Mock<ICreateCommentStorage> storage;
+        private readonly ISetup<ICreateCommentStorage, Task<Models.Forum>> createForumSetup;
         private readonly CreateForumUseCase sut;
 
         public CreateForumUseCaseShould()
@@ -19,7 +19,7 @@ namespace OldButGold.Forums.Domain.Tests.CreateForum
                 .Setup(m => m.IsAllowed(It.IsAny<ForumIntention>()))
                 .Returns(true);
 
-            storage = new Mock<ICreateForumStorage>();
+            storage = new Mock<ICreateCommentStorage>();
             createForumSetup = storage.Setup(s => s.CreateForum(It.IsAny<string>(), It.IsAny<CancellationToken>()));
 
             sut = new CreateForumUseCase(intentionManager.Object, storage.Object);

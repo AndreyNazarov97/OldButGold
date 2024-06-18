@@ -3,6 +3,7 @@ using OldButGold.Forums.Domain;
 using OldButGold.Forums.Domain.Authentication;
 using OldButGold.Forums.Domain.Authorization;
 using OldButGold.Forums.Domain.DomainEvents;
+using OldButGold.Forums.Domain.UseCases.CreateComment;
 using OldButGold.Forums.Domain.UseCases.GetForums;
 using Topic = OldButGold.Forums.Domain.Models.Topic;
 
@@ -14,8 +15,6 @@ namespace OldButGold.Forums.Domain.UseCases.CreateTopic
         IGetForumsStorage getForumsStorage,
         IUnitOfWork unitOfWork) : IRequestHandler<CreateTopicCommand, Topic>
     {
-        private readonly IUnitOfWork unitOfWork = unitOfWork;
-
         public async Task<Topic> Handle(CreateTopicCommand command, CancellationToken cancellationToken)
         {
             var (forumId, title) = command;

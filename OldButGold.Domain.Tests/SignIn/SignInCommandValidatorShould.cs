@@ -19,11 +19,11 @@ namespace OldButGold.Forums.Domain.Tests.SignIn
         {
             var validCommand = new SignInCommand("Login", "Password");
 
-            yield return new object[] { validCommand with { Password = string.Empty } };
-            yield return new object[] { validCommand with { Password = "          " } };
-            yield return new object[] { validCommand with { Login = string.Empty } };
-            yield return new object[] { validCommand with { Login = "          " } };
-            yield return new object[] { validCommand with { Login = string.Join("a", Enumerable.Range(0, 30)) } };
+            yield return [validCommand with { Password = string.Empty }];
+            yield return [validCommand with { Password = "          " }];
+            yield return [validCommand with { Login = string.Empty }];
+            yield return [validCommand with { Login = "          " }];
+            yield return [validCommand with { Login = string.Join("a", Enumerable.Range(0, 30)) }];
         }
 
         [Theory]

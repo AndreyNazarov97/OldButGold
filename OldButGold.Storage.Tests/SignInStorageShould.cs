@@ -17,15 +17,15 @@ namespace OldButGold.Forums.Storage.Tests
             {
                 Login = "testUser",
                 UserId = Guid.Parse("92b9d2f2-fd60-44a3-9f46-ef4d6ae7d04d"),
-                Salt = new byte[] { 1 },
-                PasswordHash = new byte[] { 2 },
+                Salt = [1],
+                PasswordHash = [2],
             },
             new User
             {
                 Login = "anotherUser",
                 UserId = Guid.Parse("7aba9aba-8796-4322-87cb-fc2471963cd4"),
-                Salt = new byte[] { 3 },
-                PasswordHash = new byte[] { 4 },
+                Salt = [3],
+                PasswordHash = [4],
             });
             await dbContext.SaveChangesAsync();
         }

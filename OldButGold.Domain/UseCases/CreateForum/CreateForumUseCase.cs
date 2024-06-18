@@ -5,7 +5,7 @@ namespace OldButGold.Forums.Domain.UseCases.CreateForum
 {
     public class CreateForumUseCase(
         IIntentionManager intentionManager,
-        ICreateForumStorage storage) : IRequestHandler<CreateForumCommand, Models.Forum>
+        ICreateCommentStorage storage) : IRequestHandler<CreateForumCommand, Models.Forum>
     {
         public async Task<Models.Forum> Handle(CreateForumCommand command, CancellationToken cancellationToken)
         {

@@ -22,7 +22,7 @@ namespace OldButGold.Forums.Storage.DependencyInjection
             services
                 .AddScoped<IDomainEventStorage, DomainEventStorage>()
                 .AddScoped<IAuthenticationStorage, AuthenticationStorage>()
-                .AddScoped<ICreateForumStorage, CreateForumStorage>()
+                .AddScoped<ICreateCommentStorage, CreateForumStorage>()
                 .AddScoped<IGetForumsStorage, GetForumStorage>()
                 .AddScoped<ICreateTopicStorage, CreateTopicStorage>()
                 .AddScoped<IGetTopicsStorage, GetTopicsStorage>()

@@ -37,7 +37,20 @@ namespace OldButGold.Forums.Domain.DomainEvents
                 Comment = null
             };
         }
-
+        public static ForumDomainEvent CommentCreated(Topic topic, Comment comment)
+        {
+            return new ForumDomainEvent
+            {
+                EventType = ForumDomainEventType.CommentCreated,
+                TopicId = topic.Id,
+                Title = topic.Title,
+                Comment = new ForumComment()
+                {
+                    CommentId = comment.Id,
+                    Text = comment.Text
+                }
+            };
+        }
 
 
 

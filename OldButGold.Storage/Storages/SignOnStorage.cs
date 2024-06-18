@@ -1,27 +1,26 @@
 ﻿using OldButGold.Forums.Domain.UseCases.SignOn;
 using OldButGold.Forums.Storage.Entities;
 
-namespace OldButGold.Forums.Storage.Storages
+namespace OldButGold.Forums.Storage.Storages;
+
+internal class SignOnStorage(
+    ForumDbContext dbContext,
+    IGuidFactory guidFactory) : ISignOnStorage
 {
-    internal class SignOnStorage(
-        ForumDbContext dbContext,
-        IGuidFactory guidFactory) : ISignOnStorage
+    public async Task<Guid> CreateUser(string login, byte[] salt, byte[] hash, CancellationToken cancellationToken)
     {
-        public async Task<Guid> CreateUser(string login, byte[] salt, byte[] hash, CancellationToken cancellationToken)
+        var userId = guidFactory.Create();
+
+        await dbContext.Users.AddAsync(new User
         {
-            var userId = guidFactory.Create();
-
-            await dbContext.Users.AddAsync(new User
-            {
-                UserId = userId,
-                Login = login,
-                Salt = salt,
-                PasswordHash = hash,
-            }, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            UserId = userId,
+            Login = login,
+            Salt = salt,
+            PasswordHash = hash,
+        }, cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
 
 
-            return userId;
-        }
+        return userId;
     }
 }
