@@ -7,14 +7,14 @@ namespace OldButGold.Forums.Storage.Tests
 {
     public class CreateForumStorageShould(StorageTestFixture fixture) : IClassFixture<StorageTestFixture>
     {
-        private readonly CreateForumStorage sut = new CreateForumStorage(
+        private readonly CreateForumStorage sut = new(
                 fixture.GetMemoryCache(),
                 new GuidFactory(),
                 fixture.GetDbContext(),
                 fixture.GetMapper());
 
         [Fact]
-        public async Task InsertNewForumInDatbase()
+        public async Task InsertNewForumInDatabase()
         {
             var forum = await sut.CreateForum("Test title", CancellationToken.None);
             forum.Id.Should().NotBeEmpty();

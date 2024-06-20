@@ -12,6 +12,7 @@ using OldButGold.Forums.Domain.UseCases.SignOn;
 using OldButGold.Forums.Domain.UseCases.SignOut;
 using OldButGold.Forums.Storage.Storages;
 using System.Reflection;
+using OldButGold.Forums.Domain.UseCases.CreateComment;
 
 namespace OldButGold.Forums.Storage.DependencyInjection
 {
@@ -22,10 +23,11 @@ namespace OldButGold.Forums.Storage.DependencyInjection
             services
                 .AddScoped<IDomainEventStorage, DomainEventStorage>()
                 .AddScoped<IAuthenticationStorage, AuthenticationStorage>()
-                .AddScoped<ICreateCommentStorage, CreateForumStorage>()
+                .AddScoped<ICreateForumStorage, CreateForumStorage>()
                 .AddScoped<IGetForumsStorage, GetForumStorage>()
                 .AddScoped<ICreateTopicStorage, CreateTopicStorage>()
                 .AddScoped<IGetTopicsStorage, GetTopicsStorage>()
+                .AddScoped<ICreateCommentStorage, CreateCommentStorage>()
                 .AddScoped<ISignInStorage, SignInStorage>()
                 .AddScoped<ISignOnStorage, SignOnStorage>()
                 .AddScoped<ISignOutStorage, SignOutStorage>()

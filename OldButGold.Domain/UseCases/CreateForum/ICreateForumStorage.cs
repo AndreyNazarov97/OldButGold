@@ -1,8 +1,6 @@
-﻿using OldButGold.Forums.Domain;
-
-namespace OldButGold.Forums.Domain.UseCases.CreateForum
+﻿namespace OldButGold.Forums.Domain.UseCases.CreateForum
 {
-    public interface ICreateCommentStorage : IStorage
+    public interface ICreateForumStorage : IStorage
     {
         Task<Models.Forum> CreateForum(string title, CancellationToken cancellationToken);
     }

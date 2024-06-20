@@ -56,6 +56,14 @@ namespace OldButGold.Search.ForumConsumer
                             Title = domainEvent.Title,
                         }, cancellationToken: stoppingToken);
                         break;
+                    case ForumDomainEventType.CommentCreated:
+                        await searchEngineClient.IndexAsync(new IndexRequest
+                        {
+                            Id = domainEvent.Comment!.CommentId.ToString(),
+                            Type = SearchEntityType.ForumComment,
+                            Text = domainEvent.Comment.Text,
+                        }, cancellationToken: stoppingToken);
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

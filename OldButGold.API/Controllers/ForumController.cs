@@ -2,13 +2,13 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OldButGold.Forums.API.Models;
-using OldButGold.Forums.API.Models.Topic;
+using OldButGold.Forums.API.Models.Topics;
 using OldButGold.Forums.Domain.UseCases.CreateForum;
 using OldButGold.Forums.Domain.UseCases.CreateTopic;
 using OldButGold.Forums.Domain.UseCases.GetForums;
 using OldButGold.Forums.Domain.UseCases.GetTopics;
 using Forum = OldButGold.Forums.API.Models.Forum;
-using Topic = OldButGold.Forums.API.Models.Topic.Topic;
+using Topic = OldButGold.Forums.API.Models.Topics.Topic;
 
 
 namespace OldButGold.Forums.API.Controllers

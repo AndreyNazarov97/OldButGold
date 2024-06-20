@@ -1,10 +1,10 @@
+using System.Reflection;
 using OldButGold.Forums.API.Authentication;
 using OldButGold.Forums.API.Middleware;
 using OldButGold.Forums.API.Monitoring;
 using OldButGold.Forums.Domain.Authentication;
 using OldButGold.Forums.Domain.DependencyInjection;
 using OldButGold.Forums.Storage.DependencyInjection;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,4 +47,7 @@ app.Run();
 
 
 
-public partial class Program { }
+namespace OldButGold.Forums.API
+{
+    public partial class Program { }
+}

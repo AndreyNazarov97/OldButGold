@@ -1,4 +1,4 @@
-﻿namespace OldButGold.Forums.API.Models.Topic
+﻿namespace OldButGold.Forums.API.Models.Topics
 {
     public class CreateTopic
     {

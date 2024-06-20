@@ -9,7 +9,7 @@ namespace OldButGold.Forums.Storage.Storages
     internal class CreateCommentStorage(
         IMapper mapper,
         ForumDbContext dbContext,
-        GuidFactory guidFactory,
+        IGuidFactory guidFactory,
         IMomentProvider momentProvider)
         : ICreateCommentStorage
     {

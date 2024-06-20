@@ -1,5 +1,6 @@
 using MediatR;
-using OldButGold.Search.Domain.UseCases.Index;
+
+namespace OldButGold.Search.Domain.UseCases.Index;
 
 internal class IndexUseCase(
     IIndexStorage storage) : IRequestHandler<IndexCommand>

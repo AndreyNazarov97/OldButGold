@@ -7,8 +7,9 @@ namespace OldButGold.Forums.API.Mapping
     {
         public ApiProfile()
         {
-            CreateMap<Forum, Models.Forum>();
-            CreateMap<Topic, Models.Topic.Topic>();
+            CreateMap<Forum, Models.Forum>();  
+            CreateMap<Topic, Models.Topics.Topic>();
+            CreateMap<Comment, Models.Comments.Comment>();
         }
     }
 }
