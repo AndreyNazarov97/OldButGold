@@ -9,16 +9,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.Storage",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{EA38BF32-D2B8-4138-8F1D-459673315BCA}"
 	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
 		Directory.Build.props = Directory.Build.props
-		docker-compose.yml = docker-compose.yml
-		Dockerfile = Dockerfile
-		kafka-connect\Dockerfile = kafka-connect\Dockerfile
-		loki-config.yml = loki-config.yml
-		kafka-connect\obg-source-connector.properties = kafka-connect\obg-source-connector.properties
-		prometheus.yml = prometheus.yml
 		README.md = README.md
-		kafka-connect\worker.properties = kafka-connect\worker.properties
+		docker\Dockerfile = docker\Dockerfile
+		docker\kafka-connect\worker.properties = docker\kafka-connect\worker.properties
+		docker\prometheus.yml = docker\prometheus.yml
+		docker\kafka-connect\obg-source-connector.properties = docker\kafka-connect\obg-source-connector.properties
+		docker\loki-config.yml = docker\loki-config.yml
+		docker\docker-compose.yml = docker\docker-compose.yml
+		docker\kafka-connect\Dockerfile = docker\kafka-connect\Dockerfile
+		docker\.dockerignore = docker\.dockerignore
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OldButGold.Forums.API", "OldButGold.API\OldButGold.Forums.API.csproj", "{15D35BC5-0C42-42A9-AC5C-B40ED04F63FA}"
