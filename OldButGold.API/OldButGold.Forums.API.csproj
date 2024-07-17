@@ -36,9 +36,5 @@
     <ProjectReference Include="..\OldButGold.Storage.DependencyIncjection\OldButGold.Forums.Storage.DependencyInjection.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DependencyInjection\" />
-  </ItemGroup>
-
 
 </Project>
